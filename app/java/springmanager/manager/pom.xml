@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.cl.hla</groupId>
-	<artifactId>newmanager</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>master</name>
+	<artifactId>master</artifactId>
+	<version>0.0.1</version>
+	<name>manager</name>
 	<description>manager with HLACore as external library-- hlacore.jar</description>
 	<properties>
 		<java.version>11</java.version>
@@ -54,7 +54,7 @@
 			<artifactId>hlacore</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/hlacore-0.0.1-SNAPSHOT.jar</systemPath>
+			<systemPath>${project.basedir}/lib/hlacore-0.0.1.jar</systemPath>
 		</dependency>
 	</dependencies>
 

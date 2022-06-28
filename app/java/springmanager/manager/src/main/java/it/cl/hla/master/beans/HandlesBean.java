@@ -12,8 +12,8 @@ public class HandlesBean {
     private InteractionClassHandle loadScenarioClassHandle;
     private InteractionClassHandle scenarioLoadedInteractionClassHandle;
     private InteractionClassHandle scenarioLoadFailureInteractionClassHandle;
-
     private InteractionClassHandle scenarioFailureErrorMessage;
+
     private ParameterHandle startTimeScaleFactorParameterHandle;
     private ParameterHandle initialFuelAmountParameterHandle;
     private ParameterHandle scenarioParameterHandle;
