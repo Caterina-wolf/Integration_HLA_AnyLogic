@@ -20,7 +20,7 @@ import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAfloat32BE;
 
 
-class TimeScaleFactorFloat32Coder {
+public class TimeScaleFactorFloat32Coder {
    private final HLAfloat32BE _coder;
 
    TimeScaleFactorFloat32Coder(EncoderFactory factory) {

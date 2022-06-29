@@ -48,6 +48,9 @@ public class MasterServiceImpl implements MasterService {
     @Value("${scenario.dir}")
     String scenarioDIR;
 
+    @Value("${federate.type}")
+    String federateType;
+
     @PostConstruct
     public void init() {
         System.out.println("Welcome to the Master Federate! ");
@@ -58,7 +61,7 @@ public class MasterServiceImpl implements MasterService {
         try {
             // Legge le proprietà e il URL del file da application.properties
             URL url = fomFile.getFile().toURI().toURL();
-            hlaCore.start(localSettingDesignator, federationName, federateName, url);
+            hlaCore.start(localSettingDesignator, federationName, url);
         } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | NotConnected | RTIinternalError |
                  ConnectionFailed | FederateServiceInvocationsAreBeingReportedViaMOM | IOException e) {
             throw new RuntimeException(e);
@@ -67,7 +70,7 @@ public class MasterServiceImpl implements MasterService {
     }
 
     public void joint(){
-           hlaCore.join(federateName);
+           hlaCore.join(federateName,federateType);
            System.out.println("Federate joint FedExec");
            getHandles();
     }
@@ -84,8 +87,8 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public void loadScenario(String scenarioName, Integer initialFuelLevel) throws FederateNotExecutionMember, NotConnected, RestoreInProgress, SaveInProgress, RTIinternalError {
             ParameterHandleValueMap mapHandle = hlaCore.createMap(2);
-            byte[] parameterNameFederate = hlaCore.encoderString(hlaCore.getFederateName());
-            mapHandle.put(handlesBean.getScenarioParameterHandle(), parameterNameFederate);
+            byte[] parameterScenarioName = hlaCore.encoderString(scenarioName);
+            mapHandle.put(handlesBean.getScenarioParameterHandle(), parameterScenarioName);
             byte[] fuel = hlaCore.encoderInt(initialFuelLevel);
             mapHandle.put(handlesBean.getInitialFuelAmountParameterHandle(), fuel);
             hlaCore.sendInteraction(handlesBean.getLoadScenarioClassHandle(), mapHandle);

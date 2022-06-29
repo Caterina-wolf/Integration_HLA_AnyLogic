@@ -18,8 +18,9 @@
 			<Name><![CDATA[Main]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<Import><![CDATA[import javax.sql.CommonDataSource;
-import src.*;
-import src.hlamodule.*;
+import it.cl.hla.core.*;
+import it.cl.hla.coordinator.implementation.AnyLogicCoordinator;
+import it.cl.hla.coordinator.interfaces.CarSimulator;
 import hla.rti1516e.exceptions.*;
 import hla.rti1516e.*;]]></Import>
 			<Implements><![CDATA[CarSimulator]]></Implements>
@@ -133,14 +134,14 @@ System.out.println("[ANYLOGIC] Problem in disconnecting");
 					<Id>1652282061280</Id>
 					<Name><![CDATA[Coord]]></Name>
 					<X>580</X><Y>530</Y>
-					<Label><X>25</X><Y>-5</Y></Label>
+					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[Coordinator]]></Type>        
+						<Type><![CDATA[AnyLogicCoordinator]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[new Coordinator((CarSimulator)this)]]></Code>
+							<Code><![CDATA[new AnyLogicCoordinator((CarSimulator)this)]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -1415,6 +1416,40 @@ e.printStackTrace();
 			<BypassInitialScreen>true</BypassInitialScreen>
 		</SimulationExperiment>	
 	</Experiments>
+	<ModelResources>
+		<Resource>
+			<Path><![CDATA[booster1516.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[fuel.png]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[prti1516e.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[prticore.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[semaforo.png]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[timeScale.png]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[hlacore-0.0.2.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[anylogiccoordinatoor-0.0.1.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+	</ModelResources>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.modules.markup_descriptors]]></LibraryName>
 		<VersionMajor>1</VersionMajor>
@@ -1430,7 +1465,39 @@ e.printStackTrace();
 	<ClassPathEntry>
 		<ResourceReference>
 			<PackageName><![CDATA[carsimb]]></PackageName>
-			<ClassName><![CDATA[hlacoordinator.jar]]></ClassName>
+			<ClassName><![CDATA[booster1516.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>true</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[carsimb]]></PackageName>
+			<ClassName><![CDATA[prti1516e.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>true</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[carsimb]]></PackageName>
+			<ClassName><![CDATA[prticore.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>true</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[carsimb]]></PackageName>
+			<ClassName><![CDATA[anylogiccoordinatoor-0.0.1.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>true</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[carsimb]]></PackageName>
+			<ClassName><![CDATA[hlacore-0.0.2.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>true</Imported>
 		<Folder>false</Folder>

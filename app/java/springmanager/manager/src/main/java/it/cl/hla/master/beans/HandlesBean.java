@@ -12,7 +12,7 @@ public class HandlesBean {
     private InteractionClassHandle loadScenarioClassHandle;
     private InteractionClassHandle scenarioLoadedInteractionClassHandle;
     private InteractionClassHandle scenarioLoadFailureInteractionClassHandle;
-    private InteractionClassHandle scenarioFailureErrorMessage;
+    private ParameterHandle scenarioFailureErrorMessage;
 
     private ParameterHandle startTimeScaleFactorParameterHandle;
     private ParameterHandle initialFuelAmountParameterHandle;
@@ -70,11 +70,11 @@ public class HandlesBean {
 
 
 
-    public InteractionClassHandle getScenarioFailureErrorMessage() {
+    public ParameterHandle getScenarioFailureErrorMessage() {
         return scenarioFailureErrorMessage;
     }
 
-    public void setScenarioFailureErrorMessage(InteractionClassHandle scenarioFailureErrorMessage) {
+    public void setScenarioFailureErrorMessage(ParameterHandle scenarioFailureErrorMessage) {
         this.scenarioFailureErrorMessage = scenarioFailureErrorMessage;
     }
 

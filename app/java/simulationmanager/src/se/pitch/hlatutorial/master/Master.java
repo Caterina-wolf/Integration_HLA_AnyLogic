@@ -1,23 +1,7 @@
-/*
- * Copyright (C) 2012  Pitch Technologies
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package simulationmanager.src.se.pitch.hlatutorial.master;
 
 import hla.rti1516e.exceptions.RTIexception;
-import simulationmanager.src.se.pitch.hlatutorial.master.hlamodule.HlaInterface;
-import simulationmanager.src.se.pitch.hlatutorial.master.hlamodule.InteractionListener;
+import simualtionmanager.*;
 
 
 import java.io.BufferedReader;
@@ -52,7 +36,7 @@ public class Master {
       System.out.println("Welcome to the Master Federate of the Fuel Economy Federation");
       System.out.println("Make sure that your desired federates have joined the federation!");
 
-      List<String> scenarios = new ArrayList<String>();
+      List<String> scenarios = new ArrayList<>();
       File dir = new File(config.getScenarioDir() + File.separator);
       if (dir.isDirectory()) {
          File[] files = dir.listFiles();
@@ -65,7 +49,6 @@ public class Master {
          }
       }
 
-      System.out.println("");
       printOptions(scenarios);
 
       BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));

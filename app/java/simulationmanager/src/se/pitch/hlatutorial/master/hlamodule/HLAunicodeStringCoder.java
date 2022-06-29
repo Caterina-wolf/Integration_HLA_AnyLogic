@@ -20,7 +20,7 @@ import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAunicodeString;
 
 
-class HLAunicodeStringCoder {
+public class HLAunicodeStringCoder {
 
    private final HLAunicodeString _coder;
 
