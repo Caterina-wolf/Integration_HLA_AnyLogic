@@ -99,21 +99,6 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
         public void start(String localSettingsDesignator, String federationName) throws RTIinternalError, ConnectionFailed, NotConnected {
             this.start(localSettingsDesignator, federationName, null);
         }
-         /*   RtiFactory rtiFactory = RtiFactoryFactory.getRtiFactory();
-            ambassador = rtiFactory.getRtiAmbassador();
-            coder = rtiFactory.getEncoderFactory();
-
-            try {
-                ambassador.connect(this, CallbackModel.HLA_IMMEDIATE, localSettingsDesignator);
-            } catch (AlreadyConnected ignored) {
-            } catch (UnsupportedCallbackModel e) {
-                throw new RTIinternalError("HlaInterfaceFailure", e);
-            } catch (InvalidLocalSettingsDesignator invalidLocalSettingsDesignator) {
-                invalidLocalSettingsDesignator.printStackTrace();
-            } catch (CallNotAllowedFromWithinCallback e) {
-                throw new RuntimeException(e);
-            }
-            }*/
 
         @Override
         public void join(String federateName, String federateType) {
