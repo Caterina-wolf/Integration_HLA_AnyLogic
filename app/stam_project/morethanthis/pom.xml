@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>it.cl.hla</groupId>
+    <artifactId>master</artifactId>
+    <version>0.0.1</version>
+    <name>moreThanThis</name>
+    <description>manager with HLACore as external library-- hlacore.jar</description>
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>hla</groupId>
+            <artifactId>rti1516e</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/prti1516e.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>it.cl.hla</groupId>
+            <artifactId>hlacore</artifactId>
+            <version>0.0.3</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/hlacore-0.0.3.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
