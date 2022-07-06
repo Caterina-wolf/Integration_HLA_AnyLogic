@@ -12,6 +12,7 @@
         <sourceTestOutputDir name="bin/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="HLACore" />
+        <module name="hlacore" />
       </profile>
     </annotationProcessing>
   </component>

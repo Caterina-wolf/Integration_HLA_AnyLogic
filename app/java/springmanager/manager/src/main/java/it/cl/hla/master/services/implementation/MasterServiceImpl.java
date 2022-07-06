@@ -42,6 +42,13 @@ public class MasterServiceImpl implements MasterService {
     @Value("${federate.name}")
     String federateName;
 
+
+    @Value("${CRC.address}")
+    String address;
+
+    @Value("${CRC.port}")
+    int port;
+
     @Value("${localSettingsDesignator.settings}")
     String localSettingDesignator;
 
@@ -51,6 +58,7 @@ public class MasterServiceImpl implements MasterService {
     @Value("${federate.type}")
     String federateType;
 
+
     @PostConstruct
     public void init() {
         System.out.println("Welcome to the Master Federate! ");
@@ -58,10 +66,11 @@ public class MasterServiceImpl implements MasterService {
         System.out.println("Make sure that your desired federates have joined the federation");
         System.out.println("****************************************************************");
 
+        String settingDesignator = "CRCAddress=" + address + ":" + Integer.toString(port);
         try {
             // Legge le proprietà e il URL del file da application.properties
             URL url = fomFile.getFile().toURI().toURL();
-            hlaCore.start(localSettingDesignator, federationName, url);
+            hlaCore.start(settingDesignator, federationName, url);
         } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | NotConnected | RTIinternalError |
                  ConnectionFailed | FederateServiceInvocationsAreBeingReportedViaMOM | IOException e) {
             throw new RuntimeException(e);

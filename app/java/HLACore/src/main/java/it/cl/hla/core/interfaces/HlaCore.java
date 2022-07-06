@@ -11,26 +11,26 @@ public interface HlaCore {
     /**
      * Connect to a CRC and join federation
      *
-     * @param localSettingsDesignator The name to load settings for or "" to load default settings
+     * @param //localSettingsDesignator The name to load settings for or "" to load default settings
      * @param federationName          Name of the federation to join
      */
-    void start(String localSettingsDesignator, String federationName, URL url)
+    void start(String settingsDesignator, String federationName, URL url)
             throws FederateNotExecutionMember,
             RestoreInProgress,
             SaveInProgress,
             NotConnected,
-            FederateServiceInvocationsAreBeingReportedViaMOM,
             RTIinternalError,
-            ConnectionFailed;
+            ConnectionFailed,
+            FederateServiceInvocationsAreBeingReportedViaMOM;
 
-    void start(String localSettingDesignator, String federation)
+    void start(String settingDesignator, String federation)
             throws FederateNotExecutionMember,
             RestoreInProgress,
             SaveInProgress,
             NotConnected,
-            FederateServiceInvocationsAreBeingReportedViaMOM,
             RTIinternalError,
-            ConnectionFailed;
+            ConnectionFailed,
+            FederateServiceInvocationsAreBeingReportedViaMOM;
 
     /**
      * Federate join the FedExec

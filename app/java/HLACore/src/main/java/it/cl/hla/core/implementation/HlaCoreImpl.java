@@ -53,22 +53,22 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
         }
 
     /**
-         * @param localSettingsDesignator The name to load settings for or "" to load default settings
-         * @param federationName          Name of the federation to join
+         * @param settingDesignator//localSettingsDesignator The name to load settings for or "" to load default settings
+         * @param federationName      Name of the federation to join
          */
     @Override
-    public void start(String localSettingsDesignator, String federationName, URL urlFOM) throws RTIinternalError, ConnectionFailed, NotConnected {
+    public void start(String settingDesignator/*localSettingsDesignator*/, String federationName, URL urlFOM) throws RTIinternalError, ConnectionFailed, NotConnected {
             RtiFactory rtiFactory = RtiFactoryFactory.getRtiFactory();
             ambassador = rtiFactory.getRtiAmbassador();
             coder = rtiFactory.getEncoderFactory();
 
 
             try {
-                ambassador.connect(this, CallbackModel.HLA_IMMEDIATE, localSettingsDesignator);
+                ambassador.connect(this, CallbackModel.HLA_IMMEDIATE, settingDesignator/*localSettingsDesignator*/);
             } catch (AlreadyConnected ignored) {
             } catch (UnsupportedCallbackModel e) {
                 throw new RTIinternalError("HlaInterfaceFailure", e);
-            } catch (InvalidLocalSettingsDesignator invalidLocalSettingsDesignator) {
+            } catch ( InvalidLocalSettingsDesignator invalidLocalSettingsDesignator) {
                 invalidLocalSettingsDesignator.printStackTrace();
             } catch (CallNotAllowedFromWithinCallback e) {
                 throw new RuntimeException(e);
@@ -96,8 +96,8 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
     }
 
         @Override
-        public void start(String localSettingsDesignator, String federationName) throws RTIinternalError, ConnectionFailed, NotConnected {
-            this.start(localSettingsDesignator, federationName, null);
+        public void start(String settingDesignator/*localSettingsDesignator*/, String federationName) throws RTIinternalError, ConnectionFailed, NotConnected {
+            this.start(settingDesignator/*localSettingsDesignator*/, federationName, null);
         }
 
         @Override
