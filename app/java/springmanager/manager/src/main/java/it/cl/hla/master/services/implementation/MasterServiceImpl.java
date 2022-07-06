@@ -66,7 +66,7 @@ public class MasterServiceImpl implements MasterService {
         System.out.println("Make sure that your desired federates have joined the federation");
         System.out.println("****************************************************************");
 
-        String settingDesignator = "CRCAddress=" + address + ":" + Integer.toString(port);
+        String settingDesignator = "crcAddress=" + address + ":" + Integer.toString(port);
         try {
             // Legge le proprietà e il URL del file da application.properties
             URL url = fomFile.getFile().toURI().toURL();

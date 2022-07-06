@@ -117,7 +117,7 @@ public class AnyLogicCoordinator {
      * chiama l'interfaccia per fare il join della FedExec,
      * inoltre gestisce i due handle per lo start e lo stop
     */
-    public void Start() throws FederateNotExecutionMember, RestoreInProgress, FederateServiceInvocationsAreBeingReportedViaMOM, NotConnected, SaveInProgress, ConnectionFailed {
+    public void Start(String settingDesignator, String federationName, String federateName, String federateType) throws FederateNotExecutionMember, RestoreInProgress, FederateServiceInvocationsAreBeingReportedViaMOM, NotConnected, SaveInProgress, ConnectionFailed {
 
         hlaCore.addInteractionListener(new ListenerInteraction() {
             @Override

@@ -20,7 +20,6 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <jdk.version>11.0.14</jdk.version>
-        <!-- <log4j.version>1.2.17</log4j.version> -->
     </properties>
 
     <dependencies>
@@ -33,18 +32,12 @@
             <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/prti1516e.jar</systemPath>
         </dependency>
 
-        <!--<dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency> -->
-
         <dependency>
             <groupId>it.cl.hla</groupId>
             <artifactId>hlacore</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/hlacore-0.0.2.jar</systemPath>
+            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/hlacore-0.0.3.jar</systemPath>
         </dependency>
 
     </dependencies>
