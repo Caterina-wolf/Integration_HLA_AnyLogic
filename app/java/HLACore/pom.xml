@@ -6,9 +6,9 @@
 
     <groupId>it.cl.hla</groupId>
     <artifactId>hlacore</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <name>HLACore</name>
-    <description>Libreria jar contenente solo il codice che comunica con HLA</description>
+    <description>library that communicate only with the ambassador in HLA</description>
     <inceptionYear>2022</inceptionYear>
     <organization>
         <name>STAM</name>
@@ -29,7 +29,7 @@
             <artifactId>rti1516e</artifactId>
             <version>1.0</version>
             <scope>system</scope> <!-- classpath - non si può fare -->
-            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/prti1516e.jar</systemPath>
+            <systemPath>C:/Users/Caterina/Desktop/Tesi/Git/app/java/jar_lib/prti1516e.jar</systemPath>
         </dependency>
 
     </dependencies>
