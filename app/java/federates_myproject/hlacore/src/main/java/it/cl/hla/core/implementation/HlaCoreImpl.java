@@ -33,10 +33,12 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
     // Factory della mappa degli Attributi di un oggetto
     private AttributeHandleValueMapFactory mapAttributeCreator;
 
+    private AttributeHandleSetFactory setAttributes;
+
     // Factory di dataElement
     private DataElementFactory dataConvertor;
 
-    // ArryList dei listener per le interazioni
+    // ArrayList dei listener per le interazioni
     private List<ListenerInteraction> listenerInteractions = new CopyOnWriteArrayList<>();
 
     //ArrayList dei listener per lo/gli oggetto/i
@@ -302,14 +304,9 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
         return (Iterable<Double>) recordFixed.iterator().next();
     }
 
-
-
-
     /******************************************
      * INTERACTIONS
      ******************************************/
-
-
 
     /**
      * Crea una Hash map di dimensione uguale a capacity,
@@ -460,7 +457,11 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
         return mapAttributeCreator.create(capacity);
     }
 
-
+    @Override
+    public AttributeHandleSet createAttributesSet(int capacity) throws FederateNotExecutionMember, NotConnected {
+        setAttributes  = ambassador.getAttributeHandleSetFactory();
+        return setAttributes.create();
+    }
     /**
      * @param nameOfObject nome della class handle che si vuole
      * @return object class handle
@@ -509,12 +510,12 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
     }
 
     /**
-     * Pubblica un oggetto sull'RTI
+     * Pubblica un oggetto sul RTI
      * @param objectClassHandle handle oggetto che si vuole pubblicare
      * @param attributeHandleSet set di attributi associato all'oggetto che si sta pubblicando
      */
     @Override
-    public void publishObjectClass(ObjectClassHandle objectClassHandle, AttributeHandleSet attributeHandleSet) {
+    public void sendObject(ObjectClassHandle objectClassHandle, AttributeHandleSet attributeHandleSet) {
         try {
             ambassador.publishObjectClassAttributes(objectClassHandle, attributeHandleSet);
         } catch (AttributeNotDefined | ObjectClassNotDefined | SaveInProgress | RestoreInProgress |
@@ -545,15 +546,15 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
      * @return una istanza dell'oggetto
      */
     @Override
-    public ObjectInstanceHandle registerObject(ObjectClassHandle object) {
-        ObjectInstanceHandle carHandle;
+    public ObjectInstanceHandle publishObject(ObjectClassHandle object) {
+        ObjectInstanceHandle instanceHandle;
         try {
-            carHandle = ambassador.registerObjectInstance(object);
+            instanceHandle = ambassador.registerObjectInstance(object);
         } catch (ObjectClassNotPublished | ObjectClassNotDefined | SaveInProgress | RestoreInProgress |
                  FederateNotExecutionMember | NotConnected | RTIinternalError e) {
             throw new RuntimeException(e);
         }
-        return carHandle;
+        return instanceHandle;
     }
 
 
@@ -591,6 +592,7 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
     /**************************************
      * LISTENER OBJECT
      **************************************/
+
     @Override
     public void addObjectListener(ListenerObject objectListener) {
         listenerObjects.add(objectListener);
@@ -599,28 +601,28 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
     /**
      * Observable del Coordinator per gli oggetti
      */
-    @Override
+
+    /*@Override
     public void reflectAttributeValues(ObjectClassHandle objectClassHandle, AttributeHandleValueMap mapAttribute, byte[] userSuppliedTag, OrderType sentOrdering, TransportationTypeHandle theTransport, SupplementalReflectInfo reflectInfo) throws FederateInternalError {
         for (ListenerObject listener : listenerObjects) {
             listener.reflectAttributeValues(objectClassHandle, mapAttribute);
         }
     }
 
-    @Override
+
     public void reflectAttributeValues(ObjectClassHandle objectClassHandle, AttributeHandleValueMap mapAttribute, byte[] userSuppliedTag, OrderType sentOrdering, TransportationTypeHandle theTransport, LogicalTime theTime, OrderType receivedOrdering, SupplementalReflectInfo reflectInfo) throws FederateInternalError {
         for (ListenerObject listener : listenerObjects) {
             listener.reflectAttributeValues(objectClassHandle, mapAttribute);
         }
     }
 
-    @Override
+
     public void reflectAttributeValues(ObjectClassHandle objectClassHandle, AttributeHandleValueMap mapAttribute, byte[] userSuppliedTag, OrderType sentOrdering, TransportationTypeHandle theTransport, LogicalTime theTime, OrderType receivedOrdering, MessageRetractionHandle retractionHandle, SupplementalReflectInfo reflectInfo) throws FederateInternalError {
         for (ListenerObject listener : listenerObjects) {
             listener.reflectAttributeValues(objectClassHandle, mapAttribute);
         }
-    }
+    }*/
 
-    //TO DO: removeObjectInstance (come nella classe HlaInterfaceImpl di mapviewer)
     //TO DO: discoverObjectInstance (come nella classe HlaInterfaceImpl di mapviewer)
 
 

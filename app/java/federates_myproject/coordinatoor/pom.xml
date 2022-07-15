@@ -29,15 +29,13 @@
             <artifactId>rti1516e</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/prti1516e.jar</systemPath>
+            <systemPath>${project.basedir}/lib/prti1516e.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>it.cl.hla</groupId>
             <artifactId>hlacore</artifactId>
-            <version>0.0.3</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/jar_lib/hlacore-0.0.3.jar</systemPath>
+            <version>0.0.4</version>
         </dependency>
 
     </dependencies>

@@ -1,27 +1,11 @@
-/*
- * Copyright (C) 2012  Pitch Technologies
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package it.cl.hla.core.fuel;
+package it.cl.hla.coordinator.flueltypecoder;
 
-import carsimj.src.se.pitch.hlatutorial.carsim.model.FuelType;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAinteger32BE;
+import it.cl.hla.coordinator.implementation.FuelType;
 
-
-class FuelTypeEnum8Coder {
+public class FuelTypeEnum8Coder {
 
    private enum FuelTypeEnum8 {
       UNKNOWN(0), GASOLINE(1), DIESEL(2), ETHANOL_FLEXIBLE_FUEL(3), NATURAL_GAS(4);
@@ -52,12 +36,12 @@ class FuelTypeEnum8Coder {
       _coder = encoderFactory.createHLAinteger32BE();
    }
 
-   byte[] encode(FuelType fuelType) {
+   public byte[] encode(FuelType fuelType) {
       _coder.setValue(translate(fuelType).getValue());
       return _coder.toByteArray();
    }
 
-   FuelType decode(byte[] bytes) throws DecoderException {
+   public FuelType decode(byte[] bytes) throws DecoderException {
       _coder.decode(bytes);
       return translate(FuelTypeEnum8.find(_coder.getValue()));
    }

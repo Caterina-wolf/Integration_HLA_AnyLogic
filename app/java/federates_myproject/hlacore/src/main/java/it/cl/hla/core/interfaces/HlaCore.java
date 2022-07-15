@@ -32,35 +32,23 @@ public interface HlaCore {
             RTIinternalError,
             ConnectionFailed;
 
-    /**
-     * Federate join the FedExec
-     *
-     * @param federateName
-     */
+    //Method to join a federation
     void join(String federateName, String federateType);
 
-    /**
-     * Resign and disconnect from CRC
-     */
+    //Resign, destroy and disconnect to federation
     void stop() throws RTIinternalError;
 
-    /**
-     * @return value of FederateName
-     */
+    //return Federate Name
     String getFederateName();
 
-    /**
-     * @return value of federation Name
-     */
+   //return federation name
     String getFederationName();
 
     /*****************************************************************************
-     * Interactions
+     * INTERACTIONS
      ****************************************************************************/
 
-    /**
-     * @param interactionClassHandle handle per l'interazione publish
-     */
+    // A federate publish an interaction on RTI
     void publishInteractions(InteractionClassHandle interactionClassHandle)
             throws FederateNotExecutionMember,
             RestoreInProgress,
@@ -70,9 +58,7 @@ public interface HlaCore {
             FederateServiceInvocationsAreBeingReportedViaMOM;
 
 
-    /**
-     * @param interactionClassHandle handle per l'interazione subscribe
-     */
+    //A federate subscribe to an interaction on RTI
     void subscribeInteractions(InteractionClassHandle interactionClassHandle)
             throws FederateNotExecutionMember,
             RestoreInProgress,
@@ -81,10 +67,7 @@ public interface HlaCore {
             RTIinternalError,
             FederateServiceInvocationsAreBeingReportedViaMOM;
 
-
-    /**
-     * @param nameHandle nome del handle da selezionare per l'interazione
-     */
+    //return an handle of interaction type
     InteractionClassHandle getInteractionClassHandle(String nameHandle)
             throws FederateNotExecutionMember,
             RTIinternalError,
@@ -93,10 +76,7 @@ public interface HlaCore {
             NotConnected,
             FederateServiceInvocationsAreBeingReportedViaMOM;
 
-    /**
-     * @param interactionHandle interazione che sto considerando al momento
-     * @param nameParameter     nome del parametro da prendere
-     */
+    //return an handle of parameter type
     ParameterHandle getParameterHandle(InteractionClassHandle interactionHandle, String nameParameter)
             throws FederateNotExecutionMember,
             SaveInProgress,
@@ -111,131 +91,77 @@ public interface HlaCore {
      *  LISTNER
      *******************************************************/
 
-    /**
-     * Add an ListenerInteraction to receive notifications when Interactions are received
-     *
-     * @param interactionListener an InteractionListener
-     */
+    // add a listener for interaction
     void addInteractionListener(ListenerInteraction interactionListener);
+
+    // add a listener for object
+    void addObjectListener(ListenerObject objectListener);
+
 
     /*******************************************************
      *  DECODERS e CODER
      *******************************************************/
-    /**
-     * @param data ByteArray da decodificare
-     */
+    // decode a byteArray to a float number
     float decodeFloat32(byte[] data) throws DecoderException;
 
-    /**
-     * @param data ByteArray da decodificare
-     */
+    // decode a byteArray to an integer number
     int decodeInt32(byte[] data) throws DecoderException;
 
-    /**
-     * @param data ByteArray da decodificare
-     */
+    // decode a byteArray to a String
     String decodeString32(byte[] data) throws DecoderException;
 
-    /**
-     * Codifica una stringa in byteArray
-     *
-     * @param name stringa da codificare
-     * @return byteArray
-     */
-    byte[] encoderString(String name);
-
-    /**
-     * Codifica un intero in byteArray
-     *
-     * @param fuel intero da codificare
-     * @return byteArray
-     */
-
-    byte[] encoderInt(int fuel);
-
-    /**
-     * Codifica un float in byteArray
-     *
-     * @param time float da codificare
-     * @return byteArray
-     */
-
-    byte[] encoderFloat(float time);
-
-    DataElement encoderFloat64BE(double latLong);
-
-    byte[] encoderDouble(double lat, double longit);
-
+    // decode a byteArray into a double array
     Iterable<Double> decoderFixedRecord(byte[] bytes) throws DecoderException;
 
-    /**
-     * Crea una HashMap con i seguenti parametri:
-     *
-     * @param capacity 2 per parameterHandle e byteArray
-     */
-    ParameterHandleValueMap createParameterMap(int capacity) throws FederateNotExecutionMember, NotConnected;
+    // encode a String in a byteArray
+    byte[] encoderString(String name);
+
+    // encode an integer number in a byteArray
+    byte[] encoderInt(int fuel);
+
+    // encode a float number in a byteArray
+    byte[] encoderFloat(float time);
+
+    // encode a double number in a dataElement
+    DataElement encoderFloat64BE(double latLong);
+
+    // encode 2 double number in a byteArray
+    byte[] encoderDouble(double lat, double longit);
+
+    /*************************************
+     * HASH MAPS and SET
+     *************************************/
+
+    // create an HashMap of handles of parameter type
+    ParameterHandleValueMap createParameterMap(int capacity)
+            throws FederateNotExecutionMember,
+            NotConnected;
+
+    // create an HashMap of handles of attribute type
+    AttributeHandleValueMap createAttributeMap(int capacity)
+            throws FederateNotExecutionMember,
+            NotConnected;
+
+    // create an Set of handles of attribute type
+    AttributeHandleSet createAttributesSet(int capacity)
+            throws FederateNotExecutionMember,
+            NotConnected;
+
 
     /*******************************************************
-     *  CALLBACK
+     *  CALLBACK 
      *******************************************************/
-    /**
-     * Pubblica sia Scenario Loaded che Scenario Failure
-     *
-     * @param interactionHandle interaction considered
-     * @param mapValue          parametro da selezionare per l'interazione
-     */
+
+    //Publish on the master that the interaction was received by federates
     void sendInteraction(InteractionClassHandle interactionHandle, ParameterHandleValueMap mapValue)
             throws NotConnected,
             FederateNotExecutionMember,
             RestoreInProgress,
             SaveInProgress,
             RTIinternalError;
-    /*******************************************************
-     *  OBJECT
-     *******************************************************/
 
-
-    ObjectClassHandle getObjectClassHandle(String nameOfObject)
-            throws NameNotFound,
-            FederateNotExecutionMember,
-            NotConnected,
-            RTIinternalError;
-
-    AttributeHandle getAttributeHandle(ObjectClassHandle objectClassHandle, String objectName)
-            throws InvalidObjectClassHandle,
-            FederateNotExecutionMember,
-            NotConnected,
-            RTIinternalError;
-
-
-    String getNameAttribute(ObjectClassHandle objectClassHandle, AttributeHandle attributeHandle)
-            throws FederateNotExecutionMember,
-            InvalidAttributeHandle,
-            AttributeNotDefined,
-            NotConnected,
-            InvalidObjectClassHandle,
-            RTIinternalError;
-
-    ObjectInstanceHandle registerObject(ObjectClassHandle objectCar)
-            throws ObjectClassNotPublished,
-            ObjectClassNotDefined,
-            SaveInProgress,
-            RestoreInProgress,
-            FederateNotExecutionMember,
-            NotConnected,
-            RTIinternalError;
-
-
-    void updatesAttributes(ObjectInstanceHandle objectHandle, AttributeHandleValueMap mapAttributes, byte[] data)
-        throws AttributeNotOwned,
-            AttributeNotDefined,
-            ObjectInstanceNotKnown,
-            SaveInProgress,
-            RestoreInProgress,
-            FederateNotExecutionMember,
-            NotConnected,
-            RTIinternalError;
-    void publishObjectClass(ObjectClassHandle objectClassCarHandle, AttributeHandleSet attributeHandle)
+    //Publish on the master that the object was received by federates
+    void sendObject(ObjectClassHandle objectClassCarHandle, AttributeHandleSet attributeHandle)
             throws FederateNotExecutionMember,
             SaveInProgress,
             RestoreInProgress,
@@ -245,15 +171,44 @@ public interface HlaCore {
             ObjectClassNotDefined,
             FederateServiceInvocationsAreBeingReportedViaMOM;
 
-    void subscribeObjectClass(ObjectClassHandle objectClassHandle, AttributeHandleSet attributeHandle)
-        throws FederateNotExecutionMember,
-        SaveInProgress,
-        RestoreInProgress,
-        NotConnected,
-        RTIinternalError,
-        AttributeNotDefined,
-        ObjectClassNotDefined;
+    /*******************************************************
+     *  OBJECT
+     *******************************************************/
 
+    // publish/register an object on RTI
+    ObjectInstanceHandle publishObject(ObjectClassHandle objectCar)
+            throws ObjectClassNotPublished,
+            ObjectClassNotDefined,
+            SaveInProgress,
+            RestoreInProgress,
+            FederateNotExecutionMember,
+            NotConnected,
+            RTIinternalError;
+
+
+    // A federate subscribe an object published on RTI
+    void subscribeObjectClass(ObjectClassHandle objectClassHandle, AttributeHandleSet attributeHandle)
+            throws FederateNotExecutionMember,
+            SaveInProgress,
+            RestoreInProgress,
+            NotConnected,
+            RTIinternalError,
+            AttributeNotDefined,
+            ObjectClassNotDefined;
+
+
+    // The attributes of an object are updated
+    void updatesAttributes(ObjectInstanceHandle objectHandle, AttributeHandleValueMap mapAttributes, byte[] data)
+            throws AttributeNotOwned,
+            AttributeNotDefined,
+            ObjectInstanceNotKnown,
+            SaveInProgress,
+            RestoreInProgress,
+            FederateNotExecutionMember,
+            NotConnected,
+            RTIinternalError;
+
+    // The instance of an object is deleted
     void removeObjectInstance(ObjectInstanceHandle objectHandle, byte[] data)
             throws DeletePrivilegeNotHeld,
             ObjectInstanceNotKnown,
@@ -263,9 +218,27 @@ public interface HlaCore {
             NotConnected,
             RTIinternalError;
 
+    // return an handle of object type
+    ObjectClassHandle getObjectClassHandle(String nameOfObject)
+            throws NameNotFound,
+            FederateNotExecutionMember,
+            NotConnected,
+            RTIinternalError;
 
-    AttributeHandleValueMap createAttributeMap(int capacity)
+    // return an handle of attribute type
+    AttributeHandle getAttributeHandle(ObjectClassHandle objectClassHandle, String objectName)
+            throws InvalidObjectClassHandle,
+            FederateNotExecutionMember,
+            NotConnected,
+            RTIinternalError;
+
+
+    // return a String which is the name of on attribute of object
+    String getNameAttribute(ObjectClassHandle objectClassHandle, AttributeHandle attributeHandle)
             throws FederateNotExecutionMember,
-            NotConnected;
-    void addObjectListener(ListenerObject objectListener);
+            InvalidAttributeHandle,
+            AttributeNotDefined,
+            NotConnected,
+            InvalidObjectClassHandle,
+            RTIinternalError;
 }

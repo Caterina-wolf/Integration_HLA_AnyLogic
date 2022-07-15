@@ -22,14 +22,16 @@
         <jdk.version>11.0.14</jdk.version>
     </properties>
 
+
+
     <dependencies>
 
         <dependency>
             <groupId>hla</groupId>
             <artifactId>rti1516e</artifactId>
             <version>1.0</version>
-            <scope>system</scope> <!-- classpath - non si può fare -->
-            <systemPath>C:/Users/Caterina/Desktop/Tesi/Git/app/java/jar_lib/prti1516e.jar</systemPath>
+            <scope>system</scope>
+            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/libraries/prti1516e.jar</systemPath>
         </dependency>
 
     </dependencies>

@@ -4,8 +4,10 @@ import hla.rti1516e.*;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.exceptions.*;
 import it.cl.hla.coordinator.interfaces.CarSimulator;
-import it.cl.hla.core.interfaces.*;
-import it.cl.hla.core.implementation.HlaCoreImpl;
+import it.cl.hla.core.implementation.*;
+import it.cl.hla.coordinator.flueltypecoder.FuelTypeEnum8Coder;
+import it.cl.hla.core.interfaces.HlaCore;
+import it.cl.hla.core.interfaces.ListenerInteraction;
 
 public class AnyLogicCoordinator {
     private HlaCore hlaCore = new HlaCoreImpl();
@@ -25,7 +27,16 @@ public class AnyLogicCoordinator {
     private ParameterHandle scenarioFailureFederateNameParameterHandle;
     private ParameterHandle scenarioFailureErrorMessage;
 
+    private ObjectClassHandle objectClassCarHandle;
 
+    private AttributeHandle attributePositionHandle;
+    private AttributeHandle attributeFuelLevelHandle;
+    private AttributeHandle nameAttributeHandle;
+    private AttributeHandle licensePlateNumberAttributeHandle;
+    private AttributeHandle fuelTypeAttributeHandle;
+
+    private FuelTypeEnum8Coder fuelTypeEnumCoder;
+    private FuelType fuelType;
     private CarSimulator anyLogic ;
     public boolean running;
     public float timeScale;
@@ -117,7 +128,7 @@ public class AnyLogicCoordinator {
      * chiama l'interfaccia per fare il join della FedExec,
      * inoltre gestisce i due handle per lo start e lo stop
     */
-    public void Start(String settingDesignator, String federationName, String federateName, String federateType) throws FederateNotExecutionMember, RestoreInProgress, FederateServiceInvocationsAreBeingReportedViaMOM, NotConnected, SaveInProgress, ConnectionFailed {
+    public void Start(String settingsDesignator, String federationName, String federateName, String federateType) throws FederateNotExecutionMember, RestoreInProgress, FederateServiceInvocationsAreBeingReportedViaMOM, NotConnected, SaveInProgress, ConnectionFailed {
 
         hlaCore.addInteractionListener(new ListenerInteraction() {
             @Override
@@ -154,6 +165,11 @@ public class AnyLogicCoordinator {
 
                     scenarioHandling();
 
+                    objectHandling();
+
+                    System.out.println("[COORD] Car Published");
+
+
             } catch (RTIinternalError e) {
                 System.out.println("[COORD] Could not connect to the RTI with local settings designator");
                 e.printStackTrace();
@@ -179,6 +195,8 @@ public class AnyLogicCoordinator {
                       setInitialFuel(fuelInitial);
 
                       anyLogic.loadScenario();
+
+
 
                   } catch (DecoderException e) {
                       e.printStackTrace();
@@ -222,12 +240,69 @@ public class AnyLogicCoordinator {
         }
 
     }
+
+
+    public void objectHandling(){
+
+        try {
+            objectClassCarHandle=hlaCore.getObjectClassHandle("Car");
+
+            attributePositionHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "Position");
+            attributeFuelLevelHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "FuelLevel");
+            nameAttributeHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "Name");
+            licensePlateNumberAttributeHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "LicensePlateNumber");;
+            fuelTypeAttributeHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "FuelType");
+
+
+            anyLogic.loadCar();
+        } catch (NameNotFound | NotConnected | FederateNotExecutionMember| InvalidObjectClassHandle | RTIinternalError e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObjectInstanceHandle createCar() {
+        ObjectInstanceHandle carInstance;
+        try {
+            carInstance = hlaCore.publishObject(objectClassCarHandle);
+            AttributeHandleValueMap mapAttributes = hlaCore.createAttributeMap(2);
+            byte [] nameAttribute = hlaCore.encoderString(hlaCore.getNameAttribute(objectClassCarHandle, nameAttributeHandle));
+            mapAttributes.put(nameAttributeHandle,nameAttribute);
+            byte [] licenseAttribute = hlaCore.encoderString(hlaCore.getNameAttribute(objectClassCarHandle, licensePlateNumberAttributeHandle));
+            mapAttributes.put(licensePlateNumberAttributeHandle, licenseAttribute);
+            //byte [] fuelTypeEnum = fuelTypeEnumCoder.encode(fuelType); //Non prende nessun tipo di fuel in particolare
+            //mapAttributes.put(fuelTypeAttributeHandle, fuelTypeEnum);
+        } catch (ObjectClassNotPublished | ObjectClassNotDefined | SaveInProgress | RestoreInProgress |
+                 FederateNotExecutionMember | NotConnected | RTIinternalError | InvalidAttributeHandle |
+                 AttributeNotDefined | InvalidObjectClassHandle e) {
+            throw new RuntimeException(e);
+        }
+        return carInstance;
+    }
+
+
+    public void publishCar() throws FederateNotExecutionMember, NotConnected, RestoreInProgress, SaveInProgress, RTIinternalError {
+        try {
+            AttributeHandleSet attributes = hlaCore.createAttributesSet(5);
+            attributes.add(nameAttributeHandle);
+            attributes.add(attributePositionHandle);
+            attributes.add(fuelTypeAttributeHandle);
+            attributes.add(licensePlateNumberAttributeHandle);
+            attributes.add(attributeFuelLevelHandle);
+            hlaCore.sendObject(objectClassCarHandle,attributes);
+        } catch (AttributeNotDefined e) {
+            throw new RTIinternalError("HlaInterfaceFailure", e);
+        } catch (ObjectClassNotDefined e) {
+            throw new RTIinternalError("HlaInterfaceFailure", e);
+        } catch (FederateServiceInvocationsAreBeingReportedViaMOM e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * callback del Coordinator sul Manager per il loading dello Scenario
      */
     public void publishScenarioLoaded() throws FederateNotExecutionMember, RestoreInProgress, NotConnected, RTIinternalError, SaveInProgress {
         try {
-            ParameterHandleValueMap mapHandle = hlaCore.createMap(2);
+            ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(2);
             byte [] nameParameter = hlaCore.encoderString(hlaCore.getFederateName());
             mapHandle.put(scenarioLoadedFederateNameParameterHandle,nameParameter);
             hlaCore.sendInteraction(scenarioLoadedInteractionClassHandle, mapHandle);
@@ -243,7 +318,7 @@ public class AnyLogicCoordinator {
      */
     public void publishScenarioFailed(String errorMessage) throws FederateNotExecutionMember, RestoreInProgress, NotConnected, RTIinternalError, SaveInProgress {
        try {
-           ParameterHandleValueMap mapHandle = hlaCore.createMap(2);
+           ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(2);
            byte [] nameParameter = hlaCore.encoderString(hlaCore.getFederateName());
            mapHandle.put(scenarioFailureFederateNameParameterHandle, nameParameter);
            byte [] error = hlaCore.encoderString(errorMessage);
