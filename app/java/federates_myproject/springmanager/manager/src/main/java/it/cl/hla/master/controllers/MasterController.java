@@ -23,9 +23,9 @@ public class MasterController {
     }
 
     //join to FedExec
-    @GetMapping("/joint")
+    @GetMapping("/join")
     void joint(){
-        service.joint();
+        service.join();
     }
 
     //Load scenario chosen

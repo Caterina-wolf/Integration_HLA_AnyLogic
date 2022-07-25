@@ -20,6 +20,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <jdk.version>11.0.14</jdk.version>
+        <librariesPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java</librariesPath>
+
     </properties>
 
 
@@ -31,7 +33,7 @@
             <artifactId>rti1516e</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/libraries/prti1516e.jar</systemPath>
+            <systemPath>${librariesPath}/libraries/prti1516e.jar</systemPath>
         </dependency>
 
     </dependencies>

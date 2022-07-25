@@ -1,23 +1,23 @@
-package it.cl.hla.coordinator.flueltypecoder;
+package it.cl.hla.coordinator.encoders;
 
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAinteger32BE;
-import it.cl.hla.coordinator.implementation.FuelType;
+import it.cl.hla.coordinator.implementation.FuelTypeImpl;
 
 public class FuelTypeEnum8Coder {
 
    private enum FuelTypeEnum8 {
       UNKNOWN(0), GASOLINE(1), DIESEL(2), ETHANOL_FLEXIBLE_FUEL(3), NATURAL_GAS(4);
 
-      private final int _value;
+      private final int value;
 
       private FuelTypeEnum8(int value) {
-         _value = value;
+         this.value = value;
       }
 
       public int getValue() {
-         return _value;
+         return this.value;
       }
 
       public static FuelTypeEnum8 find(int value) {
@@ -30,38 +30,35 @@ public class FuelTypeEnum8Coder {
       }
    }
 
-   private final HLAinteger32BE _coder;
 
-   FuelTypeEnum8Coder(EncoderFactory encoderFactory) {
-      _coder = encoderFactory.createHLAinteger32BE();
+   public byte[] encode(FuelTypeImpl fuelTypeImpl, EncoderFactory coder) {
+      HLAinteger32BE fuelTypeEnum8Coder = coder.createHLAinteger32BE();
+      fuelTypeEnum8Coder.setValue(translate(fuelTypeImpl).getValue());
+      return fuelTypeEnum8Coder.toByteArray();
    }
 
-   public byte[] encode(FuelType fuelType) {
-      _coder.setValue(translate(fuelType).getValue());
-      return _coder.toByteArray();
+   public FuelTypeImpl decode(byte[] bytes, EncoderFactory coder) throws DecoderException {
+      HLAinteger32BE fuelTypeEnum8Coder = coder.createHLAinteger32BE();
+      fuelTypeEnum8Coder.decode(bytes);
+      return translate(FuelTypeEnum8.find(fuelTypeEnum8Coder.getValue()));
    }
 
-   public FuelType decode(byte[] bytes) throws DecoderException {
-      _coder.decode(bytes);
-      return translate(FuelTypeEnum8.find(_coder.getValue()));
-   }
-
-   private static FuelType translate(FuelTypeEnum8 fuelType) {
+   private static FuelTypeImpl translate(FuelTypeEnum8 fuelType) {
       switch (fuelType) {
          case GASOLINE:
-            return FuelType.GASOLINE;
+            return FuelTypeImpl.GASOLINE;
          case DIESEL:
-            return FuelType.DIESEL;
+            return FuelTypeImpl.DIESEL;
          case ETHANOL_FLEXIBLE_FUEL:
-            return FuelType.ETHANOL_FLEXIBLE_FUEL;
+            return FuelTypeImpl.ETHANOL_FLEXIBLE_FUEL;
          case NATURAL_GAS:
-            return FuelType.NATURAL_GAS;
+            return FuelTypeImpl.NATURAL_GAS;
       }
-      return FuelType.UNKNOWN;
+      return FuelTypeImpl.UNKNOWN;
    }
 
-   private static FuelTypeEnum8 translate(FuelType fuelType) {
-      switch (fuelType) {
+   private static FuelTypeEnum8 translate(FuelTypeImpl fuelTypeImpl) {
+      switch (fuelTypeImpl) {
          case GASOLINE:
             return FuelTypeEnum8.GASOLINE;
          case DIESEL:

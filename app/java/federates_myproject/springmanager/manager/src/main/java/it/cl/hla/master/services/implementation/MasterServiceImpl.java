@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 
 
-
-
 @Service
 public class MasterServiceImpl implements MasterService {
 
@@ -31,7 +29,6 @@ public class MasterServiceImpl implements MasterService {
 
     @Autowired
     private HandlesBean handlesBean;
-
 
     @Value("${fom.xml}")
     Resource fomFile;
@@ -78,7 +75,7 @@ public class MasterServiceImpl implements MasterService {
         System.out.println("FedExec Started");
     }
 
-    public void joint(){
+    public void join(){
            hlaCore.join(federateName,federateType);
            System.out.println("Federate joint FedExec");
            getHandles();
@@ -95,7 +92,7 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public void loadScenario(String scenarioName, Integer initialFuelLevel) throws FederateNotExecutionMember, NotConnected, RestoreInProgress, SaveInProgress, RTIinternalError {
-            ParameterHandleValueMap mapHandle = hlaCore.createMap(2);
+            ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(2);
             byte[] parameterScenarioName = hlaCore.encoderString(scenarioName);
             mapHandle.put(handlesBean.getScenarioParameterHandle(), parameterScenarioName);
             byte[] fuel = hlaCore.encoderInt(initialFuelLevel);
@@ -106,7 +103,7 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public void sendStart(float timeScaleFactor) throws FederateNotExecutionMember, NotConnected, RestoreInProgress, RTIinternalError, SaveInProgress {
-        ParameterHandleValueMap mapHandle = hlaCore.createMap(1);
+        ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(1);
         byte [] time = hlaCore.encoderFloat(timeScaleFactor);
         mapHandle.put(handlesBean.getStartTimeScaleFactorParameterHandle(), time);
         hlaCore.sendInteraction(handlesBean.getStartInteractionClassHandle(), mapHandle);
@@ -114,7 +111,7 @@ public class MasterServiceImpl implements MasterService {
     }
     @Override
     public void sendStop() throws FederateNotExecutionMember, NotConnected, RestoreInProgress, RTIinternalError, SaveInProgress {
-        ParameterHandleValueMap mapHandle = hlaCore.createMap(0);
+        ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(0);
         hlaCore.sendInteraction(handlesBean.getStopInteractionClassHandle(), mapHandle);
 
     }

@@ -1,22 +1,25 @@
 package it.cl.hla.coordinator.implementation;
 
 
-public enum FuelType {
+public enum FuelTypeImpl{
    GASOLINE("Gasoline"),
    DIESEL("Diesel"),
    ETHANOL_FLEXIBLE_FUEL("EthanolFlexibleFuel"),
    NATURAL_GAS("NaturalGas"),
    UNKNOWN("Unknown");
 
-   private final String _name;
+   private String name = " ";
 
-   private FuelType(String name) {
-      _name = name;
+   FuelTypeImpl(String name) {
+      this.name = name;
    }
 
-   public static FuelType find(String name) {
-      for (FuelType fuel : values()) {
-         if (fuel._name.equals(name)) {
+  FuelTypeImpl(){}
+
+
+   public FuelTypeImpl find(String name) {
+      for (FuelTypeImpl fuel : values()) {
+         if (fuel.name.equals(name)) {
             return fuel;
          }
       }

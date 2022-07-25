@@ -3,11 +3,15 @@ package it.cl.hla.coordinator.implementation;
 import hla.rti1516e.*;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.exceptions.*;
+import it.cl.hla.coordinator.interfaces.Car;
 import it.cl.hla.coordinator.interfaces.CarSimulator;
 import it.cl.hla.core.implementation.*;
-import it.cl.hla.coordinator.flueltypecoder.FuelTypeEnum8Coder;
+import it.cl.hla.coordinator.encoders.FuelTypeEnum8Coder;
 import it.cl.hla.core.interfaces.HlaCore;
 import it.cl.hla.core.interfaces.ListenerInteraction;
+import it.cl.hla.coordinator.encoders.*;
+import it.cl.hla.coordinator.car.*;
+
 
 public class AnyLogicCoordinator {
     private HlaCore hlaCore = new HlaCoreImpl();
@@ -27,7 +31,9 @@ public class AnyLogicCoordinator {
     private ParameterHandle scenarioFailureFederateNameParameterHandle;
     private ParameterHandle scenarioFailureErrorMessage;
 
+
     private ObjectClassHandle objectClassCarHandle;
+
 
     private AttributeHandle attributePositionHandle;
     private AttributeHandle attributeFuelLevelHandle;
@@ -35,9 +41,17 @@ public class AnyLogicCoordinator {
     private AttributeHandle licensePlateNumberAttributeHandle;
     private AttributeHandle fuelTypeAttributeHandle;
 
-    private FuelTypeEnum8Coder fuelTypeEnumCoder;
-    private FuelType fuelType;
+
+    private FuelTypeEnum8Coder fuelTypeEnumCoder= new FuelTypeEnum8Coder();
+    private PositionRecordCoder coderPosition = new PositionRecordCoder();
+
+
+    private CarTracking carTracking= new CarTracking();
+
+
     private CarSimulator anyLogic ;
+
+
     public boolean running;
     public float timeScale;
     public int initialFuel;
@@ -45,8 +59,7 @@ public class AnyLogicCoordinator {
     /**
      * Costruttore di default
      */
-    public AnyLogicCoordinator(){
-    }
+    public AnyLogicCoordinator(){}
 
     /**
      * Costruttore con parametro
@@ -260,25 +273,50 @@ public class AnyLogicCoordinator {
         }
     }
 
-    public ObjectInstanceHandle createCar() {
-        ObjectInstanceHandle carInstance;
+    public void createCar(Car car) {
         try {
-            carInstance = hlaCore.publishObject(objectClassCarHandle);
-            AttributeHandleValueMap mapAttributes = hlaCore.createAttributeMap(2);
-            byte [] nameAttribute = hlaCore.encoderString(hlaCore.getNameAttribute(objectClassCarHandle, nameAttributeHandle));
+            ObjectInstanceHandle carInstance = hlaCore.publishObject(objectClassCarHandle);
+            carTracking.put(carInstance, car.getIdentifier());
+            AttributeHandleValueMap mapAttributes = hlaCore.createAttributeMap(3);
+            byte [] nameAttribute = hlaCore.encoderString(car.getName());
             mapAttributes.put(nameAttributeHandle,nameAttribute);
-            byte [] licenseAttribute = hlaCore.encoderString(hlaCore.getNameAttribute(objectClassCarHandle, licensePlateNumberAttributeHandle));
+            byte [] licenseAttribute = hlaCore.encoderString(car.getLicensePlateNumber());
             mapAttributes.put(licensePlateNumberAttributeHandle, licenseAttribute);
-            //byte [] fuelTypeEnum = fuelTypeEnumCoder.encode(fuelType); //Non prende nessun tipo di fuel in particolare
-            //mapAttributes.put(fuelTypeAttributeHandle, fuelTypeEnum);
+            byte [] fuelTypeEnum = fuelTypeEnumCoder.encode(car.getFuelType(), hlaCore.getCoder());
+            mapAttributes.put(fuelTypeAttributeHandle, fuelTypeEnum);
+            hlaCore.updatesAttributes(carInstance, mapAttributes,null);
         } catch (ObjectClassNotPublished | ObjectClassNotDefined | SaveInProgress | RestoreInProgress |
-                 FederateNotExecutionMember | NotConnected | RTIinternalError | InvalidAttributeHandle |
-                 AttributeNotDefined | InvalidObjectClassHandle e) {
+                 FederateNotExecutionMember | NotConnected | RTIinternalError |
+                 AttributeNotDefined | AttributeNotOwned | ObjectInstanceNotKnown e) {
             throw new RuntimeException(e);
         }
-        return carInstance;
     }
 
+
+   public void updateCar(Car car){
+
+       try {
+           AttributeHandleValueMap mapAttribute = hlaCore.createAttributeMap(2);
+           byte [] positionAttribute = coderPosition.encode(car.getLocation(), hlaCore.getCoder());
+           mapAttribute.put(attributePositionHandle, positionAttribute);
+           byte [] fuelLevel = hlaCore.encoderInt((int)Math.round(car.getFuelLevel()));
+           mapAttribute.put(fuelTypeAttributeHandle,fuelLevel);
+           hlaCore.updatesAttributes(carTracking.translate(car.getIdentifier()),mapAttribute,null);
+       } catch (FederateNotExecutionMember | NotConnected | AttributeNotOwned | AttributeNotDefined | ObjectInstanceNotKnown | SaveInProgress |
+                RestoreInProgress | RTIinternalError e) {
+           throw new RuntimeException(e);
+       }
+
+    }
+
+    public void removeCar(Car car){
+        try {
+            hlaCore.removeObjectInstance(carTracking.translate(car.getIdentifier()),null);
+            carTracking.remove(car.getIdentifier());
+        } catch (NotConnected | DeletePrivilegeNotHeld |ObjectInstanceNotKnown | SaveInProgress | RestoreInProgress | FederateNotExecutionMember | RTIinternalError e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void publishCar() throws FederateNotExecutionMember, NotConnected, RestoreInProgress, SaveInProgress, RTIinternalError {
         try {
@@ -289,12 +327,8 @@ public class AnyLogicCoordinator {
             attributes.add(licensePlateNumberAttributeHandle);
             attributes.add(attributeFuelLevelHandle);
             hlaCore.sendObject(objectClassCarHandle,attributes);
-        } catch (AttributeNotDefined e) {
+        } catch (FederateServiceInvocationsAreBeingReportedViaMOM| ObjectClassNotDefined| AttributeNotDefined e) {
             throw new RTIinternalError("HlaInterfaceFailure", e);
-        } catch (ObjectClassNotDefined e) {
-            throw new RTIinternalError("HlaInterfaceFailure", e);
-        } catch (FederateServiceInvocationsAreBeingReportedViaMOM e) {
-            throw new RuntimeException(e);
         }
     }
     /**

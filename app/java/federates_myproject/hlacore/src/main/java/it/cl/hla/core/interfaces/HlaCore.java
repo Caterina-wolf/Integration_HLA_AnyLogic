@@ -41,14 +41,17 @@ public interface HlaCore {
     //return Federate Name
     String getFederateName();
 
-   //return federation name
+    //return coder created by EncoderFactory
+    EncoderFactory getCoder();
+
+    //return federation name
     String getFederationName();
 
     /*****************************************************************************
      * INTERACTIONS
      ****************************************************************************/
 
-    // A federate publish an interaction on RTI
+    // One federate publish an interaction on RTI
     void publishInteractions(InteractionClassHandle interactionClassHandle)
             throws FederateNotExecutionMember,
             RestoreInProgress,
@@ -110,9 +113,6 @@ public interface HlaCore {
     // decode a byteArray to a String
     String decodeString32(byte[] data) throws DecoderException;
 
-    // decode a byteArray into a double array
-    Iterable<Double> decoderFixedRecord(byte[] bytes) throws DecoderException;
-
     // encode a String in a byteArray
     byte[] encoderString(String name);
 
@@ -121,12 +121,6 @@ public interface HlaCore {
 
     // encode a float number in a byteArray
     byte[] encoderFloat(float time);
-
-    // encode a double number in a dataElement
-    DataElement encoderFloat64BE(double latLong);
-
-    // encode 2 double number in a byteArray
-    byte[] encoderDouble(double lat, double longit);
 
     /*************************************
      * HASH MAPS and SET
@@ -198,7 +192,7 @@ public interface HlaCore {
 
 
     // The attributes of an object are updated
-    void updatesAttributes(ObjectInstanceHandle objectHandle, AttributeHandleValueMap mapAttributes, byte[] data)
+    void updatesAttributes(ObjectInstanceHandle objectHandle, AttributeHandleValueMap mapAttributes, byte[] userSuppliedTag)
             throws AttributeNotOwned,
             AttributeNotDefined,
             ObjectInstanceNotKnown,
@@ -209,7 +203,7 @@ public interface HlaCore {
             RTIinternalError;
 
     // The instance of an object is deleted
-    void removeObjectInstance(ObjectInstanceHandle objectHandle, byte[] data)
+    void removeObjectInstance(ObjectInstanceHandle objectHandle, byte[] userSuppliedTag)
             throws DeletePrivilegeNotHeld,
             ObjectInstanceNotKnown,
             SaveInProgress,

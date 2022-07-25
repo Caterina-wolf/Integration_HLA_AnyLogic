@@ -1,6 +1,10 @@
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\implementation\Position.java
 C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\Main.java
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\encoders\PositionRecordCoder.java
 C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\implementation\AnyLogicCoordinator.java
-C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\model\Car.java
-C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\flueltypecoder\FuelTypeEnum8Coder.java
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\car\CarTracking.java
 C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\interfaces\CarSimulator.java
-C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\implementation\FuelType.java
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\implementation\FuelTypeImpl.java
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\interfaces\Car.java
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\encoders\FuelTypeEnum8Coder.java
+C:\Users\Caterina\Desktop\Integration_HLA_AnyLogic\app\java\federates_myproject\coordinatoor\src\main\java\it\cl\hla\coordinator\car\CarImpl.java

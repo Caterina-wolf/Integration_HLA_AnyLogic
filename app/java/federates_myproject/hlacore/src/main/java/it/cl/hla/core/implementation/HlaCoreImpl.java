@@ -60,6 +60,15 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
 
     /**
      *
+     * @return coder costruito dalla EncoderFactory
+     */
+    @Override
+    public EncoderFactory getCoder() {
+        return coder;
+    }
+
+    /**
+     *
      * @return Federation's name
      */
     @Override
@@ -264,45 +273,7 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
         return coderFloat.toByteArray();
     }
 
-    /**
-     *
-     * @param latLong
-     * @return DataElement class
-     */
-    @Override
-    public DataElement encoderFloat64BE(double latLong) {
-        DataElement dataElement = dataConvertor.createElement(1);
-        return dataElement;
-    }
 
-    /**
-     *
-     * @param lat
-     * @param longit
-     * @return byte Array
-     */
-    @Override
-    public byte[] encoderDouble(double lat, double longit) {
-        HLAfixedRecord record = coder.createHLAfixedRecord();
-        DataElement dataElement_1 = encoderFloat64BE(lat);
-        DataElement dataElement_2 = encoderFloat64BE(longit);
-        record.add(dataElement_1);
-        record.add(dataElement_2);
-        return record.toByteArray();
-    }
-
-    /**
-     *
-     * @param bytes
-     * @return double iterable
-     * @throws DecoderException
-     */
-    @Override
-    public Iterable<Double> decoderFixedRecord(byte[] bytes) throws DecoderException {
-        HLAfixedRecord recordFixed = coder.createHLAfixedRecord();
-        recordFixed.decode(bytes);
-        return (Iterable<Double>) recordFixed.iterator().next();
-    }
 
     /******************************************
      * INTERACTIONS
@@ -562,12 +533,12 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
      * Update degli attributi dell'oggetto
      * @param objectHandle object class handle
      * @param mapAttributes hash map degli attributi dell'oggetto
-     * @param data byteArray associato
+     * @param userSuppliedTag byteArray associato
      */
     @Override
-    public void updatesAttributes(ObjectInstanceHandle objectHandle, AttributeHandleValueMap mapAttributes, byte[] data) {
+    public void updatesAttributes(ObjectInstanceHandle objectHandle, AttributeHandleValueMap mapAttributes, byte[] userSuppliedTag) {
         try {
-            ambassador.updateAttributeValues(objectHandle, mapAttributes, data);
+            ambassador.updateAttributeValues(objectHandle, mapAttributes, userSuppliedTag);
         } catch (AttributeNotOwned | AttributeNotDefined | ObjectInstanceNotKnown | SaveInProgress | RestoreInProgress |
                  FederateNotExecutionMember | NotConnected | RTIinternalError e) {
             throw new RuntimeException(e);
@@ -577,12 +548,12 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
     /**
      * Rimozione di una istanza di un oggetto
      * @param objectHandle istanza di un object class handle
-     * @param data byteArray associato
+     * @param userSuppliedTag byteArray associato
      */
     @Override
-    public void removeObjectInstance(ObjectInstanceHandle objectHandle, byte[] data) {
+    public void removeObjectInstance(ObjectInstanceHandle objectHandle, byte[] userSuppliedTag) {
         try {
-            ambassador.deleteObjectInstance(objectHandle, data);
+            ambassador.deleteObjectInstance(objectHandle, userSuppliedTag);
         } catch (DeletePrivilegeNotHeld | ObjectInstanceNotKnown | SaveInProgress | RestoreInProgress |
                  FederateNotExecutionMember | NotConnected | RTIinternalError e) {
             throw new RuntimeException(e);

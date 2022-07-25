@@ -19,10 +19,12 @@
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<Import><![CDATA[import javax.sql.CommonDataSource;
 import it.cl.hla.core.*;
-import it.cl.hla.coordinator.implementation.AnyLogicCoordinator;
-import it.cl.hla.coordinator.interfaces.CarSimulator;
+import it.cl.hla.coordinator.interfaces.*;
 import hla.rti1516e.exceptions.*;
-import hla.rti1516e.*;]]></Import>
+import hla.rti1516e.*;
+import it.cl.hla.coordinator.implementation.*;
+import it.cl.hla.coordinator.car.*;
+import it.cl.hla.coordinator.encoders.*;]]></Import>
 			<Implements><![CDATA[CarSimulator]]></Implements>
 			<StartupCode><![CDATA[try{
 Coord.Start(settingDesignator,federationName,federateName,federateType);
@@ -59,8 +61,8 @@ System.out.println("[ANYLOGIC] Problem in disconnecting");
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode Class="CodeUnitValue">
-					<Code><![CDATA[10]]></Code>
-					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+					<Code><![CDATA[70]]></Code>
+					<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 				</VelocityCode>
 				<BeforeStepCode><![CDATA[loadScenario();
 loadCar();]]></BeforeStepCode>
@@ -83,7 +85,7 @@ loadCar();]]></BeforeStepCode>
 						<Code><![CDATA[1.0]]></Code>
 						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 					</StepDurationCode>
-					<SpaceType>CONTINUOUS</SpaceType>
+					<SpaceType>GIS</SpaceType>
 					<WidthCode><![CDATA[500]]></WidthCode>
 					<HeightCode><![CDATA[500]]></HeightCode>
 					<ZHeightCode><![CDATA[0]]></ZHeightCode>
@@ -134,8 +136,8 @@ loadCar();]]></BeforeStepCode>
 				<Variable Class="PlainVariable">
 					<Id>1652282061280</Id>
 					<Name><![CDATA[Coord]]></Name>
-					<X>800</X><Y>560</Y>
-					<Label><X>15</X><Y>0</Y></Label>
+					<X>270</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -149,7 +151,7 @@ loadCar();]]></BeforeStepCode>
 				<Variable Class="PlainVariable">
 					<Id>1657112003083</Id>
 					<Name><![CDATA[settingDesignator]]></Name>
-					<X>800</X><Y>520</Y>
+					<X>270</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -157,14 +159,14 @@ loadCar();]]></BeforeStepCode>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.1.9:8989"]]></Code>
+							<Code><![CDATA["crcAddress=192.168.100.89:8989"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1657112086380</Id>
 					<Name><![CDATA[federationName]]></Name>
-					<X>800</X><Y>480</Y>
+					<X>270</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -179,7 +181,7 @@ loadCar();]]></BeforeStepCode>
 				<Variable Class="PlainVariable">
 					<Id>1657112129283</Id>
 					<Name><![CDATA[federateName]]></Name>
-					<X>800</X><Y>440</Y>
+					<X>270</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -194,7 +196,7 @@ loadCar();]]></BeforeStepCode>
 				<Variable Class="PlainVariable">
 					<Id>1657112163187</Id>
 					<Name><![CDATA[federateType]]></Name>
-					<X>800</X><Y>400</Y>
+					<X>270</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -271,7 +273,7 @@ loadCar();]]></BeforeStepCode>
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-160</X><Y>0</Y></Point>
+						<Point><X>-140</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -281,7 +283,7 @@ loadCar();]]></BeforeStepCode>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1653465998043</Id>
 					<Name><![CDATA[startSimulation]]></Name>
-					<X>580</X><Y>440</Y>
+					<X>80</X><Y>190</Y>
 					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -293,7 +295,7 @@ loadCar();]]></BeforeStepCode>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1653570426795</Id>
 					<Name><![CDATA[loadScenario]]></Name>
-					<X>580</X><Y>480</Y>
+					<X>80</X><Y>230</Y>
 					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -311,17 +313,20 @@ if(fuelInitial > 100){
 e.printStackTrace();
 }]]></Body>
 				</Function>
-				<Function AccessType="default" StaticFunction="false">
+				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1657811203842</Id>
 					<Name><![CDATA[loadCar]]></Name>
-					<X>580</X><Y>520</Y>
+					<X>80</X><Y>270</Y>
 					<Label><X>25</X><Y>5</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[Coord.publishCar();]]></Body>
+					<Body><![CDATA[try {
+Coord.publishCar();
+}catch(FederateNotExecutionMember | NotConnected | RestoreInProgress | SaveInProgress | RTIinternalError e){
+e.printStackTrace();}]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -350,9 +355,9 @@ e.printStackTrace();
 				<EmbeddedObject>
 					<Id>1651051891727</Id>
 					<Name><![CDATA[sourceCarl]]></Name>
-					<X>20</X><Y>480</Y>
+					<X>40</X><Y>480</Y>
 					<Label><X>-10</X><Y>-25</Y></Label>
-					<PublicFlag>false</PublicFlag>
+					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<ActiveObjectClass>
@@ -464,7 +469,7 @@ e.printStackTrace();
 						<Parameter>
 							<Name><![CDATA[locationNode]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[nodePRIMO]]></Code>
+								<Code><![CDATA[cupertino]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -473,8 +478,8 @@ e.printStackTrace();
 						<Parameter>
 							<Name><![CDATA[speed]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[8]]></Code>
-								<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+								<Code><![CDATA[90]]></Code>
+								<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -484,12 +489,12 @@ e.printStackTrace();
 								<EntityEmbeddedObject>
 									<ActiveObjectClass>
 										<PackageName><![CDATA[carsimb]]></PackageName>
-										<ClassName><![CDATA[CarCarl]]></ClassName>
+										<ClassName><![CDATA[CarAgent]]></ClassName>
 									</ActiveObjectClass>
 									<GenericParameterSubstitute>
 										<GenericParameterSubstituteReference>
 											<PackageName><![CDATA[carsimb]]></PackageName>
-											<ClassName><![CDATA[CarCarl]]></ClassName>
+											<ClassName><![CDATA[CarAgent]]></ClassName>
 											<ItemName><![CDATA[1651051512538]]></ItemName>
 										</GenericParameterSubstituteReference>
 									</GenericParameterSubstitute>
@@ -574,6 +579,9 @@ e.printStackTrace();
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[Coord.createCar(agent);]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onDiscard]]></Name>
@@ -691,7 +699,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<EmbeddedObject>
 					<Id>1651051901949</Id>
 					<Name><![CDATA[carCarl]]></Name>
-					<X>580</X><Y>400</Y>
+					<X>80</X><Y>150</Y>
 					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -699,12 +707,12 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<PresentationId>1651051903305</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[carsimb]]></PackageName>
-						<ClassName><![CDATA[CarCarl]]></ClassName>
+						<ClassName><![CDATA[CarAgent]]></ClassName>
 					</ActiveObjectClass>
 					<GenericParameterSubstitute>
 						<GenericParameterSubstituteReference>
 							<PackageName><![CDATA[carsimb]]></PackageName>
-							<ClassName><![CDATA[CarCarl]]></ClassName>
+							<ClassName><![CDATA[CarAgent]]></ClassName>
 							<ItemName><![CDATA[1651051512538]]></ItemName>
 						</GenericParameterSubstituteReference>
 					</GenericParameterSubstitute>
@@ -717,8 +725,8 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<CollectionType>ARRAY_LIST_BASED</CollectionType>
 					<InEnvironment>true</InEnvironment>	
 					<InitialSpeedCode Class="CodeUnitValue">
-						<Code><![CDATA[8]]></Code>
-						<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+						<Code><![CDATA[90]]></Code>
+						<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 					</InitialSpeedCode>
 					<InitialLocationType>NODE</InitialLocationType>
 					<XCode Class="CodeValue">
@@ -737,15 +745,16 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 						<Code><![CDATA[0]]></Code>
 					</RowCode>
 					<LatitudeCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[37.3233]]></Code>
 					</LatitudeCode>
 					<LongitudeCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[-122.0325]]></Code>
 					</LongitudeCode>
-					<NodeCode><![CDATA[nodePRIMO]]></NodeCode>
+					<NodeCode><![CDATA[cupertino]]></NodeCode>
 					<LocationNameCode Class="CodeValue">
-						<Code><![CDATA[""]]></Code>
+						<Code><![CDATA["Cupert"]]></Code>
 					</LocationNameCode>
+					<RouteProviderCode><![CDATA[network]]></RouteProviderCode>
 					<InitializationType>SPECIFIED_NUMBER</InitializationType>
 					<InitializationDatabaseTableQuery>
 						<TableReference>
@@ -784,7 +793,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 						<Parameter>
 							<Name><![CDATA[destinationNode]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[nodeULTIMO]]></Code>
+								<Code><![CDATA[pacifica]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -837,6 +846,9 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[straightMovement]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[true]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[destinationUseRotation]]></Name>
@@ -927,103 +939,6 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
 
 			<Presentation>
-				<Network>
-					<Id>1651051891800</Id>
-					<Name><![CDATA[network]]></Name>
-					<X>421.117</X><Y>243.063</Y>
-					<Label><X>6.449</X><Y>-6.034</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-
-			<Presentation>
-				<Path SourceId="1651052914172" TargetId="1651052906363">
-					<Id>1651051891723</Id>
-					<Name><![CDATA[path]]></Name>
-					<X>80</X><Y>70</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-14774017</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<PathType>line</PathType>
-					
-					<Width Class="UnitValue">
-						<Value Class="Double">1</Value>
-						<Unit Class="LengthUnits"><![CDATA[METER]]></Unit>
-					</Width>
-					<Points>
-						<Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>7.401486830834378E-17</Y><Z>0</Z></Point>
-						<Point><X>25</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>340</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>315</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>365</X><Y>0</Y><Z>0</Z></Point>
-						<Point><X>520</X><Y>2.4424906541753444E-15</Y><Z>0</Z></Point>
-						<Point><X>495</X><Y>2.4424906541753444E-15</Y><Z>0</Z></Point>
-						<Point><X>545</X><Y>2.2343238370581275E-15</Y><Z>0</Z></Point>
-						<Point><X>600</X><Y>1.7763568394002505E-15</Y><Z>0</Z></Point>
-						<Point><X>575</X><Y>1.9845236565174673E-15</Y><Z>0</Z></Point>
-						<Point><X>575</X><Y>1.7023419710919068E-15</Y><Z>0</Z></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-					<SpeedLimit>false</SpeedLimit>
-					<SpeedLimitValue Class="CodeUnitValue">
-						<Code><![CDATA[10.0]]></Code>
-						<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
-					</SpeedLimitValue>
-					<LimitNumberOfTransporters>false</LimitNumberOfTransporters>
-					<LimitNumberOfTransportersValue>10</LimitNumberOfTransportersValue>
-				</Path>
-				<PointNode>
-					<Id>1651052914172</Id>
-					<Name><![CDATA[nodeULTIMO]]></Name>
-					<X>60</X><Y>70</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<FakeNode>false</FakeNode>	
-					<Lock>false</Lock>
-					<Color>-16777216</Color>
-					<Radius>20</Radius>
-					<SpeedLimit>false</SpeedLimit>
-					<SpeedLimitValue Class="UnitValue">
-						<Value Class="Double">10</Value>
-						<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
-					</SpeedLimitValue>
-				</PointNode>
-				<PointNode>
-					<Id>1651052906363</Id>
-					<Name><![CDATA[nodePRIMO]]></Name>
-					<X>700</X><Y>70</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<FakeNode>false</FakeNode>	
-					<Lock>false</Lock>
-					<Color>-16777216</Color>
-					<Radius>20</Radius>
-					<SpeedLimit>false</SpeedLimit>
-					<SpeedLimitValue Class="UnitValue">
-						<Value Class="Double">10</Value>
-						<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
-					</SpeedLimitValue>
-				</PointNode>
-			</Presentation>
-
-					<Z>0</Z>
-				</Network>
 				<EmbeddedObjectPresentation>
 					<Id>1651051903305</Id>
 					<Name><![CDATA[carCarl_presentation]]></Name>
@@ -1046,7 +961,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Image>
 					<Id>1652967191721</Id>
 					<Name><![CDATA[semaforo]]></Name>
-					<X>460</X><Y>130</Y>
+					<X>60</X><Y>960</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1054,8 +969,8 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
-					<Width>240</Width>
-					<Height>223</Height>
+					<Width>180</Width>
+					<Height>180</Height>
 					<Rotation>0.0</Rotation>
 					<ImageFiles>
 						<ImageResourceReference>
@@ -1068,7 +983,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Oval>
 					<Id>1652974471978</Id>
 					<Name><![CDATA[ovalRED1]]></Name>
-					<X>576</X><Y>197</Y>
+					<X>148</X><Y>1014</Y>
 					<Label><X>0</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1081,7 +996,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<LineColor>-4144960</LineColor>
 					<LineMaterial>null</LineMaterial>
 					<LineStyle>SOLID</LineStyle>
-					<RadiusX>37</RadiusX>
+					<RadiusX>29</RadiusX>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
 					<FillColor>-4144960</FillColor>
@@ -1091,7 +1006,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Oval>
 					<Id>1652976014359</Id>
 					<Name><![CDATA[ovalRED2]]></Name>
-					<X>576</X><Y>275</Y>
+					<X>148</X><Y>1077</Y>
 					<Label><X>0</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1104,7 +1019,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<LineColor>-473907008</LineColor>
 					<LineMaterial>null</LineMaterial>
 					<LineStyle>SOLID</LineStyle>
-					<RadiusX>37</RadiusX>
+					<RadiusX>29</RadiusX>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
 					<FillColor>-4144960</FillColor>
@@ -1114,7 +1029,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Text>
 					<Id>1652977332775</Id>
 					<Name><![CDATA[InitialFuel]]></Name>
-					<X>190</X><Y>200</Y>
+					<X>180</X><Y>910</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1128,7 +1043,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<TextCode><![CDATA[Coord.getInitialFuel()]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
-						<Size>24</Size>
+						<Size>20</Size>
 						<Style>0</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
@@ -1136,7 +1051,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Text>
 					<Id>1653052614716</Id>
 					<Name><![CDATA[TimeScale]]></Name>
-					<X>190</X><Y>120</Y>
+					<X>160</X><Y>832</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1150,7 +1065,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<TextCode><![CDATA[Coord.getTimeScale()]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
-						<Size>24</Size>
+						<Size>20</Size>
 						<Style>0</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
@@ -1158,7 +1073,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Image>
 					<Id>1653053171991</Id>
 					<Name><![CDATA[image]]></Name>
-					<X>20</X><Y>120</Y>
+					<X>10</X><Y>830</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1166,7 +1081,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
-					<Width>160</Width>
+					<Width>150</Width>
 					<Height>34</Height>
 					<Rotation>0.0</Rotation>
 					<ImageFiles>
@@ -1180,7 +1095,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<Image>
 					<Id>1653053197206</Id>
 					<Name><![CDATA[image1]]></Name>
-					<X>20</X><Y>200</Y>
+					<X>10</X><Y>910</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1199,6 +1114,128 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					</ImageFiles>
 					<OriginalSize>false</OriginalSize>
 				</Image>
+				<GISMap>
+					<Id>1658415125168</Id>
+					<Name><![CDATA[map]]></Name>
+					<X>360</X><Y>730</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>850</Width>
+					<Height>650</Height>
+					<GISShapes>
+					</GISShapes>
+					<Latitude>37.48523492181123</Latitude>
+					<Longitude>-122.25187241551217</Longitude>
+					<Scale>320000</Scale>
+					<BorderColor>-4144960</BorderColor>
+					<FillColor>-1</FillColor>
+					<ShowTiles>true</ShowTiles>
+					<TileURLProvider>ANYLOGIC</TileURLProvider>
+					<CustomTileURL>false</CustomTileURL>
+					<TileURL><![CDATA[https://a.tile.openstreetmap.org/[zoom]/[x]/[y].png]]></TileURL>				
+					<RouteProviderType>WEB_SERVICE</RouteProviderType>
+					<RouteNotFound>CREATE_STRAIGHT_LINE</RouteNotFound>
+					<OnlineRouteProvider>ANYLOGIC</OnlineRouteProvider>
+					<TransportType>CAR</TransportType>
+					<RoutingMethod>FASTEST</RoutingMethod>
+					<PathfindingAlgorithm>DIJKSTRABI</PathfindingAlgorithm>
+					<CustomRouteProvider>false</CustomRouteProvider>
+					<RouteSourceResourceReference>
+					</RouteSourceResourceReference>
+					<RouteGraphResourceReference>
+					</RouteGraphResourceReference>	
+					<MapScaleBasedGeneralization>true</MapScaleBasedGeneralization>
+					<AbsolutePrecisionGeneralization>1000</AbsolutePrecisionGeneralization>
+
+			<Presentation>
+						<GISNetwork>
+							<Id>1658415374754</Id>
+							<Name><![CDATA[network]]></Name>
+							<X>0</X><Y>0</Y>
+							<Label><X>10</X><Y>0</Y></Label>
+							<PublicFlag>true</PublicFlag>
+							<PresentationFlag>true</PresentationFlag>
+							<ShowLabel>false</ShowLabel>
+							<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+
+			<Presentation>
+				<GISRoute SourceId="1658415326705" TargetId="1658415215270">
+
+					<Id>1658415374750</Id>
+					<Name><![CDATA[road]]></Name>
+					<X>183</X><Y>183</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>DASHED</LineStyle>
+					<ReadOnly>false</ReadOnly>
+					<Points>
+						<Point><X>37.613371</X><Y>-122.487684</Y></Point>
+						<Point><X>37.47194457052023</X><Y>-122.27581284728947</Y></Point>
+						<Point><X>37.4139623024559</X><Y>-122.18164348834905</Y></Point>
+						<Point><X>37.323398</X><Y>-122.0325</Y></Point>
+					</Points>
+					<Bidirectional>false</Bidirectional>
+
+				</GISRoute>
+				<GISPoint>
+					<Id>1658415326705</Id>
+					<Name><![CDATA[pacifica]]></Name>
+					<X>343</X><Y>167</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>SOLID</LineStyle>
+					<Title><![CDATA[pacifica]]></Title>
+					<ReadOnly>false</ReadOnly>
+					<Latitude>37.613371</Latitude>	
+					<Longitude>-122.487684</Longitude>
+					<Radius>3</Radius>
+					<FillColor>2144175423</FillColor>
+				</GISPoint>
+				<GISPoint>
+					<Id>1658415215270</Id>
+					<Name><![CDATA[cupertino]]></Name>
+					<X>139</X><Y>256</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>SOLID</LineStyle>
+					<Title><![CDATA[cupertino]]></Title>
+					<ReadOnly>false</ReadOnly>
+					<Latitude>37.323398</Latitude>	
+					<Longitude>-122.0325</Longitude>
+					<Radius>3</Radius>
+					<FillColor>2144175423</FillColor>
+				</GISPoint>
+			</Presentation>
+
+						</GISNetwork>
+			</Presentation>
+
+				</GISMap>
 			</Presentation>
 
 				</Level>
@@ -1208,8 +1245,14 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 		<!--   =========   Active Object Class   ========  -->
 		<ActiveObjectClass>
 			<Id>1651051512540</Id>
-			<Name><![CDATA[CarCarl]]></Name>
+			<Name><![CDATA[CarAgent]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<Import><![CDATA[import it.cl.hla.coordinator.car.*;
+import it.cl.hla.coordinator.encoders.*;
+import it.cl.hla.coordinator.implementation.*;
+import it.cl.hla.coordinator.interfaces.*;]]></Import>
+			<Implements><![CDATA[Car]]></Implements>
+			<StartupCode><![CDATA[this.setLocation(location);]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1651051512538</Id>
@@ -1233,9 +1276,10 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode Class="CodeUnitValue">
-					<Code><![CDATA[10]]></Code>
-					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+					<Code><![CDATA[90]]></Code>
+					<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 				</VelocityCode>
+				<OnArrival><![CDATA[System.out.println("[ANYLOGIC] updating data car-On_arrival_location");]]></OnArrival>
 				<PhysicalLength Class="CodeUnitValue">
 					<Code><![CDATA[1]]></Code>
 					<Unit Class="LengthUnits"><![CDATA[METER]]></Unit>
@@ -1302,6 +1346,300 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 			</ScaleRuler>
 			<CurrentLevel>1651051512539</CurrentLevel>
 			<ConnectionsId>1651051512535</ConnectionsId>
+			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1658318338169</Id>
+					<Name><![CDATA[location]]></Name>
+					<X>420</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[it.cl.hla.coordinator.implementation.Position]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new it.cl.hla.coordinator.implementation.Position(latitude, longitude)]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1658319092939</Id>
+					<Name><![CDATA[fuel]]></Name>
+					<X>420</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[FuelTypeImpl]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[FuelTypeImpl.GASOLINE]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1658400733840</Id>
+					<Name><![CDATA[license]]></Name>
+					<X>420</X><Y>270</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["Ti prenderò da qualche parte"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1658401065559</Id>
+					<Name><![CDATA[identifier]]></Name>
+					<X>420</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["Car1"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1658420787084</Id>
+					<Name><![CDATA[latitude]]></Name>
+					<X>420</X><Y>350</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[this.getX();]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1658420795316</Id>
+					<Name><![CDATA[longitude]]></Name>
+					<X>420</X><Y>390</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[this.getY();]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+			</Variables>
+			<Events>
+				<Event>
+					<Id>1658409086335</Id>
+					<Name><![CDATA[update]]></Name>
+					<X>560</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties TriggerType="timeout" Mode="occuresOnce">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[100]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[MILLISECOND]]></Unit>
+						</Timeout>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1658476800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[100]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[MILLISECOND]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</RecurrenceCode>
+						<Condition><![CDATA[false]]></Condition>
+					</Properties>
+					<Action><![CDATA[main.Coord.updateCar(this);]]></Action>
+				</Event>
+			</Events>
+			<Functions>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658315199726</Id>
+					<Name><![CDATA[getCurrentSpeed]]></Name>
+					<X>150</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return 5.0;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[String]]></ReturnType>
+					<Id>1658318813902</Id>
+					<Name><![CDATA[getIdentifier]]></Name>
+					<X>150</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return identifier;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[String]]></ReturnType>
+					<Id>1658318855586</Id>
+					<Name><![CDATA[getNamex]]></Name>
+					<X>150</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return "carCarl";]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[String]]></ReturnType>
+					<Id>1658318911750</Id>
+					<Name><![CDATA[getLicensePlateNumber]]></Name>
+					<X>150</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return license;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[FuelTypeImpl]]></ReturnType>
+					<Id>1658318954143</Id>
+					<Name><![CDATA[getFuelType]]></Name>
+					<X>150</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return fuel;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1658319022954</Id>
+					<Name><![CDATA[getNormalSpeed]]></Name>
+					<X>150</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return 100;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[it.cl.hla.coordinator.implementation.Position]]></ReturnType>
+					<Id>1658319068767</Id>
+					<Name><![CDATA[getLocation]]></Name>
+					<X>150</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return location;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658319231562</Id>
+					<Name><![CDATA[setFuelLevel]]></Name>
+					<X>150</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[fuelLevel]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658319305929</Id>
+					<Name><![CDATA[getFuelLevel]]></Name>
+					<X>150</X><Y>500</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return 12.0;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658320142680</Id>
+					<Name><![CDATA[setLocation]]></Name>
+					<X>150</X><Y>460</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[location]]></Name>
+						<Type><![CDATA[it.cl.hla.coordinator.implementation.Position ]]></Type>
+					</Parameter>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658320854046</Id>
+					<Name><![CDATA[getLitersPerKm]]></Name>
+					<X>150</X><Y>580</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return 0.9;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658321753361</Id>
+					<Name><![CDATA[adjustCurrentSpeed]]></Name>
+					<X>150</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[change]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1658420409463</Id>
+					<Name><![CDATA[translateLocation]]></Name>
+					<X>730</X><Y>390</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[//this.location = new it.cl.hla.coordinator.implementation.Position(latitude,longitude);
+
+]]></Body>
+				</Function>
+			</Functions>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1651051512535</Id>
@@ -1329,7 +1667,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<Id>1651051903311</Id>
 					<Name><![CDATA[main]]></Name>
 					<X>50</X><Y>-100</Y>
-					<Label><X>10</X><Y>0</Y></Label>
+					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -1370,7 +1708,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<LineColor>-16777216</LineColor>
 					<LineMaterial>null</LineMaterial>
 					<LineStyle>SOLID</LineStyle>
-					<RadiusX>15</RadiusX>
+					<RadiusX>10</RadiusX>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
 					<FillColor>-65281</FillColor>
@@ -1391,13 +1729,13 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 	<RelativeAccuracy>1.0E-5</RelativeAccuracy>
 	<TimeAccuracy>1.0E-5</TimeAccuracy>
 	<Frame>
-		<Width>1000</Width>
-		<Height>600</Height>
+		<Width>1210</Width>
+		<Height>690</Height>
 	</Frame>
 	<Database>
-		<Logging>false</Logging>
+		<Logging>true</Logging>
 		<AutoExport>false</AutoExport>
-		<ShutdownCompact>false</ShutdownCompact>
+		<ShutdownCompact>true</ShutdownCompact>
 		<ImportSettings>
 		</ImportSettings>
 		<ExportSettings>
@@ -1520,7 +1858,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[hlacore-0.0.4.jar]]></Path>
+			<Path><![CDATA[C:/Users/Caterina/.m2/repository/it/cl/hla/hlacore/0.0.4/hlacore-0.0.4.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
@@ -1563,9 +1901,9 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 	<ClassPathEntry>
 		<ResourceReference>
 			<PackageName><![CDATA[carsimb]]></PackageName>
-			<ClassName><![CDATA[hlacore-0.0.4.jar]]></ClassName>
+			<ClassName><![CDATA[C:/Users/Caterina/.m2/repository/it/cl/hla/hlacore/0.0.4/hlacore-0.0.4.jar]]></ClassName>
 		</ResourceReference>
-		<Imported>true</Imported>
+		<Imported>false</Imported>
 		<Folder>false</Folder>
 	</ClassPathEntry>
 	<ClassPathEntry>

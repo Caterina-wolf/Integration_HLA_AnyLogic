@@ -7,7 +7,7 @@ public interface MasterService {
 
     void exit();
 
-    void joint();
+    void join();
 
     void loadScenario(String scenarioName, Integer initialFuelLevel) throws
             FederateNotExecutionMember,
@@ -16,8 +16,19 @@ public interface MasterService {
             SaveInProgress,
             RTIinternalError;
 
-    void sendStart(float timeScaleFactor) throws FederateNotExecutionMember, NotConnected, RestoreInProgress, RTIinternalError, SaveInProgress;
-    void sendStop() throws FederateNotExecutionMember, NotConnected, RestoreInProgress, RTIinternalError, SaveInProgress;
+    void sendStart(float timeScaleFactor)
+            throws FederateNotExecutionMember,
+            NotConnected,
+            RestoreInProgress,
+            RTIinternalError,
+            SaveInProgress;
+
+    void sendStop()
+            throws FederateNotExecutionMember,
+            NotConnected,
+            RestoreInProgress,
+            RTIinternalError,
+            SaveInProgress;
 
 
 }
