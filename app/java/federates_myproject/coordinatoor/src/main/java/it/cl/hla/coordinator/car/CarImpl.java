@@ -40,11 +40,14 @@ public class CarImpl implements Car {
       this.location = new Position();
    }
 
-   public CarImpl(){}
+   public CarImpl(){
+      identifier = "Car" + carCount;
+      carCount++;
+   }
+
    public String getIdentifier() {
       return this.identifier;
    }
-
    public String getName() {
       return this.name;
    }

@@ -12,6 +12,8 @@ import it.cl.hla.core.interfaces.ListenerInteraction;
 import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.car.*;
 
+import javax.management.ObjectInstance;
+
 
 public class AnyLogicCoordinator {
     private HlaCore hlaCore = new HlaCoreImpl();
@@ -277,6 +279,7 @@ public class AnyLogicCoordinator {
         try {
             ObjectInstanceHandle carInstance = hlaCore.publishObject(objectClassCarHandle);
             carTracking.put(carInstance, car.getIdentifier());
+            //System.out.println("[ANYLOGIC]" + carTracking);
             AttributeHandleValueMap mapAttributes = hlaCore.createAttributeMap(3);
             byte [] nameAttribute = hlaCore.encoderString(car.getName());
             mapAttributes.put(nameAttributeHandle,nameAttribute);
@@ -294,13 +297,14 @@ public class AnyLogicCoordinator {
 
 
    public void updateCar(Car car){
-
        try {
            AttributeHandleValueMap mapAttribute = hlaCore.createAttributeMap(2);
            byte [] positionAttribute = coderPosition.encode(car.getLocation(), hlaCore.getCoder());
            mapAttribute.put(attributePositionHandle, positionAttribute);
            byte [] fuelLevel = hlaCore.encoderInt((int)Math.round(car.getFuelLevel()));
            mapAttribute.put(fuelTypeAttributeHandle,fuelLevel);
+           //car.setIdentifier("Car");
+           System.out.println("[ANYLOGIC]"+ carTracking);
            hlaCore.updatesAttributes(carTracking.translate(car.getIdentifier()),mapAttribute,null);
        } catch (FederateNotExecutionMember | NotConnected | AttributeNotOwned | AttributeNotDefined | ObjectInstanceNotKnown | SaveInProgress |
                 RestoreInProgress | RTIinternalError e) {

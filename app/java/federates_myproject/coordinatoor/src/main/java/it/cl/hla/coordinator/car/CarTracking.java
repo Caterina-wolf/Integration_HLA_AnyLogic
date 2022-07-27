@@ -7,8 +7,9 @@ import java.util.Map;
 
 public class CarTracking {
 
-    private Map<String, ObjectInstanceHandle> map2 = new HashMap<>();
     private Map<ObjectInstanceHandle, String> map1 = new HashMap<>();
+    private Map<String, ObjectInstanceHandle> map2 = new HashMap<>();
+
 
 
     public CarTracking(){}

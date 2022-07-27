@@ -699,6 +699,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<EmbeddedObject>
 					<Id>1651051901949</Id>
 					<Name><![CDATA[carCarl]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
 					<X>80</X><Y>150</Y>
 					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -923,6 +924,68 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 					<QuantityColumn>
 					</QuantityColumn>
 				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1658912783341</Id>
+					<Name><![CDATA[carAgent]]></Name>
+					<X>110</X><Y>70</Y>
+					<Label><X>-45</X><Y>-35</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1658912784619</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[carsimb]]></PackageName>
+						<ClassName><![CDATA[CarAgent]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[carsimb]]></PackageName>
+							<ClassName><![CDATA[CarAgent]]></ClassName>
+							<ItemName><![CDATA[1651051512538]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
 			</EmbeddedObjects>
 
 			<Presentation>
@@ -942,6 +1005,7 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 				<EmbeddedObjectPresentation>
 					<Id>1651051903305</Id>
 					<Name><![CDATA[carCarl_presentation]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
 					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -1236,6 +1300,25 @@ System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
 			</Presentation>
 
 				</GISMap>
+				<EmbeddedObjectPresentation>
+					<Id>1658912784619</Id>
+					<Name><![CDATA[carAgent_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>37.48523492181123</Latitude>
+					<Longitude>-122.25187241551217</Longitude>
+				</EmbeddedObjectPresentation>
 			</Presentation>
 
 				</Level>
@@ -1252,7 +1335,6 @@ import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.implementation.*;
 import it.cl.hla.coordinator.interfaces.*;]]></Import>
 			<Implements><![CDATA[Car]]></Implements>
-			<StartupCode><![CDATA[this.setLocation(location);]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1651051512538</Id>
@@ -1350,7 +1432,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1658318338169</Id>
 					<Name><![CDATA[location]]></Name>
-					<X>420</X><Y>180</Y>
+					<X>680</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1365,7 +1447,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1658319092939</Id>
 					<Name><![CDATA[fuel]]></Name>
-					<X>420</X><Y>220</Y>
+					<X>680</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1380,7 +1462,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1658400733840</Id>
 					<Name><![CDATA[license]]></Name>
-					<X>420</X><Y>270</Y>
+					<X>680</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1393,24 +1475,9 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
-					<Id>1658401065559</Id>
-					<Name><![CDATA[identifier]]></Name>
-					<X>420</X><Y>310</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[String]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA["Car1"]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
 					<Id>1658420787084</Id>
 					<Name><![CDATA[latitude]]></Name>
-					<X>420</X><Y>350</Y>
+					<X>680</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1425,7 +1492,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1658420795316</Id>
 					<Name><![CDATA[longitude]]></Name>
-					<X>420</X><Y>390</Y>
+					<X>680</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1440,24 +1507,24 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 			</Variables>
 			<Events>
 				<Event>
-					<Id>1658409086335</Id>
+					<Id>1658909186051</Id>
 					<Name><![CDATA[update]]></Name>
-					<X>560</X><Y>190</Y>
+					<X>400</X><Y>90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties TriggerType="timeout" Mode="occuresOnce">
+					<Properties TriggerType="rate" Mode="cyclic">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[100]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[MILLISECOND]]></Unit>
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
 						<OccurrenceAtTime>true</OccurrenceAtTime>
-						<OccurrenceDate>1658476800000</OccurrenceDate>
+						<OccurrenceDate>1658995200000</OccurrenceDate>
 						<OccurrenceTime Class="CodeUnitValue">
 							<Code><![CDATA[100]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[MILLISECOND]]></Unit>
@@ -1468,7 +1535,15 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[main.Coord.updateCar(this);]]></Action>
+					<Action><![CDATA[System.out.println("[ANYLOGIC] UPDATE CAR");
+System.out.println(getName());
+System.out.println(getLocation().getLatitude());
+System.out.println(getLocation().getLongitude());
+System.out.println(getFuelLevel());
+System.out.println(main);
+System.out.println(main.Coord);
+
+main.Coord.updateCar(this);]]></Action>
 				</Event>
 			</Events>
 			<Functions>
@@ -1477,7 +1552,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658315199726</Id>
 					<Name><![CDATA[getCurrentSpeed]]></Name>
-					<X>150</X><Y>340</Y>
+					<X>390</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1494,7 +1569,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return identifier;]]></Body>
+					<Body><![CDATA[return "Car";]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -1537,7 +1612,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1658319022954</Id>
 					<Name><![CDATA[getNormalSpeed]]></Name>
-					<X>150</X><Y>380</Y>
+					<X>390</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1549,19 +1624,19 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[it.cl.hla.coordinator.implementation.Position]]></ReturnType>
 					<Id>1658319068767</Id>
 					<Name><![CDATA[getLocation]]></Name>
-					<X>150</X><Y>420</Y>
+					<X>390</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return location;]]></Body>
+					<Body><![CDATA[return new it.cl.hla.coordinator.implementation.Position(getX(), getY());]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658319231562</Id>
 					<Name><![CDATA[setFuelLevel]]></Name>
-					<X>150</X><Y>540</Y>
+					<X>150</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1576,7 +1651,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658319305929</Id>
 					<Name><![CDATA[getFuelLevel]]></Name>
-					<X>150</X><Y>500</Y>
+					<X>150</X><Y>340</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1588,7 +1663,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658320142680</Id>
 					<Name><![CDATA[setLocation]]></Name>
-					<X>150</X><Y>460</Y>
+					<X>390</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1603,7 +1678,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658320854046</Id>
 					<Name><![CDATA[getLitersPerKm]]></Name>
-					<X>150</X><Y>580</Y>
+					<X>390</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1615,7 +1690,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658321753361</Id>
 					<Name><![CDATA[adjustCurrentSpeed]]></Name>
-					<X>150</X><Y>620</Y>
+					<X>390</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1630,7 +1705,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658420409463</Id>
 					<Name><![CDATA[translateLocation]]></Name>
-					<X>730</X><Y>390</Y>
+					<X>150</X><Y>90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
