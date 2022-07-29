@@ -10,13 +10,16 @@ public class HandlesBean {
     private InteractionClassHandle startInteractionClassHandle;
     private InteractionClassHandle stopInteractionClassHandle;
     private InteractionClassHandle loadScenarioClassHandle;
-    private InteractionClassHandle scenarioLoadedInteractionClassHandle;
-    private InteractionClassHandle scenarioLoadFailureInteractionClassHandle;
-    private ParameterHandle scenarioFailureErrorMessage;
+    private InteractionClassHandle addCarClassInteractionHandle;
+
 
     private ParameterHandle startTimeScaleFactorParameterHandle;
     private ParameterHandle initialFuelAmountParameterHandle;
     private ParameterHandle scenarioParameterHandle;
+    private ParameterHandle carNameParameterHandle;
+    private ParameterHandle carColoParameterHandle;
+    private ParameterHandle carLicensePlateParameterHandle;
+
 
 
 
@@ -50,33 +53,14 @@ public class HandlesBean {
 
 
 
-    public InteractionClassHandle getScenarioLoadedInteractionClassHandle() {
-        return scenarioLoadedInteractionClassHandle;
+    public InteractionClassHandle getAddCarClassInteractionHandle() {
+        return addCarClassInteractionHandle;
     }
 
-    public void setScenarioLoadedInteractionClassHandle(InteractionClassHandle scenarioLoadedInteractionClassHandle) {
-        this.scenarioLoadedInteractionClassHandle = scenarioLoadedInteractionClassHandle;
+    public void setAddCarClassInteractionHandle(InteractionClassHandle addCarClassInteractionHandle) {
+        this.addCarClassInteractionHandle = addCarClassInteractionHandle;
     }
 
-
-
-    public InteractionClassHandle getScenarioLoadFailureInteractionClassHandle() {
-        return scenarioLoadFailureInteractionClassHandle;
-    }
-
-    public void setScenarioLoadFailureInteractionClassHandle(InteractionClassHandle scenarioLoadedFailureInteractionClassHandle) {
-        this.scenarioLoadFailureInteractionClassHandle = scenarioLoadedFailureInteractionClassHandle;
-    }
-
-
-
-    public ParameterHandle getScenarioFailureErrorMessage() {
-        return scenarioFailureErrorMessage;
-    }
-
-    public void setScenarioFailureErrorMessage(ParameterHandle scenarioFailureErrorMessage) {
-        this.scenarioFailureErrorMessage = scenarioFailureErrorMessage;
-    }
 
 
 
@@ -108,6 +92,35 @@ public class HandlesBean {
         this.scenarioParameterHandle = scenarioParameterHandle;
     }
 
+
+
+    public ParameterHandle getCarNameParameterHandle() {
+        return carNameParameterHandle;
+    }
+
+    public void setCarNameParameterHandle(ParameterHandle carNameParameterHandle) {
+        this.carNameParameterHandle = carNameParameterHandle;
+    }
+
+
+
+    public ParameterHandle getCarColoParameterHandle() {
+        return carColoParameterHandle;
+    }
+
+    public void setCarColoParameterHandle(ParameterHandle carColoParameterHandle) {
+        this.carColoParameterHandle = carColoParameterHandle;
+    }
+
+
+
+    public ParameterHandle getCarLicensePlateParameterHandle() {
+        return carLicensePlateParameterHandle;
+    }
+
+    public void setCarLicensePlateParameterHandle(ParameterHandle carLicensePlateParameterHandle) {
+        this.carLicensePlateParameterHandle = carLicensePlateParameterHandle;
+    }
 
 
 

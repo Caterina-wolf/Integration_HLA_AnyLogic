@@ -64,7 +64,7 @@ System.out.println("[ANYLOGIC] Problem in disconnecting");
 					<Code><![CDATA[90]]></Code>
 					<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 				</VelocityCode>
-				<BeforeStepCode><![CDATA[loadScenario();
+				<BeforeStepCode><![CDATA[//loadScenario(nameScenario,initialFuel);
 loadCar();]]></BeforeStepCode>
 				<PhysicalLength Class="CodeUnitValue">
 					<Code><![CDATA[1]]></Code>
@@ -282,14 +282,25 @@ loadCar();]]></BeforeStepCode>
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[CarAgent]]></ReturnType>
 					<Id>1653465998043</Id>
-					<Name><![CDATA[startSimulation]]></Name>
+					<Name><![CDATA[injectCar]]></Name>
 					<X>80</X><Y>190</Y>
 					<Label><X>25</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[sourceCarl.inject();
-]]></Body>
+					<Parameter>
+						<Name><![CDATA[name]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[licensePlate]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Body><![CDATA[sourceCarl.inject();]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -301,9 +312,16 @@ loadCar();]]></BeforeStepCode>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[nameScenario]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[initialFuel]]></Name>
+						<Type><![CDATA[int]]></Type>
+					</Parameter>
 					<Body><![CDATA[try {
-int fuelInitial = Coord.getInitialFuel();
-if(fuelInitial > 100){
+if(initialFuel > 100){
        
       Coord.publishScenarioFailed("\n[ANYLOGIC] Infeasible value: initial Fuel Level is too much. \n Choose the Scenario again and digit a fuel value < 100.");
 	  Coord.setAllParameters();

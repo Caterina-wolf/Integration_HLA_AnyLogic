@@ -8,6 +8,13 @@ public interface MasterService {
     void exit();
 
 
+    void injectCar(String nameCar, String licensePlate, String colorCar)throws
+            FederateNotExecutionMember,
+            NotConnected,
+            RestoreInProgress,
+            SaveInProgress,
+            RTIinternalError;
+
     void loadScenario(String scenarioName, Integer initialFuelLevel) throws
             FederateNotExecutionMember,
             NotConnected,

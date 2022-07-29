@@ -2,12 +2,11 @@ package it.cl.hla.master.controllers;
 
 import hla.rti1516e.exceptions.*;
 
+import it.cl.hla.master.DTO.CarDTO;
 import it.cl.hla.master.services.interfaces.MasterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -24,6 +23,11 @@ public class MasterController {
         service.init();
     }
 
+    //inject a Car
+    @PostMapping("/inject")
+    void injectCar(@RequestBody CarDTO carDto) throws FederateNotExecutionMember, RestoreInProgress, NotConnected, RTIinternalError, SaveInProgress {
+        service.injectCar(carDto.getName(), carDto.getLicensePlate(), carDto.getColor());
+    }
 
     //Load scenario chosen
     @GetMapping("/scenario/{scenarioName}/{initialFuelLevel}")

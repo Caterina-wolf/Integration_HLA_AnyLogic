@@ -23,6 +23,8 @@ public class AnyLogicCoordinator {
     private InteractionClassHandle loadScenarioClassHandle;
     private InteractionClassHandle scenarioLoadedInteractionClassHandle;
     private InteractionClassHandle scenarioLoadFailureInteractionClassHandle;
+    private InteractionClassHandle addCarClassInteractionHandle;
+
 
 
     private ParameterHandle startTimeScaleFactorParameterHandle;
@@ -31,6 +33,11 @@ public class AnyLogicCoordinator {
     private ParameterHandle scenarioLoadedFederateNameParameterHandle;
     private ParameterHandle scenarioFailureFederateNameParameterHandle;
     private ParameterHandle scenarioFailureErrorMessage;
+    private ParameterHandle carNameParameterHandle;
+    private ParameterHandle carColoParameterHandle;
+    private ParameterHandle carLicensePlateParameterHandle;
+
+
 
 
     private ObjectClassHandle objectClassCarHandle;
@@ -152,17 +159,33 @@ public class AnyLogicCoordinator {
                     try {
                         float timeScaleFactor = hlaCore.decodeFloat32(mapValue.get(startTimeScaleFactorParameterHandle));
                         setRunning(true);
-                        System.out.println("[COORD] Federate is running: " + isRunning());
+                        System.out.println("[COORD] Federate is running");
                         setTimeScale(timeScaleFactor);
-                        System.out.println("[COORD] Received Start interaction");
-                        anyLogic.startSimulation();
+                        System.out.println("[COORD] StartInteraction received");
+                        //anyLogic.startSimulation();
+
                     } catch (DecoderException e) {
                         throw new RuntimeException(e);
                     }
                 } else if (interactionHandle.equals(stopInteractionClassHandle)) {
-                    System.out.println("[COORD] Federate is running: " + isRunning());
-                    System.out.println("[COORD] Received Stop interaction");
+                    System.out.println("[COORD] SimulationInteraction received");
                     setAllParameters();
+                } else if(interactionHandle.equals(addCarClassInteractionHandle)){
+                    try {
+
+                        String carName = hlaCore.decodeString32(mapValue.get(carNameParameterHandle));
+                        String license= hlaCore.decodeString32(mapValue.get(carLicensePlateParameterHandle));
+                        String color= hlaCore.decodeString32(mapValue.get(carColoParameterHandle));
+
+                        anyLogic.injectCar(carName, license, color);
+
+                        System.out.println("[COORD] Car injected");
+
+                    } catch (DecoderException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
                 }
             }
         });
@@ -178,12 +201,17 @@ public class AnyLogicCoordinator {
                     stopInteractionClassHandle = hlaCore.getInteractionClassHandle("Stop");
                     hlaCore.subscribeInteractions(stopInteractionClassHandle);
 
+                    addCarClassInteractionHandle = hlaCore.getInteractionClassHandle("addCar");
+                    hlaCore.subscribeInteractions(addCarClassInteractionHandle);
+                    carNameParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "CarName");
+                    carLicensePlateParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "LicensePlateCar");
+                    carColoParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "ColorCar");
+
+                    addCarHandling();
+
                     scenarioHandling();
 
                     objectHandling();
-
-                    System.out.println("[COORD] Car Published");
-
 
             } catch (RTIinternalError e) {
                 System.out.println("[COORD] Could not connect to the RTI with local settings designator");
@@ -209,7 +237,7 @@ public class AnyLogicCoordinator {
                       int fuelInitial = hlaCore.decodeInt32(mapValue.get(initialFuelAmountParameterHandle));
                       setInitialFuel(fuelInitial);
 
-                      anyLogic.loadScenario();
+                      anyLogic.loadScenario(scenarioName, fuelInitial);
 
 
 
@@ -256,6 +284,18 @@ public class AnyLogicCoordinator {
 
     }
 
+    public void addCarHandling(){
+        try {
+            addCarClassInteractionHandle = hlaCore.getInteractionClassHandle("addCar");
+
+            carNameParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "CarName");
+            carLicensePlateParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "LicensePlateCar");
+            carColoParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "ColorCar");
+
+        } catch (SaveInProgress | RestoreInProgress | NotConnected| RTIinternalError | FederateNotExecutionMember | FederateServiceInvocationsAreBeingReportedViaMOM e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void objectHandling(){
 
@@ -270,10 +310,28 @@ public class AnyLogicCoordinator {
 
 
             anyLogic.loadCar();
+            System.out.println("[COORD] Car Published");
         } catch (NameNotFound | NotConnected | FederateNotExecutionMember| InvalidObjectClassHandle | RTIinternalError e) {
             throw new RuntimeException(e);
         }
     }
+
+    public void addCar(String nameCar, String licensePlate, String colorCar){
+        try {
+            ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(3);
+            byte [] nameCarParameter = hlaCore.encoderString(nameCar);
+            mapHandle.put(carNameParameterHandle,nameCarParameter);
+            byte [] license = hlaCore.encoderString(licensePlate);
+            mapHandle.put(carLicensePlateParameterHandle,license);
+            byte [] color = hlaCore.encoderString(colorCar);
+            mapHandle.put(carColoParameterHandle,color);
+            hlaCore.sendInteraction(addCarClassInteractionHandle, mapHandle);
+            System.out.println("[COORD] Car injected in AnyLogic.");
+        } catch(NullPointerException  | FederateNotExecutionMember | RestoreInProgress | NotConnected | RTIinternalError | SaveInProgress e){
+            e.printStackTrace();}
+    }
+
+
 
     public void createCar(Car car) {
         try {

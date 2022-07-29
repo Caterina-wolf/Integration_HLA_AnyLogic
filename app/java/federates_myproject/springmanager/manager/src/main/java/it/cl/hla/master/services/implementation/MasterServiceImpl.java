@@ -69,14 +69,13 @@ public class MasterServiceImpl implements MasterService {
             URL url = fomFile.getFile().toURI().toURL();
             hlaCore.start(settingDesignator, federationName, url);
             hlaCore.join(federateName,federateType);
-            System.out.println("Federate joint FedExec");
             getHandles();
         } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | NotConnected | RTIinternalError |
                  ConnectionFailed | FederateServiceInvocationsAreBeingReportedViaMOM | IOException e) {
             throw new RuntimeException(e);
         }
         System.out.println("****************************************");
-        System.out.println("FedExec started -> "+"Federate connected");
+        System.out.println("FedExec started -> "+"Federate joined");
         System.out.println("****************************************");
     }
 
@@ -91,6 +90,24 @@ public class MasterServiceImpl implements MasterService {
         System.out.println("Federation destruction");
     }
 
+    @Override
+    public void injectCar(String nameCar, String licensePlate, String colorCar){
+        try {
+            ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(3);
+            byte [] nameCarParameter = hlaCore.encoderString(nameCar);
+            mapHandle.put(handlesBean.getCarNameParameterHandle(),nameCarParameter);
+            byte [] license = hlaCore.encoderString(licensePlate);
+            mapHandle.put(handlesBean.getCarLicensePlateParameterHandle(),license);
+            byte [] color = hlaCore.encoderString(colorCar);
+            mapHandle.put(handlesBean.getCarColoParameterHandle(),color);
+
+            hlaCore.sendInteraction(handlesBean.getAddCarClassInteractionHandle(), mapHandle);
+        } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | RTIinternalError | NotConnected e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
     @Override
     public void loadScenario(String scenarioName, Integer initialFuelLevel) throws FederateNotExecutionMember, NotConnected, RestoreInProgress, SaveInProgress, RTIinternalError {
             ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(2);
@@ -141,6 +158,17 @@ public class MasterServiceImpl implements MasterService {
             handlesBean.setScenarioParameterHandle(scenarioName);
             ParameterHandle initialFuelLevel = hlaCore.getParameterHandle(loadScenarioClassHandle, "InitialFuelAmount");
             handlesBean.setInitialFuelAmountParameterHandle(initialFuelLevel);
+
+            //addCar Handle
+            InteractionClassHandle addCarInteractionClassHandle = hlaCore.getInteractionClassHandle("addCar");
+            handlesBean.setAddCarClassInteractionHandle(addCarInteractionClassHandle);
+            hlaCore.publishInteractions(addCarInteractionClassHandle);
+            ParameterHandle carName = hlaCore.getParameterHandle(addCarInteractionClassHandle, "CarName");
+            handlesBean.setCarNameParameterHandle(carName);
+            ParameterHandle license = hlaCore.getParameterHandle(addCarInteractionClassHandle, "LicensePlateCar");
+            handlesBean.setCarLicensePlateParameterHandle(license);
+            ParameterHandle color = hlaCore.getParameterHandle(addCarInteractionClassHandle, "ColorCar");
+            handlesBean.setCarColoParameterHandle(color);
 
         } catch(FederateNotExecutionMember| RTIinternalError | FederateServiceInvocationsAreBeingReportedViaMOM | RestoreInProgress | SaveInProgress | NotConnected e) {
             System.out.println("Some error just occurs.");
