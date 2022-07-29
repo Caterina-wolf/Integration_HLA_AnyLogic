@@ -68,18 +68,19 @@ public class MasterServiceImpl implements MasterService {
             // Legge le proprietà e il URL del file da application.properties
             URL url = fomFile.getFile().toURI().toURL();
             hlaCore.start(settingDesignator, federationName, url);
+            hlaCore.join(federateName,federateType);
+            System.out.println("Federate joint FedExec");
+            getHandles();
         } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | NotConnected | RTIinternalError |
                  ConnectionFailed | FederateServiceInvocationsAreBeingReportedViaMOM | IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("FedExec Started");
+        System.out.println("****************************************");
+        System.out.println("FedExec started -> "+"Federate connected");
+        System.out.println("****************************************");
     }
 
-    public void join(){
-           hlaCore.join(federateName,federateType);
-           System.out.println("Federate joint FedExec");
-           getHandles();
-    }
+
 
     public void exit() {
         try {

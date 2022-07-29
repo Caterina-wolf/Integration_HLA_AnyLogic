@@ -75,7 +75,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
    public HlaInterfaceImpl() {
    }
 
-   public void start(String localSettingsDesignator, String fomPath, String federationName, String federateName) throws ConnectionFailed, InvalidLocalSettingsDesignator, RTIinternalError, NotConnected, ErrorReadingFDD, CouldNotOpenFDD, InconsistentFDD, RestoreInProgress, SaveInProgress, FederateServiceInvocationsAreBeingReportedViaMOM {
+   public void start(String crcAddress, String fomPath, String federationName, String federateName) throws ConnectionFailed, InvalidLocalSettingsDesignator, RTIinternalError, NotConnected, ErrorReadingFDD, CouldNotOpenFDD, InconsistentFDD, RestoreInProgress, SaveInProgress, FederateServiceInvocationsAreBeingReportedViaMOM {
       RtiFactory rtiFactory = RtiFactoryFactory.getRtiFactory();
       _ambassador = rtiFactory.getRtiAmbassador();
 
@@ -88,7 +88,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
       _callbackTimeScaleFactorCoder = new TimeScaleFactorFloat32Coder(encoderFactory);
 
       try {
-         _ambassador.connect(this, CallbackModel.HLA_IMMEDIATE, localSettingsDesignator);
+         _ambassador.connect(this, CallbackModel.HLA_IMMEDIATE, crcAddress);
       } catch (AlreadyConnected ignored) {
       } catch (UnsupportedCallbackModel e) {
          throw new RTIinternalError("HlaInterfaceFailure", e);

@@ -51,8 +51,10 @@ public class MapViewer {
 
       final SimulationConfig config;
       try {
-         config = new SimulationConfig("Simulation.config");
+         config = new SimulationConfig("C:/Users/Caterina/Desktop/Integration_HLA_AnyLogic/app/java/federates_tutorial_project/mapviewer/bin/Simulation.config");
       } catch (IOException e) {
+         System.out.println("line 56");
+         e.printStackTrace();
          System.out.println("Could not read Simulation.config");
          return;
       }
@@ -150,9 +152,9 @@ public class MapViewer {
       });
 
       try {
-         hlaInterface.start(config.getLocalSettingsDesignator(), config.getFom(), config.getFederationName(), config.getFederateName());
+         hlaInterface.start(config.getCrcAddress(), config.getFom(), config.getFederationName(), config.getFederateName());
       } catch (RTIexception e) {
-         System.out.println("Could not connect to the RTI using the local settings designator \"" + config.getLocalSettingsDesignator() + "\"");
+         System.out.println("Could not connect to the RTI using the crc address  \"" + config.getCrcAddress() + "\"");
          e.printStackTrace();
          System.exit(0);
       }

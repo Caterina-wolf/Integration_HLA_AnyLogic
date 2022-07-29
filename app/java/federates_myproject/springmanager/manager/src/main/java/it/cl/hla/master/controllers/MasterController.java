@@ -16,17 +16,14 @@ public class MasterController {
     @Autowired
     private MasterService service;
 
-    //connection to pitchRTI and creation of FedExec
+    //Connect to pitchRTI
+    //create the FedExec
+    //join the federate to pitch
     @GetMapping("/init")
     void init(){
         service.init();
     }
 
-    //join to FedExec
-    @GetMapping("/join")
-    void joint(){
-        service.join();
-    }
 
     //Load scenario chosen
     @GetMapping("/scenario/{scenarioName}/{initialFuelLevel}")

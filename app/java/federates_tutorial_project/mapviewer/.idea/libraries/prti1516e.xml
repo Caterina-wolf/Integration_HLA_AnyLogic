@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="prti1516e">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../libraries/prti1516e.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../libraries/prti1516e.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -41,8 +41,6 @@ public class CarImpl implements Car {
    }
 
    public CarImpl(){
-      identifier = "Car" + carCount;
-      carCount++;
    }
 
    public String getIdentifier() {
@@ -59,6 +57,7 @@ public class CarImpl implements Car {
    public FuelTypeImpl getFuelType() {
       return this.fuelTypeImpl;
    }
+
 
    public int getNormalSpeed() {
       return this.normalSpeed;

@@ -112,7 +112,6 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
             try {
                 ambassador.createFederationExecution(federationName, urlFOM);
             } catch (FederationExecutionAlreadyExists ignored) {
-                ignored.printStackTrace();
             } catch (ErrorReadingFDD | InconsistentFDD | CouldNotOpenFDD e) {
                 throw new RuntimeException(e);
             }

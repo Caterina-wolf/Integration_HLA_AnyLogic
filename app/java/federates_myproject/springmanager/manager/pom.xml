@@ -12,7 +12,7 @@
 	<artifactId>master</artifactId>
 	<version>0.0.1</version>
 	<name>manager</name>
-	<description>manager with HLACore as external library-- hlacore.jar</description>
+	<description>manager with HLACore as external library -- hlacore.jar</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

@@ -20,7 +20,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-class SimulationConfig {
+public class SimulationConfig {
+
+   private static final String CRC_ADDRESS = "crcAddress=";
+   private String ip = "192.168.100.91";
 
    private static final String LOCAL_SETTINGS_DESIGNATOR = "localSettingsDesignator";
    private static final String FEDERATION_NAME = "federationName";
@@ -36,6 +39,9 @@ class SimulationConfig {
    private final String _scenarioDir;
    private final String _fom;
 
+   private final String crc_Address;
+
+
    public SimulationConfig(String fileName) throws IOException {
       this(new File(fileName));
    }
@@ -44,12 +50,14 @@ class SimulationConfig {
       Properties properties = new Properties();
       properties.load(new FileInputStream(file));
 
-      _localSettingsDesignator = properties.getProperty(LOCAL_SETTINGS_DESIGNATOR, "");
+      crc_Address = properties.getProperty(CRC_ADDRESS,"crcAddress=" + ip + ":" + Integer.toString(8989));
+      _localSettingsDesignator = properties.getProperty(LOCAL_SETTINGS_DESIGNATOR, " ");
       _federationName = properties.getProperty(FEDERATION_NAME, "HLA Tutorial");
       _federateName = properties.getProperty(FEDERATE_NAME, "CarSimJ");
 
       _scenarioDir = properties.getProperty(SCENARIO_DIR, ".");
       _fom = properties.getProperty(FOM, "FuelEconomyBase.xml");
+
    }
 
    public String getLocalSettingsDesignator() {
@@ -70,5 +78,9 @@ class SimulationConfig {
 
    public String getFom() {
       return _fom;
+   }
+
+   public String getCrcAddress(){
+      return crc_Address;
    }
 }

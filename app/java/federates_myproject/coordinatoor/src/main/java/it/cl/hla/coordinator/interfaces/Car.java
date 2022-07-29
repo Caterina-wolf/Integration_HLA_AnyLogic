@@ -37,7 +37,6 @@ public interface Car {
     * @return the speed
     */
    int getNormalSpeed();
-
    /**
     * Get the current speed of the car
     *

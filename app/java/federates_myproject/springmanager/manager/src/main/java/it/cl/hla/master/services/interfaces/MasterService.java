@@ -7,7 +7,6 @@ public interface MasterService {
 
     void exit();
 
-    void join();
 
     void loadScenario(String scenarioName, Integer initialFuelLevel) throws
             FederateNotExecutionMember,
