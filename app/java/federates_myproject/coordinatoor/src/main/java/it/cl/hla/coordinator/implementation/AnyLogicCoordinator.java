@@ -160,15 +160,14 @@ public class AnyLogicCoordinator {
                         float timeScaleFactor = hlaCore.decodeFloat32(mapValue.get(startTimeScaleFactorParameterHandle));
                         setRunning(true);
                         System.out.println("[COORD] Federate is running");
+
                         setTimeScale(timeScaleFactor);
                         System.out.println("[COORD] StartInteraction received");
-                        //anyLogic.startSimulation();
-
                     } catch (DecoderException e) {
                         throw new RuntimeException(e);
                     }
                 } else if (interactionHandle.equals(stopInteractionClassHandle)) {
-                    System.out.println("[COORD] SimulationInteraction received");
+                    System.out.println("[COORD] Stop interaction");
                     setAllParameters();
                 } else if(interactionHandle.equals(addCarClassInteractionHandle)){
                     try {
@@ -238,23 +237,22 @@ public class AnyLogicCoordinator {
                       setInitialFuel(fuelInitial);
 
                       anyLogic.loadScenario(scenarioName, fuelInitial);
-
-
-
                   } catch (DecoderException e) {
                       e.printStackTrace();
                   }
                 } else if (interactionHandle.equals(scenarioLoadedInteractionClassHandle)) {
 
                   try {
-                      hlaCore.decodeString32(mapValue.get(scenarioLoadedFederateNameParameterHandle));
+                     String scenarioLoadedInFederate = hlaCore.decodeString32(mapValue.get(scenarioLoadedFederateNameParameterHandle));
+                      System.out.println("The federate" + scenarioLoadedInFederate + "has loaded the scenario chosen." );
                   } catch (DecoderException e) {
                       throw new RuntimeException(e);
                   }
                 } else if (interactionHandle.equals(scenarioLoadFailureInteractionClassHandle)) {
                     try {
-                        hlaCore.decodeString32(mapValue.get(scenarioFailureFederateNameParameterHandle));
-                        hlaCore.decodeString32(mapValue.get(scenarioFailureErrorMessage));
+                        String scenarioFailureInFederate = hlaCore.decodeString32(mapValue.get(scenarioFailureFederateNameParameterHandle));
+                        String error = hlaCore.decodeString32(mapValue.get(scenarioFailureErrorMessage));
+                        System.out.println("The federate" + scenarioFailureInFederate + "has not loaded the scenario chosen, because" + error + "error.");
                     } catch (DecoderException e) {
                         throw new RuntimeException(e);
                     }
@@ -326,7 +324,6 @@ public class AnyLogicCoordinator {
             byte [] color = hlaCore.encoderString(colorCar);
             mapHandle.put(carColoParameterHandle,color);
             hlaCore.sendInteraction(addCarClassInteractionHandle, mapHandle);
-            System.out.println("[COORD] Car injected in AnyLogic.");
         } catch(NullPointerException  | FederateNotExecutionMember | RestoreInProgress | NotConnected | RTIinternalError | SaveInProgress e){
             e.printStackTrace();}
     }

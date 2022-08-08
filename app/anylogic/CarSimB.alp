@@ -159,7 +159,7 @@ loadCar();]]></BeforeStepCode>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.100.91:8989";]]></Code>
+							<Code><![CDATA["crcAddress=192.168.1.216:8989";]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -1371,6 +1371,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1659101395907</Id>
 					<Name><![CDATA[randColor]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
 					<X>620</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1661,6 +1662,7 @@ return rand;]]></Body>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1659101293317</Id>
 					<Name><![CDATA[randomColor]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
 					<X>780</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1751,7 +1753,7 @@ return rand;]]></Body>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
 					<FillColor>-65281</FillColor>
-					<FillColorCode><![CDATA[new Color(213,randColor,randColor)]]></FillColorCode>
+					<FillColorCode><![CDATA[new Color(00,000,000)]]></FillColorCode>
 					<FillMaterial>null</FillMaterial>
 				</Oval>
 			</Presentation>
