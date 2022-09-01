@@ -11,13 +11,13 @@ Here the Topology:
 
 The components of this figure are: 
 1. **Federates**: usually simulators.It can be a wide types of simulation software (as AnyLogic or Unity) and/or normal Java programs developed to be a simulation.
-2. **RTI**:(Runtime Infastructure). :(Runtime Infrastructure). It is the sowtware part. It's the linker between federates. It’s regulated by FOM file and thanks to it the simulations can receive and send data among them. For example, if a federate wants to send a signal as interaction to start the simulation in another federate, can send the interaction through RTI and the other federate receive the interaction. The second federate send a Callback once has receveid the data to notify it, always passing through the RTI.       
-3. **FOM** (Federation object model) is a ".xml" file, where is descripted the structure of data trasmitted through the RTI. The data can be:  
+2. **RTI**: (Runtime Infrastructure). It is the sowtware part. It's the linker between federates. It’s regulated by FOM file and thanks to it the simulations can receive and send data among them. For example, if a federate wants to send a signal as interaction to start the simulation in another federate, can send the interaction through RTI and the other federate receive the interaction. The second federate send a Callback once has receveid the data to notify it, always passing through the RTI.       
+3. **FOM** (Federation object model): is a ".xml" file, where is descripted the structure of data trasmitted through the RTI. The data can be:  
   *Interactions;
   *Objects. 
 In the FOM the data are specified in term of Interaction handle and Parameter handle for the interactions data, while for object data the data type are Object handle and attribute handle. 
 Moreover, the file contains also other information about the federation as well as the federation name, federates names and others.
-4. **The ambassador**:internal component of the architecture. The ambassador is double, one is located in the federates and one in the RTI. The two ambassadors make a bi-directional channel to CALL and CALLBACKS between federates. It's the core of the comunication protocol.
+4. **The ambassador**: internal component of the architecture. The ambassador is double, one is located in the federates and one in the RTI. The two ambassadors make a bi-directional channel to CALL and CALLBACKS between federates. It's the core of the comunication protocol.
 5. **Federation**: the federation is the set of components over mentioned.
 
 ### Software used:
@@ -58,12 +58,13 @@ How to link Anylogic to the Master federate? Simply importing the coordinator.ja
 
 #### Pitch 
 PITCH is the HLA environments in which the federation is created. It mainly let all the components of a federation to join and create the FedExec.
-Actually, PITCH is a GUI to visualize the federation and the interaction exchanged by every federates
+Actually, PITCH is also a GUI to visualize the federation and the interaction exchanged by every federates.
 
 ### MANUALS
 #### Installation
 To install PITCH:
 * It's available a guide written by authors of PITCH. [Guide](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/resources/TheHLAtutorial.pdf)
+Also available in the "tools" section of this project. 
 
 Other module to export: 
 * As just said the coordinator.jar library is the one who behave the model, so it's should be imported in AnyLogic model in the section dedicated;
