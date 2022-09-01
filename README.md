@@ -1,15 +1,5 @@
 ## User guide of a distributed system based on the communication protocol HLA, to permit exchange of data between simulations.
 
-- What is HLA?
-- What are federates?
--  What is AnyLogic?
-- What is PITCH and what for?
-- Scalable hlacore.. what, how and why?
-- Postman.. API calls, why?
-- Description of libraries 
-- Maven project
-- Bibliografy
-
 #### HLA
 HLA (High Level Architecture) is an open international standard, developed by the Simulation Interoperability Standards Organization (SISO) and published by IEEE.
 Essentially, HLA is a communicaion protocol used to develop distributed simulation. The simualtions are called federates; each federate is able to excahnge data to each other thnaks to the interoperbility of HLA.
