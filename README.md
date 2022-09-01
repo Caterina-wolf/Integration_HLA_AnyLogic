@@ -4,7 +4,7 @@
 HLA (High Level Architecture) is an open international standard, developed by the Simulation Interoperability Standards Organization (SISO) and published by IEEE.
 Essentially, HLA is a communicaion protocol used to develop distributed simulation. The simualtions are called federates; each federate is able to excahnge data to each other thnaks to the interoperbility of HLA.
 Here the Architecture:
-[Architecture] (images in the repository)
+[Architecture](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/images/HLA_Federation.png)
 The component of HLA are: 
 1. **Federates**: simulations, inlcuding a wide types of simulation software and/or normal Java programs developed to be a simulation.
 2. **RTI**:(Runtime Infastructure). It's the linker between federates. The data flows from one federate, they pass throw the RTI that knows which type of data is thanks to the FOM. Then the data is redirect to the other federates. This one send a Callback once has received the data, that always pass throw th RTI.    
