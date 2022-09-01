@@ -7,7 +7,7 @@ Essentially, HLA is a comunication protocol used to develop distributed simulati
 Here the Topology:
 
 
-![image] (https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/blob/main/docs/images/HLA_Federation.png)
+![image](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/blob/main/docs/images/HLA_Federation.png)
 
 The components of this figure are: 
 1. **Federates**: usually simulators.It can be a wide types of simulation software (as AnyLogic or Unity) and/or normal Java programs developed to be a simulation.
