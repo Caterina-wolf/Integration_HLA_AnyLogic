@@ -6,6 +6,7 @@ HLA (High Level Architecture) is an open international standard, developed by th
 Essentially, HLA is a comunication protocol used to develop distributed simulation. The topology of this infrastructure is a service bus type, were the backbone infrastructure is the RTI were the federates pass the data to be exchanged to each other.
 Here the Topology:
 
+
 ![image] (https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/blob/main/docs/images/HLA_Federation.png)
 
 The components of this figure are: 
