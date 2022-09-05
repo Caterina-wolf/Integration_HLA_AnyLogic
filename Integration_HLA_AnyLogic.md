@@ -3,18 +3,20 @@
 
 #### HLA
 HLA (High Level Architecture) is an open international standard, developed by the Simulation Interoperability Standards Organization (SISO) and published by IEEE.
-Essentially, HLA is a comunication protocol used to develop distributed simulation. The simulations are called federates; each federate is able to exchange data to each other thanks to the interoperability of HLA.
-Here the Architecture:
-[Architecture] (https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/images/HLA_Federation.png)
-The component of HLA are: 
-1. **Federates**: simulations, Including a wide types of simulation software and/or normal Java programs developed to be a simulation.
-2. **RTI**:(Runtime Infastructure). :(Runtime Infrastructure). It's the linker between federates. It’s regulated by FOM file and thanks to it the simulations can receive and send data among them. For example, if a federate wants to send a signal as interaction to start the simulation in another federate, can send the interaction through RTI and the other federate receive the interaction. The second federate send a Callback once has receveid the data to notify it, always passing through the RTI.       
+Essentially, HLA is a comunication protocol used to develop distributed simulation. The topology of this infrastructure is a service bus type, were the backbone infrastructure is the RTI were the federates pass the data to be exchanged to each other.
+Here the Topology:
+
+![image] (https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/blob/main/docs/images/HLA_Federation.png)
+
+The components of this figure are: 
+1. **Federates**: usually simulators.It can be a wide types of simulation software (as AnyLogic or Unity) and/or normal Java programs developed to be a simulation.
+2. **RTI**:(Runtime Infastructure). :(Runtime Infrastructure). It is the sowtware part. It's the linker between federates. It’s regulated by FOM file and thanks to it the simulations can receive and send data among them. For example, if a federate wants to send a signal as interaction to start the simulation in another federate, can send the interaction through RTI and the other federate receive the interaction. The second federate send a Callback once has receveid the data to notify it, always passing through the RTI.       
 3. **FOM** (Federation object model) is a ".xml" file, where is descripted the structure of data trasmitted through the RTI. The data can be:  
   *Interactions;
   *Objects. 
 In the FOM the data are specified in term of Interaction handle and Parameter handle for the interactions data, while for object data the data type are Object handle and attribute handle. 
 Moreover, the file contains also other information about the federation as well as the federation name, federates names and others.
-4. **The ambassador**:internal component of the architecture. The ambassador is double, one is located in the federates and one in the RTI. The two ambassadors make the CALL and the CALLBACKS between federates. It's the core of the comunication protocol.
+4. **The ambassador**:internal component of the architecture. The ambassador is double, one is located in the federates and one in the RTI. The two ambassadors make a bi-directional channel to CALL and CALLBACKS between federates. It's the core of the comunication protocol.
 5. **Federation**: the federation is the set of components over mentioned.
 
 ### Software used:
@@ -40,10 +42,11 @@ Postman is an API platform used for designing, testing and developing APIs.
 In this project, only Master federate is a web service that need to use POSTMAN.
 I have built a workspace in which put the API's calls. 
 The GET calls are:
-* GET init to connect and join the federate to pitch which was activated in advance.
-* GET exit to disconnet and shut the federate linked to pitch.
-* GET startInteraction that takes also a parameter (TimeScaleFactor) to get the start interaction from pitch.
-* GET stopInteraction to get the stop interaction form pitch.
+* GET init --> to connect and to join the federate to pitch. It's called once the Spring Boot application is launched. But can be called again once the GET exit call is made.
+* GET exit --> to disconnet the federates from pitch and to shut the federation.
+* GET startInteraction --> takes a parameter (TimeScaleFactor) to get the start interaction from pitch. Simply launch the interaction.
+* GET stopInteraction --> to get the stop interaction form pitch.
+* GET loadscenario --> to get the scenario. It takes 2 parameters, for now the first is always "/cupertino" and the second is the initial fuel of the car, so it's a integer number.
 And the POST call is:
 * POST injectCar that post a Car with 3 attributes (name, license plate and color) into AnyLogic model.
 
@@ -59,14 +62,15 @@ Actually, PITCH is a GUI to visualize the federation and the interaction exchang
 ### MANUALS
 #### Installation
 To install PITCH:
-* It's available a guide written by authors of PITCH.
+* It's available a guide written by authors of PITCH. [Guide](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/resources/TheHLAtutorial.pdf)
+
 Other module to export: 
 * As just said the coordinator.jar library is the one who behave the model, so it's should be imported in AnyLogic model in the section dedicated;
 * The others modules to import in AnyLogic model are: hlaCore.jar, which is now in a local maven repository; and the library of open-hla, prti1516e.jar.
 
 #### Run
 The steps to run the program until now are: 
-1. Open Pitch
-2. Run Master federate: this one has the task to create the federation in Pitch environment and then join itself.
+1. Open Pitch, Open AnyLogic model, Java programs POSTMAN workspace.
+2. Run Master federate: this one has the task to create the federation in Pitch environment and then join itself (The Spring Boot service).
 3. Run AnyLogic simulation with Play button. At this point the federation is completed; all the members has joined.
 4. Open POSTMAN: and run the calls of interest. In this case: GET loadScenario to load the Scenario into the federates and then GET startInteraction to start the interaction. In the end launch the simulation with POST injectCar.

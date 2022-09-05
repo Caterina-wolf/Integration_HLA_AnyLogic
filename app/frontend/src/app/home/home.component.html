@@ -1,0 +1,49 @@
+<h1>MASTER federate</h1>
+<div style="text-align:center">
+    <h3>
+       Click you choice!!
+    </h3>
+    <button  (click)="connectEvent()" >Connect Master</button>
+    <button (click)="disconnectEvent()">Disconnect Master</button>
+    <p style="text-align:center">{{msg}}<p>
+</div>
+
+<div class="div1">
+   <h3>
+      Scenario parameters
+   </h3>
+   
+   <form>
+      <label for="scenario"> Choose the scenario in the list:  </label>
+      <select id="scenario">
+         <option value="cu">cupertino</option>
+         <option value="red">redmond</option>
+      </select><br><br>
+
+      <label for="fuel">Initial fuel level: </label>
+      <input type="text" id="fuel" name="fuel"><br><br>
+
+      <label for="time">Time scale factor: </label> 
+      <input type="text" id="time" name="time"><br><br>
+
+      <input type="submit" value="Submit" (click)="submit()">
+   </form>
+</div>
+
+
+<div class="div1">
+   <h3>Car parameters</h3>
+   <form [formGroup]="form">
+      <label for="name"> Name the car:  </label>
+      <input type="text" id="name" name="name" formControlName="name"><br><br>
+
+      <label for="licensce">Write your license Plate: </label>
+      <input type="text" id="license" name="license" formControlName="licensePlate"><br><br>
+
+      <label for="time">Write the color of your car: </label> 
+      <input type="text" id="color" name="color" formControlName="color"><br><br>
+
+      <input type="submit" value="Play" (click)="showCar()">
+   </form>
+</div>
+ 
