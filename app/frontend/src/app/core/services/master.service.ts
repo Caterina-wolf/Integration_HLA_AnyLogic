@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MasterService {
 connectionConfig= environment.masterUrl + "/init";
-disconnectionConfig = environment.masterUrl + "/exit";
+disconnectionConfig = environment.masterUrl + "/quit";
 
   constructor(private http: HttpClient) { }
 

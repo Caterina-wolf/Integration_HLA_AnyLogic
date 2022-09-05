@@ -3,5 +3,13 @@
     height: 200px;
     border: 0.5px grey solid;
     padding: 20px;
+    background-color: lightgray;
+  }
+
+  .nameTitle{
+      color:rgb(4, 45, 120);
+      background-color: aliceblue;
+      border-width: 2px;
+
   }
 

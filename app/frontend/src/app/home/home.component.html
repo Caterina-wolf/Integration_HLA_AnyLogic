@@ -1,32 +1,36 @@
-<h1>MASTER federate</h1>
-<div style="text-align:center">
-    <h3>
-       Click you choice!!
-    </h3>
-    <button  (click)="connectEvent()" >Connect Master</button>
-    <button (click)="disconnectEvent()">Disconnect Master</button>
-    <p style="text-align:center">{{msg}}<p>
+<h1 class="nameTitle">MASTER federate</h1>
+<div style="text-align:center" >
+   <h3>
+      Click you choice!!
+   </h3>
+   <button (click)="connectEvent($event)">Connect Master</button>
+   <button (click)="disconnectEvent($event)">Disconnect Master</button>
+   <p style="text-align:center">{{msg}}</p>
 </div>
 
 <div class="div1">
    <h3>
       Scenario parameters
    </h3>
-   
+
    <form>
-      <label for="scenario"> Choose the scenario in the list:  </label>
-      <select id="scenario">
-         <option value="cu">cupertino</option>
-         <option value="red">redmond</option>
+      <label for="scenario" > Choose the scenario in the list: </label>
+      <select id="scenario" [formControl]="formSelect">
+         <option value="" disabled selected hidden>scenario</option>
+         <option value="Cupertino">cupertino</option>
+         <option value="Redmond">redmond</option>
       </select><br><br>
-
+   </form>
+      <form [formGroup]="form2">
       <label for="fuel">Initial fuel level: </label>
-      <input type="text" id="fuel" name="fuel"><br><br>
+      <input type="text" id="fuel" name="fuel" formControlName="fuel"><br><br>
+   
 
-      <label for="time">Time scale factor: </label> 
-      <input type="text" id="time" name="time"><br><br>
+ 
+      <label for="time">Time scale factor: </label>
+      <input type="text" id="time" name="time" formControlName="time"><br><br>
 
-      <input type="submit" value="Submit" (click)="submit()">
+      <input type="submit" value="Submit" (click)="submit(form2,formSelect)">
    </form>
 </div>
 
@@ -34,16 +38,20 @@
 <div class="div1">
    <h3>Car parameters</h3>
    <form [formGroup]="form">
-      <label for="name"> Name the car:  </label>
+      <label for="name"> Name the car: </label>
       <input type="text" id="name" name="name" formControlName="name"><br><br>
 
-      <label for="licensce">Write your license Plate: </label>
+      <label for="license">Write your license Plate: </label>
       <input type="text" id="license" name="license" formControlName="licensePlate"><br><br>
 
-      <label for="time">Write the color of your car: </label> 
+      <label for="color">Write the color of your car: </label>
       <input type="text" id="color" name="color" formControlName="color"><br><br>
 
-      <input type="submit" value="Play" (click)="showCar()">
+      <input type="submit" value="Play" (click)="showCar(form)">
    </form>
 </div>
- 
+
+<div>
+   <button (click)="stop($event)">Stop simulation</button>
+   <p style="text-align:left">{{msg1}}</p>
+</div>
