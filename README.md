@@ -73,6 +73,8 @@ Other module to export:
 #### Run
 The steps to run the program until now are: 
 1. Open Pitch, Open AnyLogic model and POSTMAN workspace.
+2. The connection between Pitch and the federates is via network, so it's necessary to read, on the top of the GUI, the PITCH's IP every time is started and to change the variable settingDesignator variable's value in the application.properties file for the Master federate and in the settingsDesignator variable allocate on the Main sheet of the AnyLogic model.
 2. Run Master federate: this one has the task to create the federation in Pitch environment and then join itself (The Spring Boot service).
 3. Run AnyLogic simulation with Play button. At this point the federation is completed; all the members has joined.
-4. Open POSTMAN: and run the calls of interest. In this case: GET loadScenario to load the Scenario into the federates and then GET startInteraction to start the interaction. In the end launch the simulation with POST injectCar.
+4. Open POSTMAN: and run the http request of interest. In this case: GET loadScenario to load the Scenario into the federates and then GET startInteraction to start the interaction. In the end launch the simulation with POST injectCar.
+5. As alternative to POSTMAN there is now a Frontend part in Angular that has the same http request as Postman and do the same things.
