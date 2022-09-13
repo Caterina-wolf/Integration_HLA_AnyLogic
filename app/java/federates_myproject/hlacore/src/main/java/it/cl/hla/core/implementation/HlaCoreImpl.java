@@ -568,32 +568,5 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
         listenerObjects.add(objectListener);
     }
 
-    /**
-     * Observable del Coordinator per gli oggetti
-     */
-
-    /*@Override
-    public void reflectAttributeValues(ObjectClassHandle objectClassHandle, AttributeHandleValueMap mapAttribute, byte[] userSuppliedTag, OrderType sentOrdering, TransportationTypeHandle theTransport, SupplementalReflectInfo reflectInfo) throws FederateInternalError {
-        for (ListenerObject listener : listenerObjects) {
-            listener.reflectAttributeValues(objectClassHandle, mapAttribute);
-        }
-    }
-
-
-    public void reflectAttributeValues(ObjectClassHandle objectClassHandle, AttributeHandleValueMap mapAttribute, byte[] userSuppliedTag, OrderType sentOrdering, TransportationTypeHandle theTransport, LogicalTime theTime, OrderType receivedOrdering, SupplementalReflectInfo reflectInfo) throws FederateInternalError {
-        for (ListenerObject listener : listenerObjects) {
-            listener.reflectAttributeValues(objectClassHandle, mapAttribute);
-        }
-    }
-
-
-    public void reflectAttributeValues(ObjectClassHandle objectClassHandle, AttributeHandleValueMap mapAttribute, byte[] userSuppliedTag, OrderType sentOrdering, TransportationTypeHandle theTransport, LogicalTime theTime, OrderType receivedOrdering, MessageRetractionHandle retractionHandle, SupplementalReflectInfo reflectInfo) throws FederateInternalError {
-        for (ListenerObject listener : listenerObjects) {
-            listener.reflectAttributeValues(objectClassHandle, mapAttribute);
-        }
-    }*/
-
-    //TO DO: discoverObjectInstance (come nella classe HlaInterfaceImpl di mapviewer)
-
 
 }

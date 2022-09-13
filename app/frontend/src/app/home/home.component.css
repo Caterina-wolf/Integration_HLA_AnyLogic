@@ -1,15 +1,249 @@
-.div1{
-    width: 500px;
-    height: 200px;
-    border: 0.5px grey solid;
+.body {
+    background-color:white;
+    margin-block: 66;
+}
+
+  
+h1 {
+    color:   rgb(51, 45, 45);
+    text-align: center;
+    font: bold 45px Verdana, Geneva, Tahoma, sans-serif;
+  
+
+}
+
+.h3{
+    color: rgb(51, 45, 45);
+    text-align: left;
+    margin-left: 30px;
+    margin-top:25px;
+    margin-bottom: 0px;
+    font: 15px Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.h4 {
+    color: rgb(51, 45, 45);
+    text-align: left;
+    margin-left: 35px;
+    margin-top:20px;
+    margin-bottom: 0px;
+    font: bold 18px Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.toggle {
+  --width: 100px;
+  --height: calc(var(--width) / 3);
+
+  position: relative;
+  display: inline-block;
+  width: var(--width);
+  height: var(--height);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: var(--height);
+  cursor: pointer;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--height);
+  background-color: #ccc;
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle .slider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--height));
+  height: calc(var(--height));
+  border-radius: calc(var(--height) / 2);
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle input:checked+.slider {
+  background-color: #181ffd;
+}
+
+.toggle input:checked+.slider::before {
+  transform: translateX(calc(var(--width) - var(--height)));
+}
+
+.toggle .labels {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+}
+
+.toggle .labels::after {
+  content: attr(data-off);
+  position: absolute;
+  right: 5px;
+  color: #4d4d4d;
+  opacity: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle .labels::before {
+  content: attr(data-on);
+  position: absolute;
+  left: calc(var(--height) - var(--width) + 2px);
+  color: #ffffff;
+  opacity: 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle input:checked~.labels::after {
+  opacity: 0;
+  transform: translateX(calc(var(--width) - var(--height)));
+}
+
+.toggle input:checked~.labels::before {
+  opacity: 1;
+  transform: translateX(calc(var(--width) - var(--height)));
+}
+
+
+.myForm{
+    width: 450px;
+    height: 240px;
+    border:1px solid #d6bcd6;
     padding: 20px;
-    background-color: lightgray;
-  }
+    margin-left: 25px;
+    margin-right: 25px;;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    background-color: rgb(142, 136, 136);
+    background:linear-gradient(to bottom, #b4aeae 5%, #8b868b 100%);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
 
-  .nameTitle{
-      color:rgb(4, 45, 120);
-      background-color: aliceblue;
-      border-width: 2px;
+}
 
-  }
+.inputForm{
+    border-radius: 5px;
+    margin-left: 230px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 180px;
+    height:20px;
+    font: 12px Verdana, Geneva, Tahoma, sans-serif;
+    background-color: white;
+}
+
+.inputForm:hover{
+    background-color: rgb(201, 200, 219);
+    font: 12px Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.inputButtonSubmit {
+	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	background-color:#ededed;
+	border-radius:10px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color: #000000;
+	font: bold 12px Verdana, Geneva, Tahoma, sans-serif;
+	padding:7px 10px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #c8c9c9;
+  text-align: center;
+  margin-left: 390px;
+  margin-top:0px;
+}
+
+.inputButtonSubmit:hover{
+  background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
+}
+
+.inputButtonSubmit:active{
+    background:linear-gradient(to bottom, #0f0f0f 5%, #575357 100%);
+    background-color: #060c0e;
+    text-decoration-color: #ededed;
+}
+
+
+.labelform{
+    font: bold 14px Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 16px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+
+.myButton {
+	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	background-color:#ededed;
+	border-radius:15px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color:#060c0e;
+	font: bold 1px Verdana, Geneva, Tahoma, sans-serif;
+	font-size:15px;
+	padding:9px 17px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #e1e2ed;
+  margin-top: 10px;
+  margin-right: 100px;
+  margin-left: 455px;
+  margin-bottom: 25px;
+}
+
+.myButton:hover {
+	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
+}
+
+.myButton:active {
+
+    background:linear-gradient(to bottom, #0f0f0f 5%, #575357 100%);
+    background-color: #060c0e;
+}
+
+
+.msg{
+    text-align: justify;
+    margin-left: 225px;
+    color:rgb(128, 126, 126);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font: size 30px;
+    margin-bottom: 15px;
+}
+
+.msg1{
+  text-align: justify;
+  margin-left:35px;
+  color:rgb(128, 126, 126);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font: size 30px;
+  margin-bottom: 15px;
+}
+
+
+
+
 

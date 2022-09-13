@@ -159,7 +159,7 @@ loadCar();]]></BeforeStepCode>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.100.96:8989";]]></Code>
+							<Code><![CDATA["crcAddress=192.168.1.222:8989";]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>

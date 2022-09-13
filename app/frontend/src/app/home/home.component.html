@@ -1,57 +1,69 @@
-<h1 class="nameTitle">MASTER federate</h1>
-<div style="text-align:center" >
-   <h3>
-      Click you choice!!
-   </h3>
-   <button (click)="connectEvent($event)">Connect Master</button>
-   <button (click)="disconnectEvent($event)">Disconnect Master</button>
-   <p style="text-align:center">{{msg}}</p>
-</div>
-
-<div class="div1">
-   <h3>
-      Scenario parameters
+<body class="body">
+<h1 class="h1">MASTER federate</h1>
+<div>
+<div style="text-align:left">
+   <h3 class="h3">
+      Slide the button to connect and disconnect the Master federate:
    </h3>
 
-   <form>
-      <label for="scenario" > Choose the scenario in the list: </label>
-      <select id="scenario" [formControl]="formSelect">
-         <option value="" disabled selected hidden>scenario</option>
-         <option value="Cupertino">cupertino</option>
-         <option value="Redmond">redmond</option>
-      </select><br><br>
-   </form>
-      <form [formGroup]="form2">
-      <label for="fuel">Initial fuel level: </label>
-      <input type="text" id="fuel" name="fuel" formControlName="fuel"><br><br>
+   <label class="toggle">
+      <input (click)="toggle($event)" type="checkbox">
+      <span  class="slider"></span>
+      <span class="labels" data-on="ON" data-off="OFF"></span>
    
-
- 
-      <label for="time">Time scale factor: </label>
-      <input type="text" id="time" name="time" formControlName="time"><br><br>
-
-      <input type="submit" value="Submit" (click)="submit(form2,formSelect)">
-   </form>
+</label>
+   <p class="msg">{{msg}}</p>
 </div>
 
 
-<div class="div1">
-   <h3>Car parameters</h3>
-   <form [formGroup]="form">
-      <label for="name"> Name the car: </label>
-      <input type="text" id="name" name="name" formControlName="name"><br><br>
-
-      <label for="license">Write your license Plate: </label>
-      <input type="text" id="license" name="license" formControlName="licensePlate"><br><br>
-
-      <label for="color">Write the color of your car: </label>
-      <input type="text" id="color" name="color" formControlName="color"><br><br>
-
-      <input type="submit" value="Play" (click)="showCar(form)">
-   </form>
-</div>
 
 <div>
-   <button (click)="stop($event)">Stop simulation</button>
-   <p style="text-align:left">{{msg1}}</p>
+   <h3 class="h3">Fill the form to load the scenario in the simulation:</h3>
+   <h4 class="h4"> Scenario parameters</h4>
+<form class="myForm">
+   <form>
+      <label class="labelform" for="scenario" > Select the scenario in the list: </label>
+      <select  class="inputForm" id="scenario" [formControl]="formSelect">
+         <option  value="" disabled selected hidden >scenario</option>
+         <option  value="Cupertino">cupertino</option>
+         <option  value="Redmond">redmond</option>
+      </select><br><br>
+   </form>
+
+      <form  [formGroup]="form2">
+      <label class="labelform" for="fuel">Insert the initial fuel amount: </label>
+      <input class="inputForm" type="text" id="fuel" name="fuel" formControlName="fuel"><br><br>
+ 
+      <label class="labelform" for="time">Insert the time scale factor: </label>
+      <input class="inputForm" type="text" id="time" name="time" formControlName="time"><br><br>
+
+      <input class="inputButtonSubmit" type="submit" value="Submit" (click)="submit(form2,formSelect)" [disabled]="form2.invalid">
+   </form>
+
+</form>
+
+<h3 class="h3">Fill the form to load the Car to inject in the simulation:</h3>
+   <h3 class="h4">Car parameters</h3>
+   <form class="myForm" [formGroup]="form" >
+      <label class="labelform" for="name"> Name the car: </label>
+      <input class="inputForm" type="text" id="name" name="name" formControlName="name"><br><br>
+
+      <label class="labelform" for="license">Write your license Plate: </label>
+      <input class="inputForm" type="text" id="license" name="license" formControlName="licensePlate"><br><br>
+
+      <label class="labelform" for="color">Write the color of your car: </label>
+      <input class="inputForm" type="text" id="color" name="color" formControlName="color"><br><br>
+
+      <input class="inputButtonSubmit" type="submit" value="Play" (click)="showCar(form)" [disabled]="form.invalid">
+   </form>
 </div>
+
+
+
+<div>
+   <h3 class="h3">To interrupt the simulation press the button below:</h3>
+   <button class="myButton" (click)="stop($event)">Stop simulation</button>
+<p class="msg1">{{msg1}}</p>
+</div>
+</div>
+</body>

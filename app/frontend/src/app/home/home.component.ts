@@ -7,6 +7,11 @@ import { ScenarioService } from '../core/models/scenario/scenario.service';
 import { InteractionService } from '../core/services/interaction.service';
 import { MasterService } from '../core/services/master.service';
 
+
+
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,6 +26,8 @@ export class HomeComponent implements OnInit {
   form: FormGroup;
   formSelect : FormControl = new FormControl('');
   form2 : FormGroup;
+  toggled : boolean = false;
+  
 
 
   constructor(public service: CarService, public masterService: MasterService, public scenarioService: ScenarioService, public interactionService: InteractionService) { }
@@ -47,17 +54,28 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  connectEvent(e:Event) {
+  connectEvent(e:MouseEvent){
     this.msg = "Connected";
     this.masterService.getMasterConnection().subscribe();
     return this.msg;
   }
 
-  disconnectEvent(e:Event) {
+  disconnectEvent(e:MouseEvent){
     this.msg = "Disconnected";
     this.masterService.getMasterDisconnection().subscribe();
+    this.msg1 = null;
     return this.msg;
   }
+
+  toggle(e: MouseEvent){
+    if(!this.toggled){
+      this.connectEvent(e);
+    }else{
+      this.disconnectEvent(e);
+    }
+    this.toggled = !this.toggled;
+  }
+
 
   loadScenario(scenario: Scenario, formSelect: FormControl) {
     console.log(this.scenario);
@@ -74,7 +92,7 @@ export class HomeComponent implements OnInit {
   }
 
   stop(e:Event) {
-    this.msg1= "The simulation has been stopped, so the values are all reset!";
+    this.msg1= "All the paramters are reset to default values!";
     this.interactionService.getStopInteraction().subscribe();
     return this.msg1;
   }
@@ -93,7 +111,7 @@ export class HomeComponent implements OnInit {
     this.scenario.initialFuelLevel = this.form2.controls['fuel'].value;
     this.timeScaleFactor = this.form2.controls['time'].value;
     this.loadScenario(this.scenario, this.formSelect.value);
-    this.sendTimeScaleFactor()
+    this.sendTimeScaleFactor();
   }
 
 
