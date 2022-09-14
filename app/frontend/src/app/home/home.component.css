@@ -4,7 +4,7 @@
 }
 
 .allert{
-  margin-left:305px;
+  margin-left:250px;
   margin-top:0px;
   font: italic 10px Verdana, Geneva, Tahoma, sans-serif;
 }  
@@ -149,7 +149,7 @@ h1 {
     border-radius: 5px;
     margin-left: 230px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     width: 180px;
     height:20px;
     font: 12px Verdana, Geneva, Tahoma, sans-serif;
