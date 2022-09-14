@@ -98,6 +98,19 @@
                     <order>Receive</order>
                     <semantics>Position of the car.</semantics>
                 </attribute>
+                <attribute>
+                    <name>CarColor</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>NA</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <dimensions/>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Color of the car.</semantics>
+                </attribute>
+                
             </objectClass>
         </objectClass>
     </objects>
@@ -217,7 +230,7 @@
         <simpleDataTypes>
             <simpleData>
                 <name>FuelInt32</name>
-                <representation notes="fueleconomybase_1">HLAinteger32BE</representation>
+                <representation notes="fueleconomybase_2">HLAinteger32BE</representation>
                 <units>Litres</units>
                 <resolution>1</resolution>
                 <accuracy>1</accuracy>
@@ -286,7 +299,7 @@
     </dataTypes>
     <notes>
         <note>
-            <label>fueleconomybase_1</label>
+            <label>fueleconomybase_2</label>
             <semantics>Consider using a float for this for higher accuracy</semantics>
         </note>
     </notes>

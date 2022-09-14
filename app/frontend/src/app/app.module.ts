@@ -22,7 +22,6 @@ import { ScenarioService } from './core/models/scenario/scenario.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule
-    
   ],
   providers: [CarService, ScenarioService],
   bootstrap: [AppComponent]

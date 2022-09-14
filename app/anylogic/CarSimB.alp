@@ -159,7 +159,7 @@ loadCar();]]></BeforeStepCode>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.1.222:8989";]]></Code>
+							<Code><![CDATA["crcAddress=192.168.100.157:8989";]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -206,6 +206,18 @@ loadCar();]]></BeforeStepCode>
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA["CarSimulator"]]></Code>
 						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1663158539654</Id>
+					<Name><![CDATA[variable]]></Name>
+					<X>270</X><Y>350</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
 			</Variables>
@@ -552,7 +564,10 @@ e.printStackTrace();}]]></Body>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[Coord.createCar(agent);]]></Code>
+								<Code><![CDATA[agent.setCarName(Coord.getNameCar());
+agent.setColorCar(Coord.getColorCar());
+agent.setLicensePlateNumber(Coord.getLicenseCar());
+Coord.createCar(agent);]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -1326,7 +1341,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1658400733840</Id>
 					<Name><![CDATA[license]]></Name>
-					<X>620</X><Y>160</Y>
+					<X>710</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1334,14 +1349,14 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["ASA-322"]]></Code>
+							<Code><![CDATA[main.Coord.getLicenseCar();]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1658932301420</Id>
 					<Name><![CDATA[identifier]]></Name>
-					<X>620</X><Y>130</Y>
+					<X>710</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1356,7 +1371,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1658933698312</Id>
 					<Name><![CDATA[levelFuel]]></Name>
-					<X>620</X><Y>190</Y>
+					<X>710</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1371,7 +1386,7 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1659101692865</Id>
 					<Name><![CDATA[normalSpeed]]></Name>
-					<X>620</X><Y>220</Y>
+					<X>710</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1383,12 +1398,42 @@ import it.cl.hla.coordinator.interfaces.*;]]></Import>
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1663144953407</Id>
+					<Name><![CDATA[namex]]></Name>
+					<X>710</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[main.Coord.getNameCar();]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1663150847278</Id>
+					<Name><![CDATA[color]]></Name>
+					<X>710</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[main.Coord.getColorCar();]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
 					<Id>1658909186051</Id>
 					<Name><![CDATA[update]]></Name>
-					<X>160</X><Y>80</Y>
+					<X>500</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1420,7 +1465,7 @@ main.Coord.updateCar(this);]]></Action>
 				<Event>
 					<Id>1659097416986</Id>
 					<Name><![CDATA[eventLog]]></Name>
-					<X>360</X><Y>80</Y>
+					<X>500</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1447,7 +1492,10 @@ main.Coord.updateCar(this);]]></Action>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
 					<Action><![CDATA[System.out.println("*************************UPDATES****************************");
-System.out.println("car chosen -> " + this.getNamex());
+System.out.println("car data -> idCar:" + this.identifier );
+System.out.println("Name:" + this.getNamex());
+System.out.println("LicensePlate:" + this.getLicensePlateNumber());
+System.out.println("Color:" + this.getColorCar());
 System.out.println("Fuel Level -> "+ this.getFuelLevel() + " liters left.");
 System.out.println("New "+ this.getLocation());]]></Action>
 					<Logging>false</Logging>
@@ -1459,19 +1507,19 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658315199726</Id>
 					<Name><![CDATA[getCurrentSpeed]]></Name>
-					<X>160</X><Y>130</Y>
+					<X>250</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return 5.0;]]></Body>
+					<Body><![CDATA[return normalSpeed;]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1658318813902</Id>
 					<Name><![CDATA[getIdentifier]]></Name>
-					<X>380</X><Y>160</Y>
+					<X>250</X><Y>120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1483,19 +1531,19 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1658318855586</Id>
 					<Name><![CDATA[getNamex]]></Name>
-					<X>380</X><Y>130</Y>
+					<X>250</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return "name";]]></Body>
+					<Body><![CDATA[return namex;]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[String]]></ReturnType>
 					<Id>1658318911750</Id>
 					<Name><![CDATA[getLicensePlateNumber]]></Name>
-					<X>380</X><Y>190</Y>
+					<X>250</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1507,7 +1555,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[FuelTypeImpl]]></ReturnType>
 					<Id>1658318954143</Id>
 					<Name><![CDATA[getFuelType]]></Name>
-					<X>380</X><Y>220</Y>
+					<X>250</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1519,7 +1567,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1658319022954</Id>
 					<Name><![CDATA[getNormalSpeed]]></Name>
-					<X>160</X><Y>160</Y>
+					<X>250</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1531,7 +1579,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[it.cl.hla.coordinator.implementation.Position]]></ReturnType>
 					<Id>1658319068767</Id>
 					<Name><![CDATA[getLocation]]></Name>
-					<X>160</X><Y>220</Y>
+					<X>250</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1543,7 +1591,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658319231562</Id>
 					<Name><![CDATA[setFuelLevel]]></Name>
-					<X>380</X><Y>280</Y>
+					<X>30</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1558,7 +1606,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658319305929</Id>
 					<Name><![CDATA[getFuelLevel]]></Name>
-					<X>380</X><Y>250</Y>
+					<X>250</X><Y>270</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1570,7 +1618,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658320142680</Id>
 					<Name><![CDATA[setLocation]]></Name>
-					<X>160</X><Y>250</Y>
+					<X>30</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1585,7 +1633,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658320854046</Id>
 					<Name><![CDATA[getLitersPerKm]]></Name>
-					<X>160</X><Y>280</Y>
+					<X>500</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1595,24 +1643,9 @@ System.out.println("New "+ this.getLocation());]]></Action>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1658321753361</Id>
-					<Name><![CDATA[adjustCurrentSpeed]]></Name>
-					<X>160</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[change]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-				</Function>
-				<Function AccessType="public" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1658935528647</Id>
 					<Name><![CDATA[updateFuel]]></Name>
-					<X>780</X><Y>160</Y>
+					<X>500</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1624,7 +1657,7 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1659086683879</Id>
 					<Name><![CDATA[randomSpeed]]></Name>
-					<X>780</X><Y>130</Y>
+					<X>500</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1640,6 +1673,63 @@ System.out.println("New "+ this.getLocation());]]></Action>
 					<Body><![CDATA[int range = max - min + 1;
 int rand = (int)(Math.random() * range) + min;
 return rand;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[String]]></ReturnType>
+					<Id>1663150464857</Id>
+					<Name><![CDATA[getColorCar]]></Name>
+					<X>250</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return color;]]></Body>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1663150706133</Id>
+					<Name><![CDATA[setColorCar]]></Name>
+					<X>30</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[colorCar]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1663165395604</Id>
+					<Name><![CDATA[setLicensePlateNumber]]></Name>
+					<X>30</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[license]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+				</Function>
+				<Function AccessType="public" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1663165427253</Id>
+					<Name><![CDATA[setCarName]]></Name>
+					<X>30</X><Y>270</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[nameCar]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -1713,7 +1803,7 @@ return rand;]]></Body>
 					<RadiusX>9</RadiusX>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
-					<FillColor>-65281</FillColor>
+					<FillColor>-2849473</FillColor>
 					<FillMaterial>null</FillMaterial>
 				</Oval>
 			</Presentation>

@@ -34,7 +34,7 @@ public class AnyLogicCoordinator {
     private ParameterHandle scenarioFailureFederateNameParameterHandle;
     private ParameterHandle scenarioFailureErrorMessage;
     private ParameterHandle carNameParameterHandle;
-    private ParameterHandle carColoParameterHandle;
+    private ParameterHandle carColorParameterHandle;
     private ParameterHandle carLicensePlateParameterHandle;
 
 
@@ -46,8 +46,10 @@ public class AnyLogicCoordinator {
     private AttributeHandle attributePositionHandle;
     private AttributeHandle attributeFuelLevelHandle;
     private AttributeHandle nameAttributeHandle;
+    private AttributeHandle carColorAttributeHandle;
     private AttributeHandle licensePlateNumberAttributeHandle;
     private AttributeHandle fuelTypeAttributeHandle;
+
 
 
     private FuelTypeEnum8Coder fuelTypeEnumCoder= new FuelTypeEnum8Coder();
@@ -63,6 +65,12 @@ public class AnyLogicCoordinator {
     public boolean running;
     public float timeScale;
     public int initialFuel;
+
+
+
+    public String nameCar;
+    public String licenseCar;
+    public String colorCar;
 
 
     /**
@@ -133,6 +141,29 @@ public class AnyLogicCoordinator {
         this.initialFuel = initialFuel;
     }
 
+    public String getNameCar() {
+        return nameCar;
+    }
+
+    public void setNameCar(String nameCar) {
+        this.nameCar = nameCar;
+    }
+
+    public String getLicenseCar() {
+        return licenseCar;
+    }
+
+    public void setLicenseCar(String licenseCar) {
+        this.licenseCar = licenseCar;
+    }
+
+    public String getColorCar() {
+        return colorCar;
+    }
+
+    public void setColorCar(String colorCar) {
+        this.colorCar = colorCar;
+    }
 
     /**
      *  chiama l'interfaccia per uscire dalla FedExec
@@ -173,8 +204,16 @@ public class AnyLogicCoordinator {
                     try {
 
                         String carName = hlaCore.decodeString32(mapValue.get(carNameParameterHandle));
+                        setNameCar(carName);
+                        System.out.println("[COORD] CarName: " + carName);
+
                         String license= hlaCore.decodeString32(mapValue.get(carLicensePlateParameterHandle));
-                        String color= hlaCore.decodeString32(mapValue.get(carColoParameterHandle));
+                        setLicenseCar(license);
+                        System.out.println("[COORD] LicensePlateNumber: " + license);
+
+                        String color= hlaCore.decodeString32(mapValue.get(carColorParameterHandle));
+                        setColorCar(color);
+                        System.out.println("[COORD] Car color: " + color);
 
                         anyLogic.injectCar(carName, license, color);
 
@@ -204,7 +243,7 @@ public class AnyLogicCoordinator {
                     hlaCore.subscribeInteractions(addCarClassInteractionHandle);
                     carNameParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "CarName");
                     carLicensePlateParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "LicensePlateCar");
-                    carColoParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "ColorCar");
+                    carColorParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "ColorCar");
 
                     addCarHandling();
 
@@ -283,17 +322,20 @@ public class AnyLogicCoordinator {
     }
 
     public void addCarHandling(){
-        try {
-            addCarClassInteractionHandle = hlaCore.getInteractionClassHandle("addCar");
+            try {
+                addCarClassInteractionHandle = hlaCore.getInteractionClassHandle("addCar");
 
-            carNameParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "CarName");
-            carLicensePlateParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "LicensePlateCar");
-            carColoParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "ColorCar");
+                carNameParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "CarName");
+                carLicensePlateParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "LicensePlateCar");
+                carColorParameterHandle = hlaCore.getParameterHandle(addCarClassInteractionHandle, "ColorCar");
 
-        } catch (SaveInProgress | RestoreInProgress | NotConnected| RTIinternalError | FederateNotExecutionMember | FederateServiceInvocationsAreBeingReportedViaMOM e) {
-            throw new RuntimeException(e);
+            } catch (SaveInProgress | RestoreInProgress | NotConnected | RTIinternalError | FederateNotExecutionMember |
+                     FederateServiceInvocationsAreBeingReportedViaMOM e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
+
+
 
     public void objectHandling(){
 
@@ -305,6 +347,7 @@ public class AnyLogicCoordinator {
             nameAttributeHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "Name");
             licensePlateNumberAttributeHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "LicensePlateNumber");;
             fuelTypeAttributeHandle=hlaCore.getAttributeHandle(objectClassCarHandle, "FuelType");
+            carColorAttributeHandle= hlaCore.getAttributeHandle(objectClassCarHandle, "CarColor");
 
 
             anyLogic.loadCar();
@@ -314,7 +357,7 @@ public class AnyLogicCoordinator {
         }
     }
 
-    public void addCar(String nameCar, String licensePlate, String colorCar){
+    public void sendCar(String nameCar, String licensePlate, String colorCar){
         try {
             ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(3);
             byte [] nameCarParameter = hlaCore.encoderString(nameCar);
@@ -322,7 +365,7 @@ public class AnyLogicCoordinator {
             byte [] license = hlaCore.encoderString(licensePlate);
             mapHandle.put(carLicensePlateParameterHandle,license);
             byte [] color = hlaCore.encoderString(colorCar);
-            mapHandle.put(carColoParameterHandle,color);
+            mapHandle.put(carColorParameterHandle,color);
             hlaCore.sendInteraction(addCarClassInteractionHandle, mapHandle);
         } catch(NullPointerException  | FederateNotExecutionMember | RestoreInProgress | NotConnected | RTIinternalError | SaveInProgress e){
             e.printStackTrace();}
@@ -334,11 +377,13 @@ public class AnyLogicCoordinator {
         try {
             ObjectInstanceHandle carInstance = hlaCore.publishObject(objectClassCarHandle);
             carTracking.put(carInstance, car.getIdentifier());
-            AttributeHandleValueMap mapAttributes = hlaCore.createAttributeMap(3);
-            byte [] nameAttribute = hlaCore.encoderString(car.getName());
+            AttributeHandleValueMap mapAttributes = hlaCore.createAttributeMap(4);
+            byte [] nameAttribute = hlaCore.encoderString(car.getNamex());
             mapAttributes.put(nameAttributeHandle,nameAttribute);
             byte [] licenseAttribute = hlaCore.encoderString(car.getLicensePlateNumber());
             mapAttributes.put(licensePlateNumberAttributeHandle, licenseAttribute);
+            byte [] colorCar = hlaCore.encoderString(car.getColorCar());
+            mapAttributes.put(carColorAttributeHandle,colorCar);
             byte [] fuelTypeEnum = fuelTypeEnumCoder.encode(car.getFuelType(), hlaCore.getCoder());
             mapAttributes.put(fuelTypeAttributeHandle, fuelTypeEnum);
             hlaCore.updatesAttributes(carInstance, mapAttributes,null);
@@ -377,12 +422,13 @@ public class AnyLogicCoordinator {
 
     public void publishCar() throws FederateNotExecutionMember, NotConnected, RestoreInProgress, SaveInProgress, RTIinternalError {
         try {
-            AttributeHandleSet attributes = hlaCore.createAttributesSet(5);
+            AttributeHandleSet attributes = hlaCore.createAttributesSet(6);
             attributes.add(nameAttributeHandle);
             attributes.add(attributePositionHandle);
             attributes.add(fuelTypeAttributeHandle);
             attributes.add(licensePlateNumberAttributeHandle);
             attributes.add(attributeFuelLevelHandle);
+            attributes.add(carColorAttributeHandle);
             hlaCore.sendObject(objectClassCarHandle,attributes);
         } catch (FederateServiceInvocationsAreBeingReportedViaMOM| ObjectClassNotDefined| AttributeNotDefined e) {
             throw new RTIinternalError("HlaInterfaceFailure", e);

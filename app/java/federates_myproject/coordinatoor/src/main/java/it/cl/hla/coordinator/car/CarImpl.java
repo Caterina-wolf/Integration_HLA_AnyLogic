@@ -13,6 +13,7 @@ public class CarImpl implements Car {
 
    private String name;
    private String licensePlateNumber;
+   private String colorCar;
    private FuelTypeImpl fuelTypeImpl;
 
    private int normalSpeed; // km/h
@@ -26,6 +27,7 @@ public class CarImpl implements Car {
 
    public CarImpl(String name,
                   String licensePlateNumber,
+                  String colorCar,
                   FuelTypeImpl fuelTypeImpl,
                   int normalSpeed,
                   double litersPerKm) {
@@ -35,6 +37,7 @@ public class CarImpl implements Car {
       this.licensePlateNumber = licensePlateNumber;
       this.fuelTypeImpl = fuelTypeImpl;
       this.normalSpeed = normalSpeed;
+      this.colorCar=colorCar;
       currentSpeed = normalSpeed;
       this.litersPerKm = litersPerKm;
       this.location = new Position();
@@ -46,12 +49,29 @@ public class CarImpl implements Car {
    public String getIdentifier() {
       return this.identifier;
    }
-   public String getName() {
+
+
+
+   public String getNamex() {
       return this.name;
+   }
+   public void setName(String name) {
+      this.name = name;
    }
 
    public String getLicensePlateNumber() {
       return this.licensePlateNumber;
+   }
+
+   public void setLicensePlateNumber(String licensePlateNumber) {
+      this.licensePlateNumber = licensePlateNumber;
+   }
+   public String getColorCar(){
+      return this.colorCar;
+   }
+
+   public void setColorCar(String colorCar) {
+      this.colorCar = colorCar;
    }
 
    public FuelTypeImpl getFuelType() {
@@ -87,7 +107,5 @@ public class CarImpl implements Car {
       return this.currentSpeed;
    }
 
-   public void adjustCurrentSpeed(double change) {
-      currentSpeed = currentSpeed + change;
-   }
+
 }

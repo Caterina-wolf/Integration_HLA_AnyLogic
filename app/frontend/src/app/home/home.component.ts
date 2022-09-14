@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Car } from '../core/models/car/car.model';
 import { CarService } from '../core/models/car/car.service';
 import { Scenario } from '../core/models/scenario/scenario.model';
@@ -23,9 +23,9 @@ export class HomeComponent implements OnInit {
   car: Car = new Car();
   scenario: Scenario = new Scenario();
   timeScaleFactor: number;
-  form: FormGroup;
+  CarForm: FormGroup;
+  ScenarioForm : FormGroup;
   formSelect : FormControl = new FormControl('');
-  form2 : FormGroup;
   toggled : boolean = false;
   
 
@@ -33,20 +33,32 @@ export class HomeComponent implements OnInit {
   constructor(public service: CarService, public masterService: MasterService, public scenarioService: ScenarioService, public interactionService: InteractionService) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl(''),
-      licensePlate: new FormControl(''),
-      color: new FormControl('')
+    this.CarForm = new FormGroup({
+      name: new FormControl('',
+      [ Validators.required,
+        Validators.maxLength(12)]),
+      licensePlate: new FormControl('',
+      [ Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(7)]),
+      color: new FormControl('',
+      [ Validators.required,
+        Validators.maxLength(7),
+        Validators.minLength(7)])
     });
-    this.form2 = new FormGroup({
-      fuel : new FormControl(''),
-      time : new FormControl('')
+    this.ScenarioForm = new FormGroup({
+      fuel : new FormControl('', 
+      [ Validators.required,
+        Validators.maxLength(3)]),
+      time : new FormControl('', 
+      [ Validators.required,
+        Validators.maxLength(2)])
     });
-    this.form.valueChanges.subscribe((input) => {
+    this.CarForm.valueChanges.subscribe((input) => {
       console.log(input);
 
     });
-    this.form2.valueChanges.subscribe((input2) => {
+    this.ScenarioForm.valueChanges.subscribe((input2) => {
       console.log(input2);
     });
     this.formSelect.valueChanges.subscribe((input3) => {
@@ -81,7 +93,7 @@ export class HomeComponent implements OnInit {
     console.log(this.scenario);
     this.scenario.scenarioName = this.formSelect.value;
     this.scenarioService.getScenario(this.scenario.scenarioName, this.scenario.initialFuelLevel)
-      .subscribe(() => this.scenario = scenario);
+      .subscribe(() => this.scenario = scenario); //TODO:controllo valore initial Fuel level (<100)
   }
 
   sendTimeScaleFactor() {
@@ -92,27 +104,32 @@ export class HomeComponent implements OnInit {
   }
 
   stop(e:Event) {
-    this.msg1= "All the paramters are reset to default values!";
+    this.msg1= "All the paramters are reset!";
     this.interactionService.getStopInteraction().subscribe();
+    this.resetForms();
     return this.msg1;
   }
 
-  showCar(form: FormGroup) {
-    this.car.name = this.form.controls['name'].value;
-    this.car.licensePlate= this.form.controls['licensePlate'].value; 
-    this.car.color = this.form.controls['color'].value;
+  showCar(CarForm: FormGroup) {
+    this.car.name = this.CarForm.controls['name'].value;
+    this.car.licensePlate= this.CarForm.controls['licensePlate'].value; 
+    this.car.color = this.CarForm.controls['color'].value;
     console.log(this.car);
     this.service.postCar(this.car)
       .subscribe((car: Car) => this.car = car);
   }
 
 
-  submit(form2:FormGroup, formSelect:FormControl) {
-    this.scenario.initialFuelLevel = this.form2.controls['fuel'].value;
-    this.timeScaleFactor = this.form2.controls['time'].value;
+  submit(ScenarioForm:FormGroup, formSelect:FormControl) {
+    this.scenario.initialFuelLevel = this.ScenarioForm.controls['fuel'].value;
+    this.timeScaleFactor = this.ScenarioForm.controls['time'].value;
     this.loadScenario(this.scenario, this.formSelect.value);
     this.sendTimeScaleFactor();
   }
 
+  resetForms(){
+    this.CarForm.reset();
+    this.ScenarioForm.reset();
+  }
 
 }

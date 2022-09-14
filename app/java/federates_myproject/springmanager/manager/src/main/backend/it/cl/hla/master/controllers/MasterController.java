@@ -29,6 +29,9 @@ public class MasterController {
     @PostMapping("/inject")
     void injectCar(@RequestBody CarDTO carDto) throws FederateNotExecutionMember, RestoreInProgress, NotConnected, RTIinternalError, SaveInProgress {
         service.injectCar(carDto.getName(), carDto.getLicensePlate(), carDto.getColor());
+        System.out.println("Car name is: " + carDto.getName());
+        System.out.println("Car license plate number is: " + carDto.getLicensePlate());
+        System.out.println("Car color is: " + carDto.getColor());
     }
 
     //Load scenario chosen

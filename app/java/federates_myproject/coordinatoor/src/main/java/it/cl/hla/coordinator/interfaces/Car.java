@@ -8,14 +8,12 @@ public interface Car {
 
    String getIdentifier();
 
-
-
    /**
     * Get the name of the Car
     *
     * @return the name
     */
-   String getName();
+   String getNamex();
 
    /**
     * Get the license plate number
@@ -25,10 +23,18 @@ public interface Car {
    String getLicensePlateNumber();
 
    /**
+    * Get the color Car
+    *
+    * @return the color of the car
+    */
+   String getColorCar();
+
+   /**
     * Get the fuel type
     *
     * @return the fuel type
     */
+
    FuelTypeImpl getFuelType();
 
    /**
@@ -43,8 +49,6 @@ public interface Car {
     * @return the speed
     */
    double getCurrentSpeed();
-
-   void adjustCurrentSpeed(double change);
 
    double getLitersPerKm();
 
@@ -67,4 +71,5 @@ public interface Car {
 
    void setFuelLevel(double fuelLevel);
 
+   void setColorCar(String colorCar);
 }
