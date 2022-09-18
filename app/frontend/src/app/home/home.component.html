@@ -1,106 +1,143 @@
-<body class="body">
-<h1 class="h1">MASTER federate</h1>
-<div>
-<div style="text-align:left">
-   <h3 class="h3">
-      Slide the button to connect and disconnect the Master federate:
-   </h3>
+<body>
+  <h1 hidden>My App</h1><br><br>
+  <h2>MASTER</h2>
 
-   <label class="toggle">
-      <input (click)="toggle($event)" type="checkbox">
-      <span  class="slider"></span>
-      <span class="labels" data-on="ON" data-off="OFF"></span>
-   
-</label>
-   <p class="msg">{{msg}}</p>
-</div>
+    <div class="flex-containerLabel">
+      <p class="p1">
+        Slide the button to connect and disconnect the Master federate:
+      </p>
 
+      <p>
+        <label class="toggle">
+          <input (click)="toggle($event)" type="checkbox" checked />
+          <span class="slider"></span>
+          <span class="labels" data-on="ON" data-off="OFF"></span>
+        </label>
+      </p>
 
+      <p class="msg">{{ msg }}</p>
+    </div>
 
-<div>
-   <h3 class="h3">Fill the form to load the scenario in the simulation:</h3>
-   <h4 class="h4"> Scenario parameters</h4>
-<form class="myForm">
-   <form>
-      <label class="labelform" for="scenario" > Select the scenario in the list: </label>
-      <select  class="inputForm" id="scenario" [formControl]="formSelect">
-         <option  value="" disabled selected hidden >scenario</option>
-         <option  value="Cupertino">cupertino</option>
-         <option  value="Redmond">redmond</option>
-      </select><br><br>
-   </form>
+    <div>
+      <p class="p1">
+        Fill the forms below to set the paramters for the simulation:
+      </p><br>
+    </div>
 
-      <form  [formGroup]="ScenarioForm">
-      <label class="labelform" for="fuel">Insert the initial fuel amount: </label>
-      <input class="inputForm" type="text" id="fuel" name="fuel" formControlName="fuel" required><br><br>
- 
-      <label class="labelform" for="time">Insert the time scale factor: </label>
-      <input class="inputForm" type="text" id="time" name="time" formControlName="time" required><br><br>
+    <div class="flex-containerForm">
+      <form class="myForm">
+        <h4 class="h4">Scenario parameters</h4>
 
-      <input class="inputButtonSubmit" type="submit" value="Submit" (click)="submit(ScenarioForm,formSelect)" [disabled]="ScenarioForm.invalid">
-   </form>
+        <form>
+          <select class="mySelect" id="scenario" [formControl]="formSelect">
+            <option value="" disabled selected hidden>- Select a scenario - </option>
+            <option value="Cupertino">cupertino</option>
+            <option value="Redmond">redmond</option></select><br /><br />
+        </form>
 
-</form>
+        <form [formGroup]="ScenarioForm">
+          <div class="inputForm">
+          <input type="text" id="fuel" name="fuel" formControlName="fuel" required/>
+          <label for="fuel">Initial Fuel Amount</label>
 
+          <div
+            class="allert" *ngIf="ScenarioForm.controls['fuel'].errors && (ScenarioForm.controls['fuel'].dirty || ScenarioForm.controls['fuel'].touched)">
 
-<h3 class="h3">Fill the form to load the Car to inject in the simulation:</h3>
-   <h3 class="h4">Car parameters</h3>
-   <form class="myForm" [formGroup]="CarForm" >
-      <div>
-      <label class="labelform" for="name"> Name the car: </label>
-      <input class="inputForm" type="text" id="name" name="name" formControlName="name" required><br><br>
+            <div *ngIf="ScenarioForm.controls['fuel'].errors?.['pattern']">
+              Integer Number Only
+            </div>
+            <div *ngIf="ScenarioForm.controls['fuel'].errors?.['required']">
+              Initial fuel level is required.
+            </div>
+            <div *ngIf="ScenarioForm.controls['fuel'].errors?.['max']">
+              Initial Fuel Level should be under 100.
+            </div>
+          </div>
+          </div>
 
-      <div *ngIf="CarForm.controls['name'].invalid && (CarForm.controls['name'].dirty || CarForm.controls['name'].touched)" class="alert alert-danger">
-         <div class="allert" *ngIf="CarForm.controls['name'].errors?.['maxlength']">
+          <div class="inputForm">
+          <input type="text" id="time" name="time" formControlName="time" required/>
+          <label for="time">Time Scale Factor</label>
+
+          <div class="allert" *ngIf="ScenarioForm.controls['time'].errors && (ScenarioForm.controls['time'].dirty || ScenarioForm.controls['time'].touched)">
+            <div *ngIf="ScenarioForm.controls['time'].errors?.['maxlength']">
+              Time Scale factor should be real, so just a number.
+            </div>
+            <div *ngIf="ScenarioForm.controls['time'].errors?.['required']">
+              time scale factor is required.
+            </div>
+          </div>
+        </div>
+
+          <input class="inputButtonSubmit" type="submit" value="Submit" (click)="submit(ScenarioForm, formSelect)" [disabled]="ScenarioForm.invalid"/>
+        </form>
+      </form>
+
+      <form class="myForm" [formGroup]="CarForm">
+        <h4 class="h4">Car parameters</h4>
+
+        <div class="inputForm">
+        <input type="text" id="name" name="name" formControlName="name" required/>
+        <label for="name">Car Name </label>
+
+        <div *ngIf="CarForm.controls['name'].invalid && (CarForm.controls['name'].dirty || CarForm.controls['name'].touched)" class="alert alert-danger">
+          <div class="allert" *ngIf="CarForm.controls['name'].errors?.['maxlength']">
             Name must be at max 12 characters long.
           </div>
-          <div class="allert" *ngIf="CarForm.controls['name'].errors?.['required']">
+          <div
+            class="allert" *ngIf="CarForm.controls['name'].errors?.['required']"> 
             Name is required.
           </div>
+        </div>
       </div>
+        
       <div>
 
-      <label class="labelform" for="license">Write your license Plate: </label>
-      <input class="inputForm" type="text" id="license" name="license" formControlName="licensePlate" required><br><br>
+        <div class="inputForm">
+          <input type="text" id="license" name="license" formControlName="licensePlate" required/>
+          <label for="license">License Plate Number</label>
 
-      <div *ngIf="CarForm.controls['licensePlate'].invalid && (CarForm.controls['licensePlate'].dirty || CarForm.controls['licensePlate'].touched)" class="alert alert-danger">
-         <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['maxlength']">
-            LicensePlate must be at max 7 characters long.
+          <div *ngIf="CarForm.controls['licensePlate'].invalid && (CarForm.controls['licensePlate'].dirty || CarForm.controls['licensePlate'].touched)" class="alert alert-danger">
+            <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['maxlength']"> LicensePlate must be at max 7 characters long.
+            </div>
+            <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['minlength']"> LicensePlate must be at least 7 characters long.
+            </div>
+            <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['required']"> LicensePlate is required.
+            </div>
           </div>
-          <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['minlength']">
-            LicensePlate must be at least 7 characters long.
-          </div>
-          <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['required']">
-            LicensePlate is required.
-          </div>
-         </div>
-         
-      <label class="labelform" for="color">Write the color of your car: </label>
-      <input class="inputForm" type="text" id="color" name="color" formControlName="color" required><br><br>
+        </div>
 
-      <div *ngIf="CarForm.controls['color'].invalid && (CarForm.controls['color'].dirty || CarForm.controls['color'].touched)" class="alert alert-danger">
-         <div class="allert" *ngIf="CarForm.controls['color'].errors?.['maxlength']">
-            Color must be at max 7 characters long.
-          </div>
-          <div class="allert" *ngIf="CarForm.controls['color'].errors?.['minlength']">
-            Color must be at least 7 characters long.
-          </div>
-          <div class="allert" *ngIf="CarForm.controls['color'].errors?.['required']">
-            Color is required.
-          </div>
-         </div>
-      </div>
-      </div>
-      <input class="inputButtonSubmit" type="submit" value="Play" (click)="showCar(CarForm)" [disabled]="CarForm.invalid">
-   </form>
-</div>
+        <div class="inputForm">
+          <input type="text" id="color" name="color" formControlName="color" required/>
+          <label for="color">Color Car</label>
+            
 
+          <div *ngIf="CarForm.controls['color'].invalid && (CarForm.controls['color'].dirty ||CarForm.controls['color'].touched)" class="alert alert-danger">
+            <div class="allert" *ngIf="CarForm.controls['color'].errors?.['maxlength']">
+              Color must be at max 7 characters long.
+            </div>
+            <div class="allert" *ngIf="CarForm.controls['color'].errors?.['minlength']">
+              Color must be at least 7 characters long.
+            </div>
+            <div class="allert" *ngIf="CarForm.controls['color'].errors?.['required']">
+              Color is required.
+            </div>
+          </div>
+        </div>
+        </div>
 
+        <input class="inputButtonSubmit" type="submit" value="Play" (click)="showCar(CarForm)" [disabled]="CarForm.invalid"/>
+        <div>
+          <p class="msg2">{{ msg2 }}</p>
+        </div>
+      </form>
+    </div>
 
-<div>
-   <h3 class="h3">To interrupt the simulation press the button below:</h3>
-   <button class="myButton" (click)="stop($event)">Stop simulation</button>
-<p class="msg1">{{msg1}}</p>
-</div>
-</div>
+    <div class="flex-containerLabel">
+      <p class="p2">To interrupt the simulation press this button:</p>
+      <br />
+      <button class="myButton" (click)="stop($event)">Stop simulation</button>
+      <p class="msg1">{{ msg1 }}</p>
+    </div>
+  
 </body>

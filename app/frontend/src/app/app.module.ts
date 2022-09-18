@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarService } from './core/models/car/car.service';
 import { ScenarioService } from './core/models/scenario/scenario.service'; 
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { ScenarioService } from './core/models/scenario/scenario.service';
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   providers: [CarService, ScenarioService],
   bootstrap: [AppComponent]

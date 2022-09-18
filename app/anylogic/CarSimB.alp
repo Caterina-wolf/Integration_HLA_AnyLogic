@@ -159,7 +159,7 @@ loadCar();]]></BeforeStepCode>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.100.157:8989";]]></Code>
+							<Code><![CDATA["crcAddress=192.168.1.201:8989";]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -206,18 +206,6 @@ loadCar();]]></BeforeStepCode>
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA["CarSimulator"]]></Code>
 						</InitialValue>
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1663158539654</Id>
-					<Name><![CDATA[variable]]></Name>
-					<X>270</X><Y>350</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
 			</Variables>
@@ -1244,7 +1232,7 @@ import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.implementation.*;
 import it.cl.hla.coordinator.interfaces.*;]]></Import>
 			<Implements><![CDATA[Car]]></Implements>
-			<StartupCode><![CDATA[System.out.println("Speed of car: " + normalSpeed + " km/h");]]></StartupCode>
+			<StartupCode><![CDATA[System.out.println("[ANYLOGIC] Speed of car: " + normalSpeed + " km/h");]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1651051512538</Id>

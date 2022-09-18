@@ -20,6 +20,7 @@ import { MasterService } from '../core/services/master.service';
 export class HomeComponent implements OnInit {
   msg: string;
   msg1: string;
+  msg2:string;
   car: Car = new Car();
   scenario: Scenario = new Scenario();
   timeScaleFactor: number;
@@ -49,10 +50,11 @@ export class HomeComponent implements OnInit {
     this.ScenarioForm = new FormGroup({
       fuel : new FormControl('', 
       [ Validators.required,
-        Validators.maxLength(3)]),
+        Validators.max(100),
+        Validators.pattern("^[0-9]*$"),]),
       time : new FormControl('', 
       [ Validators.required,
-        Validators.maxLength(2)])
+        Validators.maxLength(1)])
     });
     this.CarForm.valueChanges.subscribe((input) => {
       console.log(input);
@@ -81,9 +83,9 @@ export class HomeComponent implements OnInit {
 
   toggle(e: MouseEvent){
     if(!this.toggled){
-      this.connectEvent(e);
-    }else{
       this.disconnectEvent(e);
+    }else{
+      this.connectEvent(e);
     }
     this.toggled = !this.toggled;
   }
@@ -104,19 +106,22 @@ export class HomeComponent implements OnInit {
   }
 
   stop(e:Event) {
-    this.msg1= "All the paramters are reset!";
+    this.msg1= "Parameters are all reset!";
     this.interactionService.getStopInteraction().subscribe();
     this.resetForms();
     return this.msg1;
   }
 
   showCar(CarForm: FormGroup) {
+    this.msg2="Car Injected...     I am waiting for another car."
     this.car.name = this.CarForm.controls['name'].value;
     this.car.licensePlate= this.CarForm.controls['licensePlate'].value; 
     this.car.color = this.CarForm.controls['color'].value;
     console.log(this.car);
     this.service.postCar(this.car)
       .subscribe((car: Car) => this.car = car);
+    this.resetForms();
+    this.msg2;
   }
 
 
@@ -125,11 +130,14 @@ export class HomeComponent implements OnInit {
     this.timeScaleFactor = this.ScenarioForm.controls['time'].value;
     this.loadScenario(this.scenario, this.formSelect.value);
     this.sendTimeScaleFactor();
+
   }
 
   resetForms(){
     this.CarForm.reset();
     this.ScenarioForm.reset();
   }
+
+  
 
 }
