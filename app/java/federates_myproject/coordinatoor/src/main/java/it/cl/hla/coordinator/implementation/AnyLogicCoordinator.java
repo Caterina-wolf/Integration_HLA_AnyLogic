@@ -12,6 +12,8 @@ import it.cl.hla.core.interfaces.ListenerInteraction;
 import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.car.*;
 
+import java.util.ArrayList;
+
 
 
 public class AnyLogicCoordinator {
@@ -54,6 +56,7 @@ public class AnyLogicCoordinator {
 
     private FuelTypeEnum8Coder fuelTypeEnumCoder= new FuelTypeEnum8Coder();
     private PositionRecordCoder coderPosition = new PositionRecordCoder();
+    //private ColorFactory colorFactory = new ColorFactory();
 
 
     private CarTracking carTracking= new CarTracking();
@@ -165,6 +168,35 @@ public class AnyLogicCoordinator {
         this.colorCar = colorCar;
     }
 
+   /* public ArrayList<Integer>  getRGBCar(String colorCar){
+        // Split string
+        int n=3;
+        if(colorCar == null){
+            return null;
+        }
+        int strlen = colorCar.length();
+        if(strlen < n){
+            throw new IllegalArgumentException("String too short");
+        }
+        String[] arr = new String[n];
+        int tokensize = strlen / n + (strlen % n == 0 ? 0 : 1);
+        for(int i = 0; i < n; i++){
+            arr[i] = colorCar.substring(i * tokensize,
+                    Math.min((i + 1) * tokensize, strlen));
+        }
+        // Decode each token
+        int red = Integer.valueOf(arr[0],16);
+        int green = Integer.valueOf(arr[1],16);
+        int blue = Integer.valueOf(arr[2],16);
+
+        ArrayList<Integer> colorArrayInt =new ArrayList<Integer>();
+        colorArrayInt.add(red);
+        colorArrayInt.add(green);
+        colorArrayInt.add(blue);
+
+        return colorArrayInt;
+    }*/
+
     /**
      *  chiama l'interfaccia per uscire dalla FedExec
      */
@@ -205,18 +237,16 @@ public class AnyLogicCoordinator {
 
                         String carName = hlaCore.decodeString32(mapValue.get(carNameParameterHandle));
                         setNameCar(carName);
-                        System.out.println("[COORD] CarName: " + carName);
 
                         String license= hlaCore.decodeString32(mapValue.get(carLicensePlateParameterHandle));
                         setLicenseCar(license);
-                        System.out.println("[COORD] LicensePlateNumber: " + license);
 
                         String color= hlaCore.decodeString32(mapValue.get(carColorParameterHandle));
                         setColorCar(color);
-                        System.out.println("[COORD] Car color: " + color);
 
                         anyLogic.injectCar(carName, license, color);
 
+                        System.out.println("[COORD] All the parameters are set!");
                         System.out.println("[COORD] Car injected");
 
                     } catch (DecoderException e) {

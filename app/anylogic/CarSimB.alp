@@ -64,8 +64,7 @@ System.out.println("[ANYLOGIC] Problem in disconnecting");
 					<Code><![CDATA[90]]></Code>
 					<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 				</VelocityCode>
-				<BeforeStepCode><![CDATA[//loadScenario(nameScenario,initialFuel);
-loadCar();]]></BeforeStepCode>
+				<BeforeStepCode><![CDATA[loadCar();]]></BeforeStepCode>
 				<PhysicalLength Class="CodeUnitValue">
 					<Code><![CDATA[1]]></Code>
 					<Unit Class="LengthUnits"><![CDATA[METER]]></Unit>
@@ -159,7 +158,7 @@ loadCar();]]></BeforeStepCode>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.1.201:8989";]]></Code>
+							<Code><![CDATA["crcAddress=192.168.100.47:8989";]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -624,8 +623,7 @@ Coord.createCar(agent);]]></Code>
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[Coord.setAllParameters();
-System.out.println("[ANYLOGIC]Car arrives to destination");]]></Code>
+								<Code><![CDATA[System.out.println("[ANYLOGIC]" + Coord.getNameCar() + " car arrived to destination");]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -1232,7 +1230,7 @@ import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.implementation.*;
 import it.cl.hla.coordinator.interfaces.*;]]></Import>
 			<Implements><![CDATA[Car]]></Implements>
-			<StartupCode><![CDATA[System.out.println("[ANYLOGIC] Speed of car: " + normalSpeed + " km/h");]]></StartupCode>
+			<StartupCode><![CDATA[System.out.println("[ANYLOGIC]" + namex + " speed: " + normalSpeed + " km/h");]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1651051512538</Id>
@@ -1479,11 +1477,7 @@ main.Coord.updateCar(this);]]></Action>
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[System.out.println("*************************UPDATES****************************");
-System.out.println("car data -> idCar:" + this.identifier );
-System.out.println("Name:" + this.getNamex());
-System.out.println("LicensePlate:" + this.getLicensePlateNumber());
-System.out.println("Color:" + this.getColorCar());
+					<Action><![CDATA[System.out.println("********************* UPDATES for " + this.getNamex()+ " car ***********************");
 System.out.println("Fuel Level -> "+ this.getFuelLevel() + " liters left.");
 System.out.println("New "+ this.getLocation());]]></Action>
 					<Logging>false</Logging>
@@ -1676,7 +1670,7 @@ return rand;]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
+					<ReturnType><![CDATA[ArrayList<Integer>]]></ReturnType>
 					<Id>1663150706133</Id>
 					<Name><![CDATA[setColorCar]]></Name>
 					<X>30</X><Y>180</Y>
@@ -1685,9 +1679,31 @@ return rand;]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[colorCar]]></Name>
+						<Name><![CDATA[color]]></Name>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
+					<Body><![CDATA[// Split string
+int n=3;
+String color1 = color.substring(1);
+int strlen = color1.length();
+if(strlen < n){
+      throw new IllegalArgumentException("String too short");
+}
+String[] arr = new String[n];
+int tokensize = strlen / n + (strlen % n == 0 ? 0 : 1);
+for(int i = 0; i < n; i++){
+    arr[i] = color1.substring(i * tokensize,
+                  Math.min((i + 1) * tokensize, strlen));
+}
+
+
+// Decode each token
+int red = Integer.valueOf(arr[0],16);
+int green = Integer.valueOf(arr[1],16);
+int blue = Integer.valueOf(arr[2],16);  
+//set new color
+this.agentCar.setFillColor(new Color(red,green,blue));
+]]></Body>
 				</Function>
 				<Function AccessType="public" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1791,7 +1807,7 @@ return rand;]]></Body>
 					<RadiusX>9</RadiusX>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
-					<FillColor>-2849473</FillColor>
+					<FillColor>-10496</FillColor>
 					<FillMaterial>null</FillMaterial>
 				</Oval>
 			</Presentation>

@@ -1,7 +1,6 @@
 <body>
   <h1 hidden>My App</h1><br><br>
   <h2>MASTER</h2>
-
     <div class="flex-containerLabel">
       <p class="p1">
         Slide the button to connect and disconnect the Master federate:
@@ -14,8 +13,7 @@
           <span class="labels" data-on="ON" data-off="OFF"></span>
         </label>
       </p>
-
-      <p class="msg">{{ msg }}</p>
+      <p class="msg">{{ msg0 }}</p>
     </div>
 
     <div>
@@ -24,6 +22,7 @@
       </p><br>
     </div>
 
+  
     <div class="flex-containerForm">
       <form class="myForm">
         <h4 class="h4">Scenario parameters</h4>
@@ -38,10 +37,10 @@
         <form [formGroup]="ScenarioForm">
           <div class="inputForm">
           <input type="text" id="fuel" name="fuel" formControlName="fuel" required/>
-          <label for="fuel">Initial Fuel Amount</label>
+          <label for="fuel">Initial Fuel Amount </label>
 
-          <div
-            class="allert" *ngIf="ScenarioForm.controls['fuel'].errors && (ScenarioForm.controls['fuel'].dirty || ScenarioForm.controls['fuel'].touched)">
+          <div class="error"
+            *ngIf="ScenarioForm.controls['fuel'].errors && (ScenarioForm.controls['fuel'].dirty || ScenarioForm.controls['fuel'].touched)">
 
             <div *ngIf="ScenarioForm.controls['fuel'].errors?.['pattern']">
               Integer Number Only
@@ -49,7 +48,7 @@
             <div *ngIf="ScenarioForm.controls['fuel'].errors?.['required']">
               Initial fuel level is required.
             </div>
-            <div *ngIf="ScenarioForm.controls['fuel'].errors?.['max']">
+            <div  *ngIf="ScenarioForm.controls['fuel'].errors?.['max']">
               Initial Fuel Level should be under 100.
             </div>
           </div>
@@ -59,19 +58,25 @@
           <input type="text" id="time" name="time" formControlName="time" required/>
           <label for="time">Time Scale Factor</label>
 
-          <div class="allert" *ngIf="ScenarioForm.controls['time'].errors && (ScenarioForm.controls['time'].dirty || ScenarioForm.controls['time'].touched)">
+          <div class="error" *ngIf="ScenarioForm.controls['time'].errors && (ScenarioForm.controls['time'].dirty || ScenarioForm.controls['time'].touched)">
             <div *ngIf="ScenarioForm.controls['time'].errors?.['maxlength']">
-              Time Scale factor should be real, so just a number.
+              Time Scale factor should be real. Insert just a number.
             </div>
             <div *ngIf="ScenarioForm.controls['time'].errors?.['required']">
-              time scale factor is required.
+              Time scale factor is required.
             </div>
           </div>
+        </div>
+        
+        <div class="restriction">
+          <ngb-alert #selfClosingAlert class="alert-msg3" *ngIf="successMessage1" type="success1" (closed)="successMessage1 = ''">{{ successMessage1 }}
+          </ngb-alert>
         </div>
 
           <input class="inputButtonSubmit" type="submit" value="Submit" (click)="submit(ScenarioForm, formSelect)" [disabled]="ScenarioForm.invalid"/>
         </form>
       </form>
+    
 
       <form class="myForm" [formGroup]="CarForm">
         <h4 class="h4">Car parameters</h4>
@@ -80,12 +85,12 @@
         <input type="text" id="name" name="name" formControlName="name" required/>
         <label for="name">Car Name </label>
 
-        <div *ngIf="CarForm.controls['name'].invalid && (CarForm.controls['name'].dirty || CarForm.controls['name'].touched)" class="alert alert-danger">
-          <div class="allert" *ngIf="CarForm.controls['name'].errors?.['maxlength']">
-            Name must be at max 12 characters long.
+        <div *ngIf="CarForm.controls['name'].invalid && (CarForm.controls['name'].dirty || CarForm.controls['name'].touched)" class="alert-danger">
+          <div class="error" *ngIf="CarForm.controls['name'].errors?.['maxlength']">
+            Name must be at max 15 characters long.
           </div>
           <div
-            class="allert" *ngIf="CarForm.controls['name'].errors?.['required']"> 
+            class="error" *ngIf="CarForm.controls['name'].errors?.['required']"> 
             Name is required.
           </div>
         </div>
@@ -95,41 +100,53 @@
 
         <div class="inputForm">
           <input type="text" id="license" name="license" formControlName="licensePlate" required/>
-          <label for="license">License Plate Number</label>
+          <label for="license">License Plate Number -- 7 characters -- </label>
 
           <div *ngIf="CarForm.controls['licensePlate'].invalid && (CarForm.controls['licensePlate'].dirty || CarForm.controls['licensePlate'].touched)" class="alert alert-danger">
-            <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['maxlength']"> LicensePlate must be at max 7 characters long.
+            <div class="error" *ngIf="CarForm.controls['licensePlate'].errors?.['maxlength']"> 
+              LicensePlate must be at max 7 characters long.
             </div>
-            <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['minlength']"> LicensePlate must be at least 7 characters long.
+            <div class="error" *ngIf="CarForm.controls['licensePlate'].errors?.['minlength']"> 
+              LicensePlate must be at least 7 characters long.
             </div>
-            <div class="allert" *ngIf="CarForm.controls['licensePlate'].errors?.['required']"> LicensePlate is required.
+            <div class="error" *ngIf="CarForm.controls['licensePlate'].errors?.['required']"> 
+              LicensePlate is required.
             </div>
           </div>
         </div>
 
         <div class="inputForm">
           <input type="text" id="color" name="color" formControlName="color" required/>
-          <label for="color">Color Car</label>
-            
+          <label for="color">Color Car -- hexadecimal --</label>
 
           <div *ngIf="CarForm.controls['color'].invalid && (CarForm.controls['color'].dirty ||CarForm.controls['color'].touched)" class="alert alert-danger">
-            <div class="allert" *ngIf="CarForm.controls['color'].errors?.['maxlength']">
-              Color must be at max 7 characters long.
+            <div class="error" *ngIf="CarForm.controls['color'].errors?.['maxlength'] "> 
+              Color must be an hexadecimal number -- 7 characters required.
             </div>
-            <div class="allert" *ngIf="CarForm.controls['color'].errors?.['minlength']">
-              Color must be at least 7 characters long.
+            <div class="error" *ngIf="CarForm.controls['color'].errors?.['minlength']"> 
+              Color must be an hexadecimal number -- 7 characters required.
             </div>
-            <div class="allert" *ngIf="CarForm.controls['color'].errors?.['required']">
+            
+            <div class="error" *ngIf="CarForm.controls['color'].errors?.['pattern']">
+              Color must be an hexadecimal number.
+            </div>
+           
+            <div class="error" *ngIf="CarForm.controls['color'].errors?.['required']">
               Color is required.
             </div>
           </div>
         </div>
         </div>
+        <div class="restriction">
+          <!-- <ngb-alert  class="alert-msg2" *ngIf="successMessage0" type="success0" (closed)="successMessage0 = ''">{{ successMessage0 }}
+          </ngb-alert> -->
+          <div style="background-color: 'green'; border-radius: 1rem; padding:4px" *ngIf="successMessage0" >
+            {{successMessage0}}
+          </div>
+        </div>
 
         <input class="inputButtonSubmit" type="submit" value="Play" (click)="showCar(CarForm)" [disabled]="CarForm.invalid"/>
-        <div>
-          <p class="msg2">{{ msg2 }}</p>
-        </div>
+   
       </form>
     </div>
 
