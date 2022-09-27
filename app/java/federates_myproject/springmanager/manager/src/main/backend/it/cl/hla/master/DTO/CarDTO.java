@@ -1,5 +1,7 @@
 package it.cl.hla.master.DTO;
 
+/*Class that rapresent the model for the Car*/
+
 public class CarDTO {
 
     private String name;
@@ -24,6 +26,7 @@ public class CarDTO {
 
     public String getColor() {
         return color;
+
     }
 
     public void setColor(String color) {

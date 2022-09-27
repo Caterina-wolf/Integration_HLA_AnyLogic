@@ -5,8 +5,12 @@ import hla.rti1516e.exceptions.*;
 import it.cl.hla.master.DTO.CarDTO;
 import it.cl.hla.master.services.interfaces.MasterService;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
+import java.nio.charset.StandardCharsets;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
@@ -14,6 +18,8 @@ public class MasterController {
 
     @Autowired
     private MasterService service;
+
+
 
     //Connect to pitchRTI
     //create the FedExec
@@ -29,9 +35,10 @@ public class MasterController {
     @PostMapping("/inject")
     void injectCar(@RequestBody CarDTO carDto) throws FederateNotExecutionMember, RestoreInProgress, NotConnected, RTIinternalError, SaveInProgress {
         service.injectCar(carDto.getName(), carDto.getLicensePlate(), carDto.getColor());
-        System.out.println("Car name is: " + carDto.getName());
-        System.out.println("Car license plate number is: " + carDto.getLicensePlate());
-        System.out.println("Car color is: " + carDto.getColor());
+        System.out.println("new Car is: ");
+        System.out.println("{ 'name': " + carDto.getName());
+        System.out.println("  'license': " + carDto.getLicensePlate());
+        System.out.println("  'color': " + carDto.getColor() + " }");
     }
 
     //Load scenario chosen

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 
 @Service
@@ -91,17 +92,18 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
-    public void injectCar(String nameCar, String licensePlate, String colorCar){
+    public void injectCar(String nameCar, String licensePlate, String hexColor){
         try {
             ParameterHandleValueMap mapHandle = hlaCore.createParameterMap(3);
             byte [] nameCarParameter = hlaCore.encoderString(nameCar);
             mapHandle.put(handlesBean.getCarNameParameterHandle(),nameCarParameter);
             byte [] license = hlaCore.encoderString(licensePlate);
             mapHandle.put(handlesBean.getCarLicensePlateParameterHandle(),license);
-            byte [] color = hlaCore.encoderString(colorCar);
-            mapHandle.put(handlesBean.getCarColoParameterHandle(),color);
+            byte [] byteColor = hlaCore.encoderString(hexColor);
+            mapHandle.put(handlesBean.getCarColoParameterHandle(),byteColor);
 
             hlaCore.sendInteraction(handlesBean.getAddCarClassInteractionHandle(), mapHandle);
+            System.out.println();
         } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | RTIinternalError | NotConnected e) {
             throw new RuntimeException(e);
         }
@@ -172,7 +174,7 @@ public class MasterServiceImpl implements MasterService {
 
         } catch(FederateNotExecutionMember| RTIinternalError | FederateServiceInvocationsAreBeingReportedViaMOM | RestoreInProgress | SaveInProgress | NotConnected e) {
             System.out.println("Some error just occurs.");
-            e.printStackTrace();
+            new RuntimeException(e);
         }
     }
 }

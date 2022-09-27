@@ -168,34 +168,7 @@ public class AnyLogicCoordinator {
         this.colorCar = colorCar;
     }
 
-   /* public ArrayList<Integer>  getRGBCar(String colorCar){
-        // Split string
-        int n=3;
-        if(colorCar == null){
-            return null;
-        }
-        int strlen = colorCar.length();
-        if(strlen < n){
-            throw new IllegalArgumentException("String too short");
-        }
-        String[] arr = new String[n];
-        int tokensize = strlen / n + (strlen % n == 0 ? 0 : 1);
-        for(int i = 0; i < n; i++){
-            arr[i] = colorCar.substring(i * tokensize,
-                    Math.min((i + 1) * tokensize, strlen));
-        }
-        // Decode each token
-        int red = Integer.valueOf(arr[0],16);
-        int green = Integer.valueOf(arr[1],16);
-        int blue = Integer.valueOf(arr[2],16);
 
-        ArrayList<Integer> colorArrayInt =new ArrayList<Integer>();
-        colorArrayInt.add(red);
-        colorArrayInt.add(green);
-        colorArrayInt.add(blue);
-
-        return colorArrayInt;
-    }*/
 
     /**
      *  chiama l'interfaccia per uscire dalla FedExec
@@ -222,10 +195,9 @@ public class AnyLogicCoordinator {
                     try {
                         float timeScaleFactor = hlaCore.decodeFloat32(mapValue.get(startTimeScaleFactorParameterHandle));
                         setRunning(true);
-                        System.out.println("[COORD] Federate is running");
+                        System.out.println("[COORD] Start interaction -> federate is ready");
 
                         setTimeScale(timeScaleFactor);
-                        System.out.println("[COORD] StartInteraction received");
                     } catch (DecoderException e) {
                         throw new RuntimeException(e);
                     }
@@ -245,9 +217,7 @@ public class AnyLogicCoordinator {
                         setColorCar(color);
 
                         anyLogic.injectCar(carName, license, color);
-
-                        System.out.println("[COORD] All the parameters are set!");
-                        System.out.println("[COORD] Car injected");
+                        System.out.println("[COORD] "+ carName + " car injected");
 
                     } catch (DecoderException e) {
                         throw new RuntimeException(e);
@@ -282,8 +252,7 @@ public class AnyLogicCoordinator {
                     objectHandling();
 
             } catch (RTIinternalError e) {
-                System.out.println("[COORD] Could not connect to the RTI with local settings designator");
-                e.printStackTrace();
+                System.out.println("[COORD] Could not connect to the RTI with the current crc address");
             }
     }
 
@@ -307,7 +276,7 @@ public class AnyLogicCoordinator {
 
                       anyLogic.loadScenario(scenarioName, fuelInitial);
                   } catch (DecoderException e) {
-                      e.printStackTrace();
+                        new RuntimeException(e);
                   }
                 } else if (interactionHandle.equals(scenarioLoadedInteractionClassHandle)) {
 
@@ -345,8 +314,8 @@ public class AnyLogicCoordinator {
             scenarioFailureErrorMessage =  hlaCore.getParameterHandle(scenarioLoadFailureInteractionClassHandle, "ErrorMessage");
 
         } catch(RTIinternalError e) {
-            System.out.println("Could not connect to the RTI with local settings designator");
-            e.printStackTrace();
+            System.out.println("Could not connect to the RTI with the current crc address");
+
         }
 
     }
@@ -381,7 +350,6 @@ public class AnyLogicCoordinator {
 
 
             anyLogic.loadCar();
-            System.out.println("[COORD] Car Published");
         } catch (NameNotFound | NotConnected | FederateNotExecutionMember| InvalidObjectClassHandle | RTIinternalError e) {
             throw new RuntimeException(e);
         }
@@ -397,8 +365,9 @@ public class AnyLogicCoordinator {
             byte [] color = hlaCore.encoderString(colorCar);
             mapHandle.put(carColorParameterHandle,color);
             hlaCore.sendInteraction(addCarClassInteractionHandle, mapHandle);
+            System.out.println("Car published");
         } catch(NullPointerException  | FederateNotExecutionMember | RestoreInProgress | NotConnected | RTIinternalError | SaveInProgress e){
-            e.printStackTrace();}
+           new RuntimeException(e);}
     }
 
 
@@ -473,9 +442,9 @@ public class AnyLogicCoordinator {
             byte [] nameParameter = hlaCore.encoderString(hlaCore.getFederateName());
             mapHandle.put(scenarioLoadedFederateNameParameterHandle,nameParameter);
             hlaCore.sendInteraction(scenarioLoadedInteractionClassHandle, mapHandle);
-            System.out.println("[COORD] Scenario Loading SUCCEED in AnyLogic");
+
         } catch(NullPointerException e){
-            e.printStackTrace();
+            new RuntimeException(e);
         }
     }
 
@@ -491,9 +460,9 @@ public class AnyLogicCoordinator {
            byte [] error = hlaCore.encoderString(errorMessage);
            mapHandle.put(scenarioFailureErrorMessage, error);
            hlaCore.sendInteraction(scenarioLoadFailureInteractionClassHandle,mapHandle);
-           System.out.println("[COORD] Scenario Loading FAILED in AnyLogic");
+
        } catch(NullPointerException e){
-           e.printStackTrace();
+           new RuntimeException(e);
        }
 
     }

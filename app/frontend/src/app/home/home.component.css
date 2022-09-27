@@ -10,16 +10,17 @@ body {
     padding:0px;
 }
 
+/* container flex for first line after Master word, it contains a paragraph,
+ the toggle and the message of disconnection and connection*/
 
-
-
-.flex-containerLabel {
+.flex-containerParagraph {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   column-gap: 30px;
 }
 
+/*container flex for the forms*/
 
 .flex-containerForm{
   display: flex;
@@ -37,7 +38,7 @@ h1 {
     text-align: center;
     margin-top: 0px;
     margin-bottom:10px;
-    font: bold 22px Verdana;
+    font: bold 25px Verdana;
     text-shadow: 1px 1px 2px rgba(6, 2, 61, 0.4);
 }
 
@@ -52,40 +53,18 @@ h2 {
 
 }
 
-.h4 {
-  color: #373434b5;
-  text-transform:uppercase;
-  font-size:18px;
-  display: block;
-  text-align: center;
-  margin-top:7px;
-  margin-bottom:35px;
+
+.paragraph {
+  color: rgb(244, 238, 238);
+  text-align: left;
+  margin-left: 60px;
+  margin-top:30px;
+  margin-bottom:0px;
+  font: 18px Verdana;
   
 }
 
-
-.p1 {
-    color: rgb(244, 238, 238);
-    text-align: left;
-    margin-left: 60px;
-    margin-top:30px;
-    margin-bottom:0px;
-    font: 18px Verdana;
-    
-}
-
-
-.p2{
-  color: rgb(247, 241, 241);
-  text-align: left;
-  margin-left: 60px;
-  margin-top:25px;
-  margin-bottom: 30px;
-  font: 18px Verdana;
-
-}
-
-
+/* button toggle to switch from connect to disconnect state and viceversa */
 .toggle {
   --width: 95px;
   --height: calc(var(--width) / 3);
@@ -150,7 +129,7 @@ h2 {
 .toggle .labels {
   position: absolute;
   top: 8px;
-  left: 0;
+  left: 5px;
   width: 100%;
   height: 100%;
   font: 12px Verdana;
@@ -161,7 +140,7 @@ h2 {
 .toggle .labels::after {
   content: attr(data-off);
   position: absolute;
-  right: 5px;
+  right: 12px;
   color: #4d4d4d;
   opacity: 1;
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
@@ -188,7 +167,19 @@ h2 {
   transform: translateX(calc(var(--width) - var(--height)));
 }
 
+/* title of the forms*/
+.titleForm {
+  color: #373434b5;
+  text-transform:uppercase;
+  font-size:18px;
+  display: block;
+  text-align: center;
+  margin-top:7px;
+  margin-bottom:35px;
+  
+}
 
+/* shape of the forms*/
 .myForm{
   position: relative;
   width: 400px;
@@ -201,12 +192,13 @@ h2 {
   margin: 8px 25px 30px 25px;
 }
 
+/* select of scenario name */
 .mySelect {
   position: relative;
   font: 16px Verdana; 
   font-weight:100;
   color:#3734347a;
-  margin-left:24px;
+  margin-left:25px;
   background-color: rgba(255, 255, 255, 0.1);
   padding:4px 0 4px 0;
   width:85%;
@@ -229,7 +221,7 @@ h2 {
   
 }
 
-
+/* what there's inside the forms */
 .inputForm{
     position:relative;
     width: 85%;
@@ -270,7 +262,7 @@ h2 {
   font-weight: 100;
   position: absolute;
   top: 0;
-  left: 5px;
+  left: 0px;
   pointer-events: none;
   transform: translateY(18px);
   color:#3734347a;
@@ -281,19 +273,21 @@ h2 {
 .inputForm input:focus {
   border:0;	
   outline:none;
-  background-color:/* rgba(180, 184, 215, 0.4)*/ rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.7);
   font: 14px Verdana;
 }
 
 .inputForm input:valid + label,
 .inputForm input:focus + label {
-    color:   #000000;
-    font: 12px Verdana;
+    color: #045fcf;
+    font: 11px Verdana;
+    margin-bottom: 2px;
     transform: translateY(0);
     outline:none;
 }
 
-.inputButtonSubmit {
+/* button "sumbit" and "play" of the forms*/
+.buttonForm {
   position:relative;
 	box-shadow:inset 0px 1px 0px 0px #483ab0;
 	background:linear-gradient(to bottom, #045fcf 5%, #0061a7 100%);
@@ -311,31 +305,19 @@ h2 {
   margin-top:10px;
 }
 
-.inputButtonSubmit:hover{
+.buttonForm:hover{
   background:linear-gradient(to bottom, #0061a7 5%, #045fcf 100%);
 	background-color:#0061a7;
 }
 
-.inputButtonSubmit:active{
+.buttonForm:active{
   background:linear-gradient(to bottom, #004379  5%, #002e4e 100%);
   background-color: #004379 ;
   border:0;
 }
 
-/*.myForm-popup{
-  position: relative;
-  background-color: rgba(180, 184, 215,0.4);
-  border: 2px solid #8c8484;
-  z-index: 9;
-  margin-left:200px;
-  margin-top:0px;
-  margin-bottom:15px;
-  width: 170px;
-  font: italic 10px Verdana;
-  color: red;
-}*/
-
-.error{
+/*error message when the input of the forms are not valid*/
+.errorMessage{
   margin-left:0px;
   margin-top:5px;
   margin-bottom:15px;
@@ -344,6 +326,7 @@ h2 {
   color: red;
 }  
 
+/* button "stop simulation" */
 .myButton {
 	box-shadow:inset 0px 1px 0px 0px #483ab0;
 	background:linear-gradient(to bottom, #045fcf 5%, #0061a7 100%);
@@ -372,10 +355,8 @@ h2 {
   border:0;
 }
 
-
-
-
-.msg{
+/*message that appears when toggle is slided*/
+.connectDisconnectMessage{
   color:rgb(168, 165, 165);
   font: 15px Verdana;
   margin-bottom: 15px;
@@ -383,14 +364,16 @@ h2 {
   margin-top:32px;
 }
 
-.msg1{
+/*message appear when stop simulation button is pressed*/
+.stopSimulationMessage{
   color:rgb(168, 165, 165);
   font: 15px Verdana;
   margin-bottom: 15px;
   margin-top:30px;
 }
 
-.alert-msg2{
+/*alert message when the forms are submitted successfull*/
+.alert{
   text-align: center;
   color: rgb(21, 62, 3);
   background-color: #1be3148a;
@@ -399,34 +382,13 @@ h2 {
   position: relative;
   border: 1px solid rgba(4, 61, 16, 0.445);
   border-radius:4px;
-  box-shadow: rgba(71, 77, 67, 0.484) 0px 7px 29px 0px;
-}
-
-.alert-msg3{
-  text-align: center;
-  color: rgb(21, 62, 3);
-  background-color: #1be3148a;
-  font: italic 15px Verdana;
-  padding:20px;
-  position: relative;
-  border: 1px solid rgba(4, 61, 16, 0.445);
-  border-radius:4px;
-  box-shadow: rgba(71, 77, 67, 0.484) 0px 7px 29px 0px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 88%;
+  margin-left: 0px;
+  margin-top:10px;
+  margin-bottom:10px;
 
 }
 
- 
-.restriction{
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left:105px;
-  margin-top:45px;
-  margin-bottom:25px;
-  margin-right:5px;
-  width: 200px;
-  height: 15px;
-}
 
 

@@ -158,7 +158,7 @@ System.out.println("[ANYLOGIC] Problem in disconnecting");
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["crcAddress=192.168.100.47:8989";]]></Code>
+							<Code><![CDATA["crcAddress=192.168.1.248:8989";]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -322,10 +322,12 @@ System.out.println("[ANYLOGIC] Problem in disconnecting");
 					<Body><![CDATA[try {
 if(initialFuel > 100){
        
-      Coord.publishScenarioFailed("\n[ANYLOGIC] Infeasible value: initial Fuel Level is too much. \n Choose the Scenario again and digit a fuel value < 100.");
+      Coord.publishScenarioFailed("\n[ANYLOGIC] Infeasible value: digit a fuel level value < 100.");
 	  Coord.setAllParameters();
+	   System.out.println("[ANYLOGIC] Scenario Loading FAILED in AnyLogic");
 }else{
        Coord.publishScenarioLoaded();
+       System.out.println("[ANYLOGIC] The scenario has been loaded with success in AnyLogic");
 } 
 }catch (RTIexception e){
 e.printStackTrace();
@@ -344,7 +346,7 @@ e.printStackTrace();
 					<Body><![CDATA[try {
 Coord.publishCar();
 }catch(FederateNotExecutionMember | NotConnected | RestoreInProgress | SaveInProgress | RTIinternalError e){
-e.printStackTrace();}]]></Body>
+new RuntimeException(e);}]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -1230,7 +1232,7 @@ import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.implementation.*;
 import it.cl.hla.coordinator.interfaces.*;]]></Import>
 			<Implements><![CDATA[Car]]></Implements>
-			<StartupCode><![CDATA[System.out.println("[ANYLOGIC]" + namex + " speed: " + normalSpeed + " km/h");]]></StartupCode>
+			<StartupCode><![CDATA[System.out.println("[ANYLOGIC] " + namex + "'s speed: " + normalSpeed + " km/h");]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1651051512538</Id>
@@ -1477,9 +1479,11 @@ main.Coord.updateCar(this);]]></Action>
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[System.out.println("********************* UPDATES for " + this.getNamex()+ " car ***********************");
-System.out.println("Fuel Level -> "+ this.getFuelLevel() + " liters left.");
-System.out.println("New "+ this.getLocation());]]></Action>
+					<Action><![CDATA[System.out.println("\n");
+System.out.println("-------------------- Updates for " + this.getNamex()+ " car --------------------");
+System.out.println("FUEL LEVEL: "+ this.getFuelLevel() + " liters left.");
+System.out.println("NEW "+ this.getLocation());
+System.out.println("\n");]]></Action>
 					<Logging>false</Logging>
 				</Event>
 			</Events>

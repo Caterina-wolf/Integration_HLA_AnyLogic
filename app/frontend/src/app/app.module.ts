@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CarService } from './core/models/car/car.service';
 import { ScenarioService } from './core/models/scenario/scenario.service'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -23,8 +23,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
-    NgbAlertModule,
+    FlexLayoutModule
   ],
   providers: [CarService, ScenarioService],
   bootstrap: [AppComponent]
