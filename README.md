@@ -1,4 +1,4 @@
-## User guide of a distributed system based on the communication protocol HLA, to permit exchange of data between simulations.
+## User guide of a distributed system based on the communication protocol HLA to permit exchange of data between simulations.
 
 
 #### HLA
@@ -65,9 +65,9 @@ Actually, PITCH is also a GUI to visualize the federation and the interaction ex
 To install PITCH:
 * It's available a guide written by authors of PITCH: [Guide to install PITCH](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/resources/TheHLAtutorial.pdf)
  
-The executable program you need are "prti1516e-free_5_5_2_windows64.exe" which is the pratically the HLA library of PITCH (You can find it in the tools section of this project).
+The executable program you need are "prti1516e-free_5_5_2_windows64.exe" which is the pratically the HLA library of PITCH.
 
-The other executable programs are additional, place to use as tutorial. 
+The other executable programs are additional, place here to be used as tutorial. 
 
 Other module to export: 
 * As just said the coordinator.jar library is the one who behave the model, so it's should be imported in AnyLogic model in the section dedicated;
@@ -80,4 +80,4 @@ The steps to run the program until now are:
 2. Run Master federate: this one has the task to create the federation in Pitch environment and then join itself (The Spring Boot service).
 3. Run AnyLogic simulation with Play button. At this point the federation is completed; all the members has joined.
 4. Open POSTMAN: and run the http request of interest. In this case: GET loadScenario to load the Scenario into the federates and then GET startInteraction to start the interaction. In the end launch the simulation with POST injectCar.
-5. As alternative to POSTMAN there is now a Frontend web app which it's forms doing the same http request as Postman. To run the web app write "ng serve" or "npm start" from the command line.
+5. As alternative to POSTMAN there is now a Frontend web app, which its forms do the same http request as Postman. To run the web app digit "ng serve" or "npm start" from the command line.
