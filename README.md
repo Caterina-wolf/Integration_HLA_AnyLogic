@@ -65,9 +65,9 @@ Actually, PITCH is also a GUI to visualize the federation and the interaction ex
 To install PITCH:
 * It's available a guide written by authors of PITCH: [Guide to install PITCH](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/resources/TheHLAtutorial.pdf)
  
-The executive program you need are "prti1516e-free_5_5_2_windows64.exe" which is the pratically the HLA library of PITCH.
+The executable program you need are "prti1516e-free_5_5_2_windows64.exe" which is the pratically the HLA library of PITCH.
 
-The other executive programs are additional, place to use as tutorial. 
+The other executable programs are additional, place to use as tutorial. 
 
 Other module to export: 
 * As just said the coordinator.jar library is the one who behave the model, so it's should be imported in AnyLogic model in the section dedicated;
