@@ -65,7 +65,7 @@ Actually, PITCH is also a GUI to visualize the federation and the interaction ex
 To install PITCH:
 * It's available a guide written by authors of PITCH: [Guide to install PITCH](https://github.com/Caterina-wolf/Integration_HLA_AnyLogic/tree/main/docs/resources/TheHLAtutorial.pdf)
  
-The executable program you need are "prti1516e-free_5_5_2_windows64.exe" which is the pratically the HLA library of PITCH.
+The executable program you need are "prti1516e-free_5_5_2_windows64.exe" which is the pratically the HLA library of PITCH (You can find it in the tools section of this project).
 
 The other executable programs are additional, place to use as tutorial. 
 
