@@ -15,13 +15,15 @@
  */
 package mapviewer.src.se.pitch.hlatutorial.mapviewer.gui;
 
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 class Marker extends JPanel {
 
-   private Color _color = Color.white;
+   private Color _color = Color.black;
    static final int SIZE = 10;
 
    Marker() {
@@ -56,4 +58,5 @@ class Marker extends JPanel {
    public void setLocation(int x, int y) {
       super.setLocation(x - SIZE / 2, y - SIZE / 2);
    }
+   
 }

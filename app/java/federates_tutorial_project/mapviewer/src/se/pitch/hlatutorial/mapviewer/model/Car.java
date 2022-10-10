@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package se.pitch.hlatutorial.mapviewer.model;
+package mapviewer.src.se.pitch.hlatutorial.mapviewer.model;
 
 import java.awt.*;
 
@@ -48,6 +48,8 @@ public class Car {
 
    private String _name;
    private String _licensePlateNumber;
+
+   private String _colorCar;
    private FuelType _fuelType;
 
    private int _fuelLevel;
@@ -61,14 +63,16 @@ public class Car {
       _identifier = "Car" + carCount;
       carCount++;
       _color = _colorCreator.getNextColor();
+
    }
 
-   public Car(String name, String licensePlateNumber, FuelType fuelType, int fuelLevel, int x, int y) {
+   public Car(String name, String licensePlateNumber, String colorCar,FuelType fuelType, int fuelLevel, int x, int y) {
       this();
       _name = name;
       _licensePlateNumber = licensePlateNumber;
       _fuelType = fuelType;
       _fuelLevel = fuelLevel;
+      _colorCar= colorCar;
       _x = x;
       _y = y;
    }
@@ -84,6 +88,7 @@ public class Car {
    public String getLicensePlateNumber() {
       return _licensePlateNumber;
    }
+
 
    public FuelType getFuelType() {
       if (_fuelType == null) {
@@ -108,6 +113,13 @@ public class Car {
       return _color;
    }
 
+   public String getColorCar(){
+      return _colorCar;
+   }
+
+   public void setColorCar(String colorCar){
+      _colorCar= colorCar;
+   }
    public void setName(String name) {
       _name = name;
    }

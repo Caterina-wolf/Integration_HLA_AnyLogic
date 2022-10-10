@@ -2,36 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaa95d17-cd50-43a4-a508-b0d8fdcf548a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mapviewer.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/prti1516e.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mapviewer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../anylogic/CarSimB.alp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/CarSimB.alp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../anylogic/anylogiccoordinatoor-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/anylogiccoordinatoor-0.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../anylogic/database/db.data" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/database/db.data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../anylogic/database/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/database/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../anylogic/database/db.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/database/db.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../anylogic/database/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/database/db.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../anylogic/database/db.script" beforeDir="false" afterPath="$PROJECT_DIR$/../../../anylogic/database/db.script" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/bin/it/cl/hla/coordinator/car/CarImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/bin/it/cl/hla/coordinator/car/CarImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/bin/it/cl/hla/coordinator/implementation/AnyLogicCoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/bin/it/cl/hla/coordinator/implementation/AnyLogicCoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/src/main/java/it/cl/hla/coordinator/car/CarImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/src/main/java/it/cl/hla/coordinator/car/CarImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frontend/src/app/core/services/master.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frontend/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frontend/src/app/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/src/main/java/it/cl/hla/coordinator/implementation/AnyLogicCoordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/src/main/java/it/cl/hla/coordinator/implementation/AnyLogicCoordinator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/src/main/java/it/cl/hla/coordinator/interfaces/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/coordinatoor/src/main/java/it/cl/hla/coordinator/interfaces/Car.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../federates_myproject/hlacore/bin/hlacore-0.0.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/hlacore/bin/hlacore-0.0.4.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../federates_myproject/hlacore/src/main/java/it/cl/hla/core/implementation/HlaCoreImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/hlacore/src/main/java/it/cl/hla/core/implementation/HlaCoreImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/java/it/cl/hla/master/controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/java/it/cl/hla/master/controllers/MasterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/java/it/cl/hla/master/services/implementation/MasterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/java/it/cl/hla/master/services/implementation/MasterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/java/it/cl/hla/master/services/interfaces/MasterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/java/it/cl/hla/master/services/interfaces/MasterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/backend/it/cl/hla/master/controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/backend/it/cl/hla/master/controllers/MasterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../federates_myproject/springmanager/manager/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Simulation.config" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Simulation.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/MapViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/MapViewer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/SimulationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/SimulationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/CarList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/CarList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/MapComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/MapComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/MapFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/MapFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/Marker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/Marker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/ScenarioTimeLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/gui/ScenarioTimeLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/CarListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/CarListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/FuelTypeEnum8Coder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/FuelTypeEnum8Coder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/HlaInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/HlaInterfaceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../libraries/anylogiccoordinatoor-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../libraries/anylogiccoordinatoor-0.0.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/PositionRecordCoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/PositionRecordCoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/DataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/DataModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/DataModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/DataModelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/FuelType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/FuelType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/Scenario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/Scenario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../docs/diagrams/class/dia_files/HLA_class_diagram.dia" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../docs/diagrams/class/dia_files/HLA_class_diagram.dia" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../docs/diagrams/class/png_files/HLA_class_diagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../docs/diagrams/class/png_files/HLA_class_diagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../docs/images/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../docs/images/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../docs/images/background1.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../docs/images/background3.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,5 +107,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/HlaInterfaceImpl.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/HlaInterfaceImpl.java</url>
+          <line>452</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/model/DataModel.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/se/pitch/hlatutorial/mapviewer/hlamodule/HlaInterfaceImpl.java</url>
+          <line>358</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

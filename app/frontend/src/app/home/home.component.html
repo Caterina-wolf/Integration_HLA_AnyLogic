@@ -71,7 +71,7 @@
           <div class="alert" *ngIf="submitSuccess">{{submitSuccess}}</div>
         </div>
         </div>
-        <input class="buttonForm" type="submit" value="Submit" (click)="submit(ScenarioForm, formSelect)" [disabled]="ScenarioForm.invalid"/>
+        <input class="buttonForm" type="submit" value="Submit" (click)="submit(ScenarioForm, formSelect)" [disabled]="ScenarioForm.invalid" />
         
         
       
@@ -79,7 +79,7 @@
     </form>
     
 
-      <form class="myForm">
+      <form class="myForm" *ngIf="isClicked"> 
         <h4 class="titleForm">Car parameters</h4>
 
           <form [formGroup]="CarForm">

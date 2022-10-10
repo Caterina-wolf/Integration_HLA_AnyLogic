@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package se.pitch.hlatutorial.mapviewer.model;
+package mapviewer.src.se.pitch.hlatutorial.mapviewer.model;
 
 
 public interface DataModelListener {

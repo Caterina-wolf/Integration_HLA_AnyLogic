@@ -19,9 +19,7 @@ import hla.rti1516e.*;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.exceptions.*;
-import se.pitch.hlatutorial.mapviewer.model.Car;
-import se.pitch.hlatutorial.mapviewer.model.FuelType;
-import se.pitch.hlatutorial.mapviewer.model.Position;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.*;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -69,6 +67,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
    private AttributeHandle _licensePlateNumberAttributeHandle;
    private AttributeHandle _fuelTypeAttributeHandle;
 
+   private AttributeHandle _carColorAttributeHandle;
    private final CarMapping _localCars = new CarMapping();
 
 
@@ -190,6 +189,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
          _nameAttributeHandle = _ambassador.getAttributeHandle(_objectClassCarHandle, "Name");
          _licensePlateNumberAttributeHandle = _ambassador.getAttributeHandle(_objectClassCarHandle, "LicensePlateNumber");
          _fuelTypeAttributeHandle = _ambassador.getAttributeHandle(_objectClassCarHandle, "FuelType");
+         _carColorAttributeHandle = _ambassador.getAttributeHandle(_objectClassCarHandle, "CarColor");
 
          _loadScenarioInteractionClassHandle = _ambassador.getInteractionClassHandle("LoadScenario");
          _scenarioNameParameterHandle = _ambassador.getParameterHandle(_loadScenarioInteractionClassHandle, "ScenarioName");
@@ -222,6 +222,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
          carAttributes.add(_nameAttributeHandle);
          carAttributes.add(_licensePlateNumberAttributeHandle);
          carAttributes.add(_fuelTypeAttributeHandle);
+         carAttributes.add(_carColorAttributeHandle);
          _ambassador.subscribeObjectClassAttributes(_objectClassCarHandle, carAttributes);
       } catch (AttributeNotDefined e) {
          throw new RTIinternalError("HlaInterfaceFailure", e);
@@ -388,6 +389,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
       String id;
       synchronized (_localCars) {
          id = _localCars.translate(theObject);
+         System.out.println("sono dentro a listener di object");
       }
       if (id != null) {
          if (theAttributes.containsKey(_nameAttributeHandle)) {
@@ -439,9 +441,22 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
                int fuelLevel = _callbackFuelInt32Coder.decode(theAttributes.get(_attributeFuelLevelHandle));
                for (CarListener listener : _carListeners) {
                   listener.carFuelLevelUpdated(id, fuelLevel);
+                  System.out.println("fuel level decoded");
                }
             } catch (DecoderException e) {
                System.out.println("Failed to decode FuelLevel attribute");
+               e.printStackTrace();
+            }
+         }
+         if (theAttributes.containsKey(_carColorAttributeHandle)) {
+            try {
+               String color = _callbackUnicodeStringCoder.decode(theAttributes.get(_carColorAttributeHandle));
+               for (CarListener listener : _carListeners) {
+                  listener.carColorUpdated(id, color);
+                  System.out.println("[Mapviewer] Car color decoded correctly");
+               }
+            } catch (DecoderException e) {
+               System.out.println("Failed to decode carColor attribute");
                e.printStackTrace();
             }
          }

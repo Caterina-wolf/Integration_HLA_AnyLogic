@@ -6,17 +6,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MasterService {
+export class ConnectionService {
 connectionConfig= environment.masterUrl + "/init";
 disconnectionConfig = environment.masterUrl + "/quit";
 
   constructor(private http: HttpClient) { }
 
-  getMasterConnection():Observable<void>{
+  getConnection():Observable<void>{
     return this.http.get<void>(this.connectionConfig);
   }
 
-  getMasterDisconnection():Observable<void>{
+  getDisconnection():Observable<void>{
     return this.http.get<void>(this.disconnectionConfig);
   }
 }

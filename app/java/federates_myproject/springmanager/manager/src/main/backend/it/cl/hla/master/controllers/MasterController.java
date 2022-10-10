@@ -9,9 +9,6 @@ import it.cl.hla.master.services.interfaces.MasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-import java.nio.charset.StandardCharsets;
-
 @CrossOrigin(maxAge = 3600)
 @RestController
 public class MasterController {

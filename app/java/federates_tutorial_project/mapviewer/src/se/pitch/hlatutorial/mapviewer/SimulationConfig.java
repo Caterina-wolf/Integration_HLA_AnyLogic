@@ -23,7 +23,7 @@ import java.util.Properties;
 public class SimulationConfig {
 
    private static final String CRC_ADDRESS = "crcAddress=";
-   private String ip = "192.168.100.91";
+   private String ip = "192.168.100.65";
 
    private static final String LOCAL_SETTINGS_DESIGNATOR = "localSettingsDesignator";
    private static final String FEDERATION_NAME = "federationName";
@@ -53,10 +53,10 @@ public class SimulationConfig {
       crc_Address = properties.getProperty(CRC_ADDRESS,"crcAddress=" + ip + ":" + Integer.toString(8989));
       _localSettingsDesignator = properties.getProperty(LOCAL_SETTINGS_DESIGNATOR, " ");
       _federationName = properties.getProperty(FEDERATION_NAME, "HLA Tutorial");
-      _federateName = properties.getProperty(FEDERATE_NAME, "CarSimJ");
+      _federateName = properties.getProperty(FEDERATE_NAME, "Mapviewer");
 
       _scenarioDir = properties.getProperty(SCENARIO_DIR, ".");
-      _fom = properties.getProperty(FOM, "FuelEconomyBase.xml");
+      _fom = properties.getProperty(FOM, "FuelEconomyBase2.xml");
 
    }
 

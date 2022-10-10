@@ -15,9 +15,8 @@
  */
 package mapviewer.src.se.pitch.hlatutorial.mapviewer.hlamodule;
 
-import se.pitch.hlatutorial.mapviewer.model.Car;
-import se.pitch.hlatutorial.mapviewer.model.FuelType;
-import se.pitch.hlatutorial.mapviewer.model.Position;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.*;
+
 
 
 public interface CarListener {
@@ -51,6 +50,13 @@ public interface CarListener {
     * @param licensePlateNumber the new LicensePlateNumber attribute value
     */
    void carLicensePlateNumberUpdated(String id, String licensePlateNumber);
+   /**
+    * Called when the CarColor attribute of a Car is updated
+    *
+    * @param id                 the id of the Car whose name is updated
+    * @param carColor the new color of car attribute value
+    */
+   void carColorUpdated(String id, String carColor);
 
    /**
     * Called when the FuelType attribute of a Car is updated

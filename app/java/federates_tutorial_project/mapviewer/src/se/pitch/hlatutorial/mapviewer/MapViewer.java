@@ -16,11 +16,11 @@
 package mapviewer.src.se.pitch.hlatutorial.mapviewer;
 
 import hla.rti1516e.exceptions.RTIexception;
-import se.pitch.hlatutorial.mapviewer.gui.MapFrame;
-import se.pitch.hlatutorial.mapviewer.hlamodule.CarListener;
-import se.pitch.hlatutorial.mapviewer.hlamodule.HlaInterface;
-import se.pitch.hlatutorial.mapviewer.hlamodule.InteractionListener;
-import se.pitch.hlatutorial.mapviewer.model.*;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.gui.MapFrame;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.hlamodule.CarListener;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.hlamodule.HlaInterface;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.hlamodule.InteractionListener;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -133,6 +133,10 @@ public class MapViewer {
 
          public void carLicensePlateNumberUpdated(String id, String licensePlateNumber) {
             _dataModel.carLicensePlateNumberUpdated(id, licensePlateNumber);
+         }
+
+         public void carColorUpdated(String id, String color){
+            _dataModel.carColorUpdated(id,color);
          }
 
          public void carFuelTypeUpdated(String id, FuelType fuelType) {

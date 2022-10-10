@@ -16,10 +16,10 @@
 package mapviewer.src.se.pitch.hlatutorial.mapviewer.gui;
 
 
-import se.pitch.hlatutorial.mapviewer.model.Car;
-import se.pitch.hlatutorial.mapviewer.model.DataModel;
-import se.pitch.hlatutorial.mapviewer.model.DataModelListener;
-import se.pitch.hlatutorial.mapviewer.model.Scenario;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.Car;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.DataModel;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.DataModelListener;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.Scenario;
 
 import javax.swing.*;
 import java.awt.*;

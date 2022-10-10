@@ -18,7 +18,7 @@ package mapviewer.src.se.pitch.hlatutorial.mapviewer.hlamodule;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAinteger32BE;
-import se.pitch.hlatutorial.mapviewer.model.FuelType;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.FuelType;
 
 
 class FuelTypeEnum8Coder {

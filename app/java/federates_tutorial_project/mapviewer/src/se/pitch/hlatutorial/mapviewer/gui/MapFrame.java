@@ -15,7 +15,7 @@
  */
 package mapviewer.src.se.pitch.hlatutorial.mapviewer.gui;
 
-import se.pitch.hlatutorial.mapviewer.model.DataModel;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.DataModel;
 
 import javax.swing.*;
 import java.awt.*;

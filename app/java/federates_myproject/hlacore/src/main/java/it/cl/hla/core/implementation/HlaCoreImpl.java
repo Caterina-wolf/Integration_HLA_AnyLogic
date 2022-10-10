@@ -140,7 +140,7 @@ public class HlaCoreImpl extends NullFederateAmbassador implements HlaCore {
                     ambassador.joinFederationExecution(federateName, federateType, federationName);
                     joined = true;
                 } catch (RestoreInProgress | NotConnected | RTIinternalError | SaveInProgress e) {
-                    System.out.println("[HLA] Federate already in use!");
+                    System.out.println("[HLA] federate fail to join federation!");
                     e.printStackTrace();
                 }
             }

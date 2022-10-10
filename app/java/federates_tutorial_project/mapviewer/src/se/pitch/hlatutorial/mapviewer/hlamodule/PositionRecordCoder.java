@@ -19,7 +19,7 @@ import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAfixedRecord;
 import hla.rti1516e.encoding.HLAfloat64BE;
-import se.pitch.hlatutorial.mapviewer.model.Position;
+import mapviewer.src.se.pitch.hlatutorial.mapviewer.model.Position;
 
 
 class PositionRecordCoder {

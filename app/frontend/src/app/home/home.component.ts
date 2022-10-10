@@ -5,7 +5,7 @@ import { CarService } from '../core/models/car/car.service';
 import { Scenario } from '../core/models/scenario/scenario.model';
 import { ScenarioService } from '../core/models/scenario/scenario.service';
 import { InteractionService } from '../core/services/interaction.service';
-import { MasterService } from '../core/services/master.service';
+import { ConnectionService } from '../core/services/connection.service';
 
 @Component({
   selector: 'app-home',
@@ -25,10 +25,11 @@ formSelect: FormControl = new FormControl('');
 toggled: boolean = false;
 submitSuccess = '';
 carInjectSuccess = '';
+isClicked=false;
 
 
-constructor(public service: CarService, 
-  public masterService: MasterService, 
+constructor(public carService: CarService, 
+  public connectionService: ConnectionService, 
   public scenarioService: ScenarioService, 
   public interactionService: InteractionService) { }
 
@@ -44,7 +45,7 @@ ngOnInit(): void {
       Validators.maxLength(7)]),
     color: new FormControl('',
       [Validators.required,
-      Validators.pattern('#[0-9a-fA-F]+')])
+      Validators.pattern('#[0-9a-fA-F]{6}')])
   });
   this.ScenarioForm = new FormGroup({
     fuel: new FormControl('',
@@ -70,14 +71,14 @@ ngOnInit(): void {
 }
 
 connectEvent(e: MouseEvent){
-  this.masterService.getMasterConnection().subscribe(() => {
+  this.connectionService.getConnection().subscribe(() => {
     this.msgConnection = "Connected";
     setTimeout(() => this.msgConnection = null, 8000);
   });
 }
 
 disconnectEvent(e: MouseEvent){
-  this.masterService.getMasterDisconnection().subscribe(()=> {
+  this.connectionService.getDisconnection().subscribe(()=> {
     this.msgConnection = "Disconnected";
     setTimeout(()=> this.msgConnection = null, 8000);
 });
@@ -99,8 +100,9 @@ loadScenario(scenario: Scenario, formSelect: FormControl) {
   this.scenarioService.getScenario(this.scenario.scenarioName, this.scenario.initialFuelLevel)
     .subscribe(() => {
       this.scenario = scenario;
-      this.submitSuccess = "Submit sucessful!";
-      setTimeout(() => this.submitSuccess = null, 5000);
+      this.submitSuccess = "Scenario Loaded!";
+      setTimeout(() => this.submitSuccess = null, 2000);
+      this.isClicked=true;
     });
 }
 
@@ -117,6 +119,7 @@ stop(e: Event) {
     setTimeout(()=> this.msgStopSimulation = null,8000);
   });
   this.resetForms();
+  this.isClicked=false;
 }
 
 showCar(CarForm: FormGroup) {
@@ -125,11 +128,11 @@ showCar(CarForm: FormGroup) {
   car.licensePlate = this.CarForm.controls['licensePlate'].value;
   car.color = this.CarForm.controls['color'].value;
   console.log(car);
-  this.service.postCar(car)
+  this.carService.postCar(car)
     .subscribe((car1: Car) => {
       car1 = car;
       this.carInjectSuccess = "Car injected...waiting for another car!"
-      setTimeout(() => this.carInjectSuccess = null, 5000);
+      setTimeout(() => this.carInjectSuccess = null, 3000);
     });
   this.resetForms();
 

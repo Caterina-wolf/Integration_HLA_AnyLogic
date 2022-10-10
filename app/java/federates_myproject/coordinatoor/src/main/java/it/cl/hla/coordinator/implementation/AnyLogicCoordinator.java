@@ -3,6 +3,8 @@ package it.cl.hla.coordinator.implementation;
 import hla.rti1516e.*;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.exceptions.*;
+
+
 import it.cl.hla.coordinator.interfaces.Car;
 import it.cl.hla.coordinator.interfaces.CarSimulator;
 import it.cl.hla.core.implementation.*;
@@ -11,9 +13,6 @@ import it.cl.hla.core.interfaces.HlaCore;
 import it.cl.hla.core.interfaces.ListenerInteraction;
 import it.cl.hla.coordinator.encoders.*;
 import it.cl.hla.coordinator.car.*;
-
-import java.util.ArrayList;
-
 
 
 public class AnyLogicCoordinator {

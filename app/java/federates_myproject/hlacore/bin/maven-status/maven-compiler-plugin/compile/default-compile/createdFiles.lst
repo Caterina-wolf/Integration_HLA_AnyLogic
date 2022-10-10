@@ -1,5 +1,5 @@
+it\cl\hla\core\interfaces\ListenerInteraction.class
 it\cl\hla\core\interfaces\HlaCore.class
 it\cl\hla\core\implementation\HlaCoreImpl.class
-it\cl\hla\core\interfaces\ListenerInteraction.class
 it\cl\hla\core\interfaces\ListenerObject.class
 it\cl\hla\core\Main.class
