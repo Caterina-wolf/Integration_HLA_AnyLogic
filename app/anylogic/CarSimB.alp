@@ -1930,10 +1930,6 @@ this.agentCar.setFillColor(new Color(red,green,blue));
 	</Experiments>
 	<ModelResources>
 		<Resource>
-			<Path><![CDATA[anylogiccoordinatoor-0.0.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
 			<Path><![CDATA[booster1516.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
@@ -1959,6 +1955,10 @@ this.agentCar.setFillColor(new Color(red,green,blue));
 		</Resource>
 		<Resource>
 			<Path><![CDATA[C:/Users/Caterina/.m2/repository/it/cl/hla/hlacore/0.0.4/hlacore-0.0.4.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[coordinator-1.0.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
@@ -2009,7 +2009,7 @@ this.agentCar.setFillColor(new Color(red,green,blue));
 	<ClassPathEntry>
 		<ResourceReference>
 			<PackageName><![CDATA[carsimb]]></PackageName>
-			<ClassName><![CDATA[anylogiccoordinatoor-0.0.1.jar]]></ClassName>
+			<ClassName><![CDATA[coordinator-1.0.0.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>true</Imported>
 		<Folder>false</Folder>

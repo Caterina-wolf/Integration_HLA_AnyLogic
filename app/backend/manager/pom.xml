@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>it.cl.hla</groupId>
 	<artifactId>master</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0.</version>
 	<name>manager</name>
 	<description>manager with HLACore as external library -- hlacore.jar</description>
 	<properties>
