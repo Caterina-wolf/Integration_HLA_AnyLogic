@@ -44,12 +44,12 @@ In this project, only Master federate is a web service that need to use POSTMAN.
 I have built a workspace in which put the API's calls. 
 The GET calls are:
 * GET init --> to connect and to join the federate to pitch. It's called once the Spring Boot application is launched. But can be called again once the GET exit call is made.
-* GET exit --> to disconnet the federates from pitch and to shut the federation.
-* GET startInteraction --> takes a parameter (TimeScaleFactor) to get the start interaction from pitch. Simply launch the interaction.
-* GET stopInteraction --> to get the stop interaction form pitch.
-* GET loadscenario --> to get the scenario. It takes 2 parameters, for now the first is always "/cupertino" and the second is the initial fuel of the car, so it's a integer number.
+* GET /exit --> to disconnet the federates from pitch and to shut the federation.
+* GET /startInteraction --> takes a parameter (TimeScaleFactor) to get the start interaction from pitch. Simply launch the interaction.
+* GET /stopInteraction --> to get the stop interaction form pitch.
+* GET /loadscenario --> to get the scenario. It takes 2 parameters, for now the first is always "/cupertino" and the second is the initial fuel of the car, so it's a integer number.
 And the POST call is:
-* POST injectCar that post a Car with 3 attributes (name, license plate and color) into AnyLogic model.
+* POST /injectCar that post a Car with 3 attributes (name, license plate and color) into AnyLogic model.
 
 
 #### AnyLogic
